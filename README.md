@@ -6,3 +6,4 @@ List of courses:
 1. [Programare Functionala](Haskell)
 1. [Algoritmi Fundamentali](Algoritmi)
 1. [Sisteme de Operare](OS)
+1. [Probabilitati si Statistica](Statistica)
