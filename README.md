@@ -7,3 +7,4 @@ List of courses:
 1. [Algoritmi Fundamentali](Algoritmi)
 1. [Sisteme de Operare](OS)
 1. [Probabilitati si Statistica](Statistica)
+1. [Dezvoltarea Aplicatiilor Web](Web)
