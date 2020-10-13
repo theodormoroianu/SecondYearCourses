@@ -1,0 +1,373 @@
+\documentclass{article}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% References
+% https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Title content
+\title{Tema 1 Algoritmi Fundamentali}
+\author{Moroianu Theodor}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Exercitiu 1}
+
+\subsection*{Lema}
+Fie $(A, E)$ un graf aciclic conex (un arbore), si $u, v \in A$.
+\newline
+Daca $(u, v) \not\in E$, atunci $(A, E \cup {(u, v)})$ contine un ciclu.
+\newline
+\textbf{Demonstratie:}
+
+$(A, E)$ este conex, deci exista un lant simplu de la $u$ la $v$:
+
+\begin{equation}
+\exists (a_0, a_1, \dots a_k) \quad a.i.\quad (a_i, a_{i+1}) \in E \quad \forall i \in [1 \dots (k-1)]
+\end{equation}
+
+Asadar, daca este adaugata muchia $(u, v)$ se formeaza ciclul $(a_0, a_1 \dots a_k)$.
+
+\subsection*{Demonstratia Exercitiului}
+Fie $G = (V, E)$ un graf neorientat aciclic.
+\newline
+Fie $K$ numarul de componente conexe ale lui $G$, si $M = |E|$.
+\newline
+\textbf{Afirmatie:}
+
+$K + M$ este un invariant la adaugarea unei muchii care pastreaza aciclitatea grafului.
+\newline
+\textbf{Demonstratie:}
+
+Fie muchia adaugata muchia $(u, v)$.
+\newline
+Apar doua cazuri:
+\begin{itemize}
+    \item $u$ si $v$ ambele fac parte din aceeasi componenta conexa.
+    \newline
+    Folosind lema demonstrata mai sus, inseamna ca s-a format un ciclu, ceea ce contrazice ipoteza ca nu se formeaza ciclii.
+    \item $u$ si $v$ se afla in componente contexe diferite.
+    \newline
+    Asadar, dupa adaugarea muchiei $(u, v)$, $K$ scade cu $1$ si $M$ creste cu $1$, pastrand suma constanta.
+\end{itemize}
+
+Scotand toate muchiile, putem observa ca valoarea invariantului $K + M$ este $|V| + 0 = |V|$.
+\newline
+Numarul de componente conexe este cel putin $1$, asadar $M$ nu poate depasi $|V| - 1$ fara a adauga ciclii in graf. $Qed$
+
+
+\section*{Exercitiu 2}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{rubikscube.png}
+    \caption{Representarea unui cub rubik}
+\end{figure}
+
+Observam, ca orice stare a cubului rubik poate fi descrisa ca un sir $s$ de lungime $48$ si valori in multimea ${1, 2, 3, 4, 5, 6}$.
+\newline
+Asadar, ne construim un graf $G = (V, E)$ in felul urmator:
+\begin{itemize}
+    \item Pentru fiecare stare $s=(s_1, s_2, \dots, s_48)$ a cubului rubik ne construim un nod (care poate de exemplu sa fie numarul al carui cifre sunt $s$ in representarea in baza $6$.
+    \item Pentru fiecare rotatie posibila a cubului rubic (rotatia unei fete sau a intregului cub rubik) se adauga o muchie.
+\end{itemize}
+
+Observam ca oricare mutare este inversabila, asadar matricea de adiacenta este una simetrica, si graful $G$ este neorientat.
+
+Un algoritm eficient pentru rezolvarea cubului rubic ar putea fi:
+\begin{itemize}
+    \item Aplicam algorimi clasici de rezolvare a cubului rubik.
+    \item Facem un A* plecand din starea initiala (desi nu stiu care euristici ar functiona).
+    \item Folosim tehnica avansata de programare "Meet In The Middle", plecand de la ipoteza ca numarul minim necesar de pasi este mic.
+\end{itemize}
+
+\section*{Exercitiu 3}
+
+Pentru rezolvarea acestui exercitiu se presupune cunoscut algoritmul $BFS$.
+\newline
+\subsection*{Lema}
+Numarul de muchii din $G'$ nu poate fi mai mic de $|V| - 1$ fara a deconecta nodul $1$ de cel putin un alt nod (altfel spus, nu exista arbori cu $N$ noduri si mai putin de $N - 1$ muchii).
+\newline
+\textbf{Demonstratie:} Demonstratia este asa triviala ca este lasata la indemana cititorului.
+
+\subsection*{Demonstratia Exercitiului}
+
+Fie $E'$ multimea muchiilor obtinute prin rularea algoritmului de $BFS$ plecand din nodul $1$, si $G' = (V, E')$.
+
+Urmeaza sa demonstram ca $G'$ este subgraful cu numar minim de muchii al lui $G$ care pastreaza distanta dintre $i$ si $1$, $\forall i \in [2 \dots |V|]$.
+
+\paragraph{A. $G'$ pastreaza distantele}
+Din functionearea algoritmului $BFS$, distanta minima dintre nodul $1$ si nodul $i$ poate fi obtinuta printr-un lant de muchii aflate in $V'$, $\forall i \in (2 \dots |V|)$. Asadar, $G'$ pastreaza distantele.
+
+\paragraph{B. $G'$ are numarul minim de muchii}
+Din functionarea algoritmului $BFS$, $|E'| = |V| - 1$. Din lema enuntata mai sus, nu este posibila obtinerea unui graf conex cu mai putine muchii. Asadar, $E'$ este de cardinalitate minima.
+\newline
+\newline
+Asadar, numarul maxim de muchii care pot fi scoase din $G$ este $|E| - |V| + 1$.
+
+\section*{Exercitiu 4}
+
+Ignoram posibile solutii utile, eficiente sau normale si ne axam pe rezolvarea problemei cu grafuri.
+\newline
+Fie $V = \{(a, b) \quad | \quad a, b \in N \}$
+\newline
+Fie $E = \{((a_1, b_1), (a_2, b_2)) \quad | \quad a_{1,2}, b_{1,2} \in N \quad si \quad |a_1-a_2|+|b_1-b_2|=1\}$
+Fie $G = (V, E)$.\\
+Altfel spus, ne uitam la graful care are cate un varf pentru fiecare punct laticial pozitiv din planul 2d.\\
+Graful este neorientat, din simetria conditiei de existente a muchiilor.\\
+
+Un algoritm care rezolva problema este un BFS prin graful acesta si oprirea la primul nod $(x, y)$ astfel incat $a*x+b*y$ este divizibil cu $d$.\\
+Cum fiecare muchie creste sau scade cu exact $1$ suma $x + y$, avem garantia ca prima solutie gasita de BFS o sa fie cea optima.
+
+\section*{Exercitiu 5}
+
+Stim ca muchiile ne-luate de parcurgerea DFS nu au voie sa fie intre doi subarbori diferiti.\\
+Folosind aceasta ipoteza, vom arata care este numarul maxim de muchii pe care le poate avea un graf cu parcurgerea DFS data, precum si ordinea in care trebuie procesate.\\Dam muchiile prin liste de adiacenta, care contin toate muchiile mai putin cele enuntate mai sus:
+\begin{itemize}
+    \item $Adiacenta_1 = \{2, 3, 4, 5, 6, 7, 8, 9, 10, 11\}$
+    \item $Adiacenta_2 = \{1, 3, 4, 5\}$
+    \item $Adiacenta_3 = \{1, 2, 4, 5, 8, 11\}$
+    \item $Adiacenta_4 = \{1, 2, 3, 5, 8\}$
+    \item $Adiacenta_5 = \{1, 2, 3, 4\}$
+    \item $Adiacenta_6 = \{1, 7, 9, 10\}$
+    \item $Adiacenta_7 = \{1, 6, 9, 10\}$
+    \item $Adiacenta_8 = \{1, 3, 4\}$
+    \item $Adiacenta_9 = \{1, 6, 7\}$
+    \item $Adiacenta_10 = \{1, 6, 7\}$
+    \item $Adiacenta_11 = \{1, 3\}$
+\end{itemize}
+
+Prin tehnica avansata de numarare a muchiilor putem deduce ca sunt maxim $24$ de muchii.
+
+\subsection*{Bonus}
+Pentru un arbore arbitrar, tragem muchie de la fiecare nod la tot stramosii sai.\\
+Astfel, raspunsul este suma adancimilor.
+
+\section*{Exercitiu 6}
+
+Stim ca BFS calculeaza arborele care minimizeaza adancimea fiecarui nod, si ca DFS incearca sa coboare cat poate in fiecare nod.
+Astfel, este evident ca:
+\begin{itemize}
+    \item Daca inecam arborele DFS in graful original, nu o sa apara cross-edges, adica muchii care sa nu fie de tipul nod-stramos.\\
+    Asta se intampla pentru ca existenta unei muchii dintre doi subarbori diferiti ar presupune ca DFS-ul nu s-a dus pe o muchie posibila.
+    \item Daca inecam arborele BFS in graful original, nu o sa apara muchii intre doua noduri la o diferenta de nivel mai mare ca 1.\\
+    Asta se intampla pentru ca existenta unei astfel de muchii ar implica existenta unui arbore cu adancimile nodurilor mai mici.
+\end{itemize}\\
+Astfel, pentru ca cele doua parcurgeri (DFS si BFS) sa ne dea acelasi arbore partial, trebuie ca:
+\begin{enumerate}
+    \item Daca adaugam toate muchiile neluate in arborele DFS/BFS, nu apar muchii intre doi subarbori diferiti.
+    \item Daca adaugam toate muchiile neluate, nu apar nici muchii dintre noduri pe nivele cu diferenta mai mare ca 1.
+\end{enumerate}
+
+Observatia cheie este ca oricare muchie neluata in arborele DFS/BFS este de tipul $1$ sau $2$, deci pentru ca cele doua parcurgeri sa coincida, trebuie ca graful sa fie un arbore.\\\\
+\textbf{Observatie:}\\
+In demonstratia de mai sus, am presupus ca graful este conex.\\
+Daca graful nu este conex, este suficient ca \textit{componenta conexa din care face parte nodul $1$} sa respecte restrictiile de mai sus.
+\section*{Exercitiu 7}
+
+Fie $G = (\{1 \dots n\}, \{(i, j) \quad | \quad \mbox{intervalul #i se intersecteaza cu intervalul #j}\})$.\\
+Fie $S = (s_1, \dots, s_n), \mbox{ unde } s_i = b_i - a_i$.\\
+
+Observam ca fiecare nod din $G$ reprezinta un interval, si doua noduri $u$ si $v$ au muchie intre ele daca intervalele $u$ si $v$ se intersecteaza.\\
+In mod evident, graful este neorientat.
+
+O gasire a solutiei este de fapt gasirea setului independent de noduri de suma maxima, care este o problema NP-Completa.
+
+\section*{Exercitiu 8}
+
+O sa rezolvam problema prin crearea unui algoritm adversarial care isi forteaza oponentul sa faca cel putin $\frac{N * (N - 1)}{2}$ queryuri.
+
+Descrierea algoritmului:
+\begin{enumerate}
+    \item Isi seteaza matricea $(Q_{ij})_{i,j < N}$ cu valorile $False$.
+    \item Cand primeste o intrebarea asupra unei muchii $(u, v)$, raspunde cu $0$ (adica spune ca nu exista muchia), si seteaza $Q_{u,v}=Q_{v,u}=True$.
+    \item Daca a ramas cel putin o valoare de $False$ in matricea $Q$ si oponentul pretinde ca a gasit care este graful $G=(V, E)$, scoatem / punem una din muchiile $(u, v)$ cu $Q_{u,v} = False$, si spunem ca acesta era defapt graful.
+\end{enumerate}
+
+\subsection*{O demonstratie mai formala, folosind teoria informatiei}
+Stim ca:
+\begin{itemize}
+    \item Fiecare intrebare primeste un raspuns dintr-un spatiu de doua elemente.
+    \item Numarul total de grafuri posibile este $2^{\frac{N*(N-1)}{2}}$
+\end{itemize}\\
+Asadar, cu mai putin de $\frac{N*(N-1)}{2}$ intrebari nu poate fi acoperit tot spatiul de posibilitati.
+
+\section*{Exercitiu 9}
+
+\subsection*{Lema}
+Fie $G = (V, E)$ un graf cu costuri pozitive pe muchii.
+\newline
+Atunci, lungimea unui ciclu hamiltonian o sa fie cel putin la fel de mare ca suma lungimilor muchiilor unui APM al acestui graf.
+\newline
+\textbf{Demonstatie:}
+\newline
+Presupunem prin absurd ca exista un ciclu hamiltonian de lungime mai mica ca oricare APM.
+
+Scoatem oricare muchie din ciclul hamiltonian, obtinand astfel un arbore partial, cu suma costurilor mai mica decat cea a unui APM. Contradictie.
+
+\subsection*{Rezolvarea Exercitiului}
+
+Fie $G = (\{1 \dots n\}), \{(i, j, d_{ij}) \quad | \quad i, j \in \{1 \dots n\})$\\
+unde $d_{ij} = \sqrt{(x_i-x_j)^2+(y_i-y_j)^2}$.\\
+Observam ca acest graf complet reprezinta corect problema, muchia de la $u$ la $v$ avand costul fix distanta dintre $(x_u, y_u)$ si $(x_v, y_v)$.\\
+Observam de asemenea ca drumul optim este un ciclu hamiltonian de cost minim al grafului.\\
+
+\\
+Fie $G' = (V, E')$ un arbore partial de cost minim al lui $G$.\\
+Observam ca parcurgerea in ordinea DFS (cu intrare / iesire din nod) al arborelui $G'$ are lungimea totala $2 * lungime(G')$, care conform lemei de mai sus este mai mica sau egala decat lungimea oricarui ciclu hamiltonian.
+
+Astfel, un itinerariu cu distanta totala cu cel mult de doua ori mai mare decat distanta optima este cel dat de parcurgerea in ordine DFS al unui APM al grafului.
+
+Gasirea APM-ului poate fi facuta cu Prim's Algorithm in $\Theta(N^2)$, sau cu vrajeli cu Ainturi 2d intr-o complexitate pe care nu vreau sa stau sa o caut.
+
+
+% Example Subsection
+\subsection{Subsection Title}
+This is a subsection.
+
+% Example Subsubsection
+\subsubsection{Subsubsection Title}
+This is a subsubsection.
+
+%  Theoretical Background
+\section{Theoretical Background}
+Add your theoretical background here. Some example text: As we learned from our textbook \cite{kutz_2013}, Fourier introduced the concept of representing a given function $f(x)$ by a trigonometric series of sines and cosines:
+\begin{equation}
+    f(x) = \frac{a_0}{2} + \sum_{i=1}^\infty \left(a_n\cos{nx} + b_n\sin{nx}\right) \quad x \in (-\pi,\pi].
+    \label{eqn:fourierseries}
+\end{equation}
+You can reference numbered equations, figures, tables, algorithms, and code like this: Equation~\ref{eqn:fourierseries}, etc.
+
+% Algorithm Implementation and Development
+\section{Algorithm Implementation and Development}
+Add your algorithm implementation and development here. See Algorithm~\ref{alg:example} for how to include an algorithm in your document. This is how to make an \textit{ordered} list:
+\begin{enumerate}
+    \item Fluffy swallowed a marble.
+    \item I took Fluffy to the vet.
+    \item They took an ultrasound of Fluffy's intestines.
+\end{enumerate}
+
+\begin{algorithm}
+\begin{algorithmic}
+    \STATE{Import data from \texttt{Testdata.mat}}
+    \FOR{$j = 1:20$}
+        \STATE{Extract measurement $j$ from \texttt{Undata}}
+        \STATE{Do something useful}
+    \ENDFOR
+    \IF{$i\geq 5$} 
+        \STATE{$i\gets i-1$}
+    \ELSE
+        \IF{$i\leq 3$}
+            \STATE{$i\gets i+2$}
+        \ENDIF
+    \ENDIF 
+\end{algorithmic}
+\caption{Example Algorithm}
+\label{alg:example}
+\end{algorithm}
+
+% Computational Results
+\section{Computational Results}
+Add your computational results here. See Table~\ref{tab:mascots} for how to include a table in your document. See Figure~\ref{fig:dubs} for how to include figures in your document.
+
+\begin{table}
+    \centering
+    \begin{tabular}{rll}
+    & Name & Years \\
+    \hline
+    1 & Frosty & 1922-1930  \\
+    2 & Frosty II & 1930-1936 \\
+    3 & Wasky & 1946 \\
+    4 & Wasky II & 1947 \\
+    5 & Ski & 1954 \\
+    6 & Denali & 1958 \\
+    7 & King Chinook & 1959-1968\\
+    8 & Regent Denali & 1969 \\
+    9 & Sundodger Denali & 1981-1992 \\
+    10 & King Redoubt & 1992-1998 \\
+    11 & Prince Redoubt & 1998 \\
+    12 & Spirit & 1999-2008 \\
+    13 & Dubs I & 2009-2018 \\
+    14 & Dubs II & 2018-Present
+    \end{tabular}
+    \caption{UW mascots as described in \cite{washington_huskies}.}
+    \label{tab:mascots}
+\end{table}
+
+% begin{figure}[tb] % t = top, b = bottom, etc.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{dubs.jpg}
+    \caption{Here is a picture of Dubs \cite{webeck_2018}. Dubs did not swallow a marble.}
+    \label{fig:dubs}
+\end{figure}
+
+% Summary and Conclusions
+\section{Summary and Conclusions}
+Add your summary and conclusions here.
+
+% References
+\printbibliography
+
+% Appendices
+\begin{appendices}
+
+% MATLAB Functions
+\section{MATLAB Functions}
+Add your important MATLAB functions here with a brief implementation explanation. This is how to make an \textbf{unordered} list:
+\begin{itemize}
+    \item \texttt{y = linspace(x1,x2,n)} returns a row vector of \texttt{n} evenly spaced points between \texttt{x1} and \texttt{x2}. 
+    \item \texttt{[X,Y] = meshgrid(x,y)} returns 2-D grid coordinates based on the coordinates contained in the vectors \texttt{x} and \texttt{y}. \text{X} is a matrix where each row is a copy of \texttt{x}, and \texttt{Y} is a matrix where each column is a copy of \texttt{y}. The grid represented by the coordinates \texttt{X} and \texttt{Y} has \texttt{length(y)} rows and \texttt{length(x)} columns.  
+\end{itemize}
+
+% MATLAB Codes
+\section{MATLAB Code}
+Add your MATLAB code here. This section will not be included in your page limit of six pages.
+
+\begin{listing}[h]
+\inputminted{matlab}{example.m}
+\caption{Example code from external file.}
+\label{listing:examplecode}
+\end{listing}
+
+\end{appendices}
+
+\end{document}
