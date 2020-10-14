@@ -5,3 +5,6 @@
 *.o
 *.out
 .ipynb_checkpoints
+.vs
+Debug/
+bin/
