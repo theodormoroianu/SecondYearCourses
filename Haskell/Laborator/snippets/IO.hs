@@ -14,7 +14,21 @@ tellname = do
     let age = read str_age :: Int
     print $ "Cool " ++ name ++ ", you are " ++ (show age) ++ " years old!"
 
+reverseWords :: String -> String
+reverseWords = unwords . map reverse . words
+
+readlines :: IO ()
+readlines = do
+    line <- getLine
+    if null line
+        then return ()
+        else do
+            print  $ reverseWords line
+            readlines
+            
 main = do
+    readlines
+    return ()
     tellname
     line <- getLine
     let (a, b) = read line ::(Int, Int)
