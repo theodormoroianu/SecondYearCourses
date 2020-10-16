@@ -1,3 +1,6 @@
+import System.Environment
+import Control.Monad
+
 my_gcd :: Int -> Int -> Int
 my_gcd 0 a = a
 my_gcd a 0 = a
@@ -25,12 +28,21 @@ readlines = do
         else do
             print  $ reverseWords line
             readlines
-            
-main = do
-    readlines
-    return ()
-    tellname
-    line <- getLine
-    let (a, b) = read line ::(Int, Int)
 
-    print $ my_gcd a b
+
+my_if_statment = do
+    when (1 < 10) $ do
+        print "12"
+
+
+a = let x = (\a -> a + 1)
+        y = [1..10] in
+    map x y
+
+numbers x = do
+    y <- sequence $ take x $ repeat getLine        
+    return $ map (\x -> read x :: Int) y
+
+main = do
+    nr <- numbers 3
+    print nr
