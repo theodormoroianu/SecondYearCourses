@@ -1,0 +1,8 @@
+2020-10-29 15:31:15.027996547000 [580438(ThreadId 13)] ERROR APP - user error (loaded module can not find from path. </home/theodor/Projects/SecondYearCourses/Haskell/Laborator/a.hs> [])
+2020-10-29 15:31:15.089670141000 [580438(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2020-10-29 15:31:23.116513317000 [580438(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-10-29 15:31:36.893238622000 [580661(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-10-29 15:32:45.501229584000 [580948(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-10-29 15:32:58.155062000000 [581034(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-10-29 15:33:04.156311599000 [581104(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-10-29 15:33:34.308567803000 [581206(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
