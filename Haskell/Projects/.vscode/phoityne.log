@@ -1,0 +1,57 @@
+2020-11-12 15:23:30.935619885000 [259032(ThreadId 13)] ERROR APP - user error (no stacktrace found.)
+2020-11-12 15:23:30.960064481000 [259032(ThreadId 13)] ERROR APP - user error (no stacktrace found.)
+2020-11-12 15:23:33.972511025000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:41.220461601000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:41.880099241000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:43.923565256000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:44.337439204000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:44.688254240000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:45.032192490000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:45.392056010000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:45.645520960000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:45.928913997000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:46.196789176000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:46.460759630000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:46.962443797000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:46.994650825000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.018462440000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.047802054000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.107638892000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.110896484000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.140115699000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.169918948000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.200816339000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.248525897000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.265610066000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.305091085000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.331475289000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.438696343000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.441020032000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.456495538000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.463558233000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:47.483478604000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:49.182751526000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:49.556526972000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:49.820841888000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:50.296733407000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:50.638270718000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:50.846640688000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:52.216103388000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:52.591489433000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:52.781398090000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:53.203696184000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:53.821047252000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:54.160506708000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:54.349130730000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:54.512262133000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:23:54.721248134000 [259032(ThreadId 13)] ERROR APP - user error (ExecResult not found.)
+2020-11-12 15:24:00.420463784000 [259032(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-11-12 15:27:10.949862791000 [272539(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2020-11-12 15:27:29.108201036000 [272539(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-11-12 15:27:31.300631313000 [273572(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2020-11-12 15:27:35.417705681000 [273572(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-11-12 15:27:48.724149912000 [273666(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2020-11-12 15:27:52.715693217000 [273666(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-11-12 15:28:45.154220649000 [276594(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
+2020-11-12 15:28:57.263144258000 [277616(ThreadId 13)] ERROR APP - start debugging failed. user error (ExecResult not found.) : Left "user error (ExecResult not found.)"
+2020-11-12 15:29:09.236691925000 [277616(ThreadId 16)] CRITICAL THREAD_MGR - Critical exit started.
