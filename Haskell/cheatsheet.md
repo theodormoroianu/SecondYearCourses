@@ -1,0 +1,127 @@
+# Haskell CheatSheet
+
+## Stuff to know
+
+1. Types and Constructors ALWAYS start with an uppercase
+2. Functions ALWAYS start with a lowercase
+3. `Foldr` can be used on infinite lists but `foldl` can't
+4. `:i Eq` gives informations on the `Eq` typeclass
+
+## Writting `map`, `filter` and `fold` with recursion
+
+``` haskell
+map' :: (a -> b) -> [a] -> [b]
+map' _ [] = []
+map' f (h:t) = f h : map' f t
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' _ [] = []
+filter' f (h:t) =
+    if f h then
+        h : filter' f t
+    else
+        filter' f t
+
+foldr' :: (a -> b -> b) -> b -> [a] -> b
+foldr' _ acc [] = acc
+foldr' f acc (h:t) =
+    let new_acc = foldr' f acc t in
+    f h acc
+
+foldl' :: (b -> a -> b) -> b -> [a] -> b
+foldl' _ acc [] = acc
+foldl' f acc (h:t) =
+    foldl' f (f acc h) t
+```
+
+## Writting `map` and `filter` with list comprehension
+
+``` haskell
+map' :: (a -> b) -> [a] -> [b]
+map' f l = [f x | x <- l]
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' f l = [x | x <- l, f x]
+```
+
+## Writting `map` and `filter` with `foldr`
+
+``` haskell
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\x acc -> f x : acc) []
+
+filter' :: (a -> Bool) -> [a] -> [a]
+filter' f = foldr (\x acc -> if f x then x : acc else acc) []
+```
+
+## Defining Type Synonims
+
+``` haskell
+type IntList = [Int]
+
+my_list = read "[1, 2, 3]" :: IntList
+```
+
+## Defining own Types
+
+``` haskell
+data Tree a
+    = EmptyNode
+    | Node a [Tree a]
+    deriving (Show, Eq)
+
+my_tree = Node 10 [Node 4 [], EmptyNode]
+
+data Car = Car
+    { name :: String
+    , year :: Int
+    } deriving (Show)
+
+my_car = Car "Dacia" 2000
+my_car2 = Car { name="Dacia", year=2000 }
+car_age = year my_car2
+```
+
+## Including type in Typeclass
+
+``` haskell
+data Lista a = Gol | Lista a (Lista a)
+
+instance (Show a) => Show (Lista a) where
+    show Gol = ""
+    show (Lista a l) = show a ++ " " ++ show l
+```
+
+## Creating new typeclases
+
+``` haskell
+class MyEq a where
+    (===) :: a -> a -> Bool
+    (/==) :: a -> a -> Bool
+    x === y = not (x /== y)
+    x /== y = not (x === y)
+```
+
+## Cusom operators
+
+Operators have a `fixity`.
+Basic operators are:
+1. `infixl 7 *`
+2. `infixl 6 +`
+3. `infixr 0 $`
+
+For defining own operators:
+``` haskell
+infixr 5 :-:  
+data List a
+    = Empty
+    | a :-: (List a)
+    deriving (Show, Read, Eq, Ord)  
+
+infixl 9 -=
+(-=) :: Int -> Int -> Int
+0 -= _ = 0
+a -= b = a + b
+```
+
+
