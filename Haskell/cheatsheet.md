@@ -124,4 +124,15 @@ infixl 9 -=
 a -= b = a + b
 ```
 
+## Case Expressions
 
+``` haskell
+tellVar :: Maybe Int -> String
+tellVar m =
+    case m of
+        Just x -> "Value is " ++ show x
+        otherwise -> "Nope"
+
+tellVar $ Just 10 -- returns "Value is 10"
+tellVar Nothing   -- returns "Nope"
+```
