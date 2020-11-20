@@ -26,7 +26,7 @@ foldr' :: (a -> b -> b) -> b -> [a] -> b
 foldr' _ acc [] = acc
 foldr' f acc (h:t) =
     let new_acc = foldr' f acc t in
-    f h acc
+    f h new_acc
 
 foldl' :: (b -> a -> b) -> b -> [a] -> b
 foldl' _ acc [] = acc
@@ -135,4 +135,15 @@ tellVar m =
 
 tellVar $ Just 10 -- returns "Value is 10"
 tellVar Nothing   -- returns "Nope"
+```
+
+## QuickCheck
+
+`` haskell
+import Test.QuickCheck
+
+prop :: Int -> Int -> Bool
+prop a b = (a + b) == (b + a)
+
+quickCheck prop
 ```
