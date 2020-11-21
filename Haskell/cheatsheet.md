@@ -139,7 +139,7 @@ tellVar Nothing   -- returns "Nope"
 
 ## QuickCheck
 
-`` haskell
+``` haskell
 import Test.QuickCheck
 
 prop :: Int -> Int -> Bool
@@ -147,3 +147,19 @@ prop a b = (a + b) == (b + a)
 
 quickCheck prop
 ```
+
+## Specify type within function
+
+``` haskell
+mapTimes2 :: [Int] -> [Int]
+mapTimes2 =
+    let mul2 :: Int -> Int
+        mul2 x = 2 * x in
+    map mul2
+```
+
+## Lista de functii utile
+
+| Nume      | Descriere         | Inclus 
+| --------- | ------------      | ---------
+| `elem`    | x exista in lista | `Prelude`
