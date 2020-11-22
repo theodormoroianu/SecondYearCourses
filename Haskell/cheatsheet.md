@@ -163,3 +163,12 @@ mapTimes2 =
 | Nume      | Descriere         | Inclus 
 | --------- | ------------      | ---------
 | `elem`    | x exista in lista | `Prelude`
+| `isDigit` | este digit        | `Data.Char`
+| `isUpper` | este litara mare  | `Data.Char`
+| `isLower` | este litera mica  | `Data.Char`
+| `isAlpha` | este litera       | `Data.Char`
+|`isAphaNum`| este litera/cifra | `Data.Char`
+| `toLower` | face litera mica  | `Data.Char`
+| `toUpper` | face litera mare  | `Data.Char`
+| `and`     | vectorul are true | `prelude`
+| `all`     | verifica o contitie| `prelude`

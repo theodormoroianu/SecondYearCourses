@@ -1,4 +1,5 @@
 import Test.QuickCheck
+import Data.Char
 
 -- L3.1
 factori :: Int -> [Int]
@@ -35,4 +36,31 @@ filterChar c =
 
 patratImpare :: [Integer] -> [Integer]
 patratImpare =
-    map (^2) $ filter odd
+    map (^2) . filter odd
+
+patrateAtImpare :: [Integer] -> [Integer]
+patrateAtImpare l =
+    let z = zip l [1..] in
+    let good = filter (\(_, y) -> odd y) z in
+    map (\(x, _) -> x^2) good
+
+removeConsoane :: [[Char]] -> [[Char]]
+removeConsoane l =
+    let consoane = "aeiou" in
+    let removeFromStr :: [Char] -> [Char]
+        removeFromStr = filter (\x -> toLower x `notElem` consoane) in
+    map removeFromStr l
+
+-- L3.5
+myMap :: (a -> b) -> [a] -> [b]
+myMap _ [] = []
+myMap f (h:t) = f h : myMap f t
+
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter _ [] = []
+myFilter f (h:t) =
+    let ans = myFilter f t in
+    if f h then
+        h : ans
+    else
+        ans
