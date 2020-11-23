@@ -6,6 +6,10 @@
 2. Functions ALWAYS start with a lowercase
 3. `Foldr` can be used on infinite lists but `foldl` can't
 4. `:i Eq` gives informations on the `Eq` typeclass
+5. Solutions can be:
+    * Descriptive: list comprehension
+    * Recursive: recursivity
+    * Higher order: `map`, `filter`, `fold` etc.
 
 ## Writting `map`, `filter` and `fold` with recursion
 
@@ -172,3 +176,5 @@ mapTimes2 =
 | `toUpper` | face litera mare  | `Data.Char`
 | `and`     | vectorul are true | `prelude`
 | `all`     | verifica o contitie| `prelude`
+| `lookup`  | daca a e in [(a, b)] | `prelude`
+| `partition` | splituieste dupa o conditie | `Data.List`

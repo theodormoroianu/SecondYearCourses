@@ -8,3 +8,10 @@ foldr' f acc (h:t) =
 
 prop :: Int -> [Int] -> Bool
 prop acc l = foldr (\a acc -> 2 * a + acc * 3) acc l == foldr' (\a acc -> 2 * a + acc * 3) acc l
+
+
+f :: (Show a) => Maybe a -> String
+f = maybe "Noting" show
+    -- case s of
+    --     Just x -> show x
+    --     Nothing -> "Nothing"

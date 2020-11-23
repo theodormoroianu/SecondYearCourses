@@ -1,4 +1,5 @@
 import Test.QuickCheck
+import Data.List
 
 double :: Int -> Int
 double = (*2)
@@ -13,7 +14,7 @@ test:: Int -> Bool
 test x = double x + triple x == penta x
 
 
-myLookUp :: Int -> [(Int, String)]-> Maybe String
+myLookUp :: Int -> [(Int, String)] -> Maybe String
 myLookUp x l =
     let f = filter (\(a, _) -> a == x) l in
     if  null f then
@@ -22,8 +23,8 @@ myLookUp x l =
         Just $ snd $ head f
 
 
-
-// TODO
+testMyLookup :: Int -> [(Int, String)] -> Bool
+testMyLookup a l = myLookUp a l == lookup a l
 
 
 testLookUp :: Int -> [(Int, String)] -> Bool
