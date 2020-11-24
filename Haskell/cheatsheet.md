@@ -10,6 +10,7 @@
     * Descriptive: list comprehension
     * Recursive: recursivity
     * Higher order: `map`, `filter`, `fold` etc.
+6. `:browse Data.List` pt informatii.
 
 ## Writting `map`, `filter` and `fold` with recursion
 
@@ -178,3 +179,4 @@ mapTimes2 =
 | `all`     | verifica o contitie| `prelude`
 | `lookup`  | daca a e in [(a, b)] | `prelude`
 | `partition` | splituieste dupa o conditie | `Data.List`
+| `ord, chr` | int <-> char     | `Data.Char`
