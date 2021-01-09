@@ -3,3 +3,231 @@
 * Link catre [Teams](https://teams.microsoft.com/l/team/19%3a0b65666abf16483dbbdfad42a4d4cd79%40thread.tacv2/conversations?groupId=4f94c14b-c6ec-45c4-bb32-fa4df8b75a88&tenantId=08a1a72f-fecd-4dae-8cec-471a2fb7c2f1).
 * Link catre [Website](https://www.cezarabenegui.com/).
 * Link catre [Rezolvari Lab](https://drive.google.com/drive/folders/12dB92SNl1ceahxZSGIKti3j64MBbctDh).
+
+# Instructiuni Examen
+
+## Entity -> Curs 4
+Instalare Entity Framework:
+Tools => NuGet package manager => Manager NuGet Packages for solution => Instalam EntityFramework pe proiect
+
+Adaugare Baza De Date:
+Click Dreapta pe App_Data => Add => New Item => Sql Server Database => Add
+
+Adaugare Connection String:
+Connection String se preia din Click Dreapta pe baza de date => Properties.
+In Web.config se adauga
+```XML
+<connectionStrings>
+<add name="DBConnectionString" providerName="System.Data.SqlClient"
+connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\...\App_Data\StudentDb.mdf';Integrated Security=True"/>
+</connectionStrings>
+```
+
+
+Se adauga clasa intr-un model:
+```C#
+public class ApplicationDbContext : DbContext
+ {
+ public ApplicationDbContext() : base("DBConnectionString") { }
+ public DbSet<Student> Students { get; set; }
+ }
+```
+
+Se foloseste cu
+```C#
+var db = new ApplicationDbContext();
+```
+
+## Migratii -> Curs 5
+Activare Migratii:
+Package manager console =>
+    enable-migrations -EnableAutomaticMigrations:$true
+In Migrations/Configuration in functia Configurations se adauga
+```C#
+AutomaticMigrationDataLossAllowed = true;
+ContextKey = "NumEProiect.ApplicationDbContext";
+```
+In contructorul lui ApplicationDbContext se adauga
+```C#
+Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext,
+    Curs4Partea2.Migrations.Configuration>("DBConnectionString"));
+```
+Initializarea:
+Package manager console => Add-Migration Initial
+                        => Update-Database
+
+Resetare baza de date: Package manager => Update-Database -Target:0
+
+
+## Modele
+```C#
+namespace Laborator5App.Models
+{
+    public class Article
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Titlul este obligatoriu")]
+        [StringLength(100, ErrorMessage = "Titlul nu poate avea mai mult de 20 caractere")]
+        public string Title { get; set; }
+
+        [Required(ErrorMessage = "Continutul articolului este obligatoriu")]
+        [DataType(DataType.MultilineText)]
+        public string Content { get; set; }
+
+        public DateTime Date { get; set; }
+
+        [Required(ErrorMessage = "Categoria este obligatorie")]
+        public int CategoryId { get; set; }
+
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
+        public IEnumerable<SelectListItem> Categ { get; set; }
+    }
+}
+```
+
+## Viewuri
+```C#
+@model Laborator5App.Models.Article
+<h1>@ViewBag.message</h1>
+
+<select name="CategoryId">
+ @foreach (var category in ViewBag.Categories)
+ {
+<option @{ if (category.CategoryId == ViewBag.Category.CategoryId)
+ { @: selected= "selected"
+ }
+ }
+ value="@category.CategoryId"> @category.CategoryName
+ </option>
+ }
+</select>
+```
+
+Trebuie folosit TempData pentru mesaje
+if (TempData.ContainsKey("message"))
+ {
+ ViewBag.message = TempData["message"].ToString();
+ }
+
+View partial: @Html.Partial("StudentInfo", student);
+
+## Helpere -> Curs 6
+Html.ActionLink – genereaza un URL
+➢ Html.TextBox – genereaza un element de tipul TextBox
+➢ Html.TextArea – genereaza un element de tipul TextArea
+➢ Html.CheckBox – genereaza un element de tipul Check-box, util pentru valorile de tip boolean
+➢ Html.RadioBox – genereaza un element de tipul Radio button
+➢ Html.DropDownList –genereaza un element de tipul Dropdown, util pentru valorile de tip Enum
+    @Html.DropDownListFor(m => m.CategoryId, new
+        SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
+
+➢ Html.ListBox – genereaza un element de tipul Dropdown cu selectie multipla
+➢ Html.Hidden – genereaza un input field ascuns
+➢ Html.Password – genereaza un camp pentru introducerea parolelor (textul introdus in camp este ascuns)
+➢ Html.Display – este util pentru afisarea textelor
+➢ Html.Label – genereaza un label pentru un element mentionat anterior
+➢ Html.Editor – acest helper genereaza unul din elementele de mai sus in functie de tipul proprietatii modelului. Astfel, daca editorul
+    este alocat unui camp de tip int va genera un input de tip numeric; daca editorul este alocat unui camp de tip string va genera un
+    textbox, etc.
+
+<form method="post" action="/Students/New">
+ @Html.HttpMethodOverride(HttpVerbs.Put)
+ <label>Nume</label>
+ <br />
+ <input type="text" name="Name" />
+ <br /><br />
+ <label>Adresa e-mail</label>
+ <br />
+ <input type="text" name="Email" />
+ <br /><br />
+ <label>CNP</label>
+ <br />
+ <input type="text" name="CNP" />
+ <br />
+ <button type="submit">Adauga student</button>
+</form>
+
+<select class="form-control" data-val="true" data-val-number="The field
+CategoryId must be a number." data-val-required="The CategoryId field
+is required." id="CategoryId" name="CategoryId">
+ <option value="">Selectati categoria</option>
+ <option value="2">Stiinta</option>
+ <option value="8">Natura</option>
+ <option value="9">Animale</option>
+</select>
+
+<form method="post" action="/Students/New">
+ @Html.HttpMethodOverride(HttpVerbs.Put)
+ @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+ <br />
+ @Html.Label("Name", "Nume Student")
+ <br />
+ @Html.TextBox("Name", null, new { @class = "form-control" })
+ @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+ <br /><br />
+ @Html.Label("Email", "Adresa de e-mail")
+ <br />
+ @Html.TextBox("Email", null, new { @class = "form-control" })
+ @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+ <br /><br />
+ @Html.Label("CNP", "CNP Student")
+ <br />
+ @Html.TextBox("CNP", null, new { @class = "form-control" })
+ @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+ <br />
+ <button type="submit" class="btn btn-success">Adauga student</button>
+</form>
+
+## Validari
+[Required(ErrorMessage = "Campul e-mail este obligatoriu")]
+[EmailAddress(ErrorMessage = "Adresa de e-mail nu este valida")]
+[MinLength(13)]
+[MaxLength(13)]
+[DataType(DataType.Text)]
+
+De adaugat in site.css
+```CSS
+.field-validation-valid {
+ display: none;
+}
+.validation-summary-valid {
+ display: none;
+}
+```
+
+Pentru a trece de validari, in controller se adauga
+```C#
+if (ModelState.IsValid)
+```
+
+## Bootstrap
+<div class="panel panel-default">
+ <div class="panel-heading">@Model.Name</div>
+ <div class="panel-body">
+ Studentul are CNP <strong>@Model.CNP</strong>
+ <br />
+ <span class="label label-success">@Model.Email</span>
+ <br />
+ <i class="glyphicon glyphicon-globe"></i> @Model.Address
+ </div>
+ <div class="panel-footer">
+ <a class="btn btn-sm btn-success"
+href="/Student/Show/@Model.StudentId">Afisare student</a>
+ </div>
+</div>
+<br />
+
+## Controller
+```C#
+if (TempData.ContainsKey("Message"))
+ {
+ ViewBag.Message = TempData["Message"].ToString();
+ }
+ 
+ TempData["Message"] = "Studentul cu numele " + student.Name + " a
+fost sters din baza de date";
+```
