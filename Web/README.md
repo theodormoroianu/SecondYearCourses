@@ -149,25 +149,28 @@ Exemplu edit event:
 
 
 ## Helpere -> Curs 6
-Html.ActionLink – genereaza un URL
-➢ Html.TextBox – genereaza un element de tipul TextBox
-➢ Html.TextArea – genereaza un element de tipul TextArea
-➢ Html.CheckBox – genereaza un element de tipul Check-box, util pentru valorile de tip boolean
-➢ Html.RadioBox – genereaza un element de tipul Radio button
-➢ Html.DropDownList –genereaza un element de tipul Dropdown, util pentru valorile de tip Enum
+ * `Html.ActionLink` – genereaza un URL
+ * `Html.TextBox` – genereaza un element de tipul TextBox
+ * `Html.TextArea` – genereaza un element de tipul TextArea
+ * `Html.CheckBox` – genereaza un element de tipul Check-box, util pentru valorile de tip boolean
+ * `Html.RadioBox` – genereaza un element de tipul Radio button
+ * `Html.DropDownList` –genereaza un element de tipul Dropdown, util pentru valorile de tip Enum
+    ```C#
     @Html.DropDownListFor(m => m.CategoryId, new
         SelectList(Model.Categories, "Value", "Text"), "Selectati categoria", new { @class = "form-control" })
+    ```
 
-➢ Html.ListBox – genereaza un element de tipul Dropdown cu selectie multipla
-➢ Html.Hidden – genereaza un input field ascuns
-➢ Html.Password – genereaza un camp pentru introducerea parolelor (textul introdus in camp este ascuns)
-➢ Html.Display – este util pentru afisarea textelor
-➢ Html.Label – genereaza un label pentru un element mentionat anterior
-➢ Html.Editor – acest helper genereaza unul din elementele de mai sus in functie de tipul proprietatii modelului. Astfel, daca editorul
+ * `Html.ListBox` – genereaza un element de tipul Dropdown cu selectie multipla
+ * `Html.Hidden` – genereaza un input field ascuns
+ * `Html.Password` – genereaza un camp pentru introducerea parolelor (textul introdus in camp este ascuns)
+ * `Html.Display` – este util pentru afisarea textelor
+ * `Html.Label` – genereaza un label pentru un element mentionat anterior
+ * `Html.Editor` – acest helper genereaza unul din elementele de mai sus in functie de tipul proprietatii modelului. Astfel, daca editorul
     este alocat unui camp de tip int va genera un input de tip numeric; daca editorul este alocat unui camp de tip string va genera un
     textbox, etc.
 
 Exemplu de form Fara helpere:
+```Html
 <form method="post" action="/Students/New">
  @Html.HttpMethodOverride(HttpVerbs.Put)
  <label>Nume</label>
@@ -184,11 +187,15 @@ Exemplu de form Fara helpere:
  <br />
  <button type="submit">Adauga student</button>
 </form>
+```
 
 Exemplu de input care transmite "ID" cu o anumita valoare:
+```Html
 <input type="hidden" name="id" value="@ev.Id" />
+```
 
 Exemplu de dropdown manual:
+```Html
 <select class="form-control" data-val="true" data-val-number="The field
 CategoryId must be a number." data-val-required="The CategoryId field
 is required." id="CategoryId" name="CategoryId">
@@ -197,15 +204,17 @@ is required." id="CategoryId" name="CategoryId">
  <option value="8">Natura</option>
  <option value="9">Animale</option>
 </select>
-
+```
 
 
 ## Validari
+```C#
 [Required(ErrorMessage = "Campul e-mail este obligatoriu")]
 [EmailAddress(ErrorMessage = "Adresa de e-mail nu este valida")]
 [MinLength(13)]
 [MaxLength(13)]
 [DataType(DataType.Text)]
+```
 
 De adaugat in site.css
 ```CSS
