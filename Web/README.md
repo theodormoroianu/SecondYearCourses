@@ -23,7 +23,6 @@ connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\...\Ap
 </connectionStrings>
 ```
 
-
 Se adauga clasa intr-un model:
 ```C#
 public class ApplicationDbContext : DbContext
@@ -37,6 +36,9 @@ Se foloseste cu
 ```C#
 var db = new ApplicationDbContext();
 ```
+
+
+
 
 ## Migratii -> Curs 5
 Activare Migratii:
@@ -57,6 +59,9 @@ Package manager console => Add-Migration Initial
                         => Update-Database
 
 Resetare baza de date: Package manager => Update-Database -Target:0
+
+
+
 
 
 ## Modele
@@ -89,31 +94,59 @@ namespace Laborator5App.Models
 }
 ```
 
-## Viewuri
-```C#
-@model Laborator5App.Models.Article
-<h1>@ViewBag.message</h1>
 
-<select name="CategoryId">
- @foreach (var category in ViewBag.Categories)
- {
-<option @{ if (category.CategoryId == ViewBag.Category.CategoryId)
- { @: selected= "selected"
- }
- }
- value="@category.CategoryId"> @category.CategoryName
- </option>
- }
-</select>
+
+
+## Controller
+```C#
+if (TempData.ContainsKey("Message"))
+    ViewBag.Message = TempData["Message"].ToString();
+ 
+ TempData["Message"] = "Studentul cu numele " + student.Name + " a fost sters din baza de date";
 ```
 
-Trebuie folosit TempData pentru mesaje
-if (TempData.ContainsKey("message"))
- {
- ViewBag.message = TempData["message"].ToString();
- }
+Pentru a trece de validari, in controller se adauga
+```C#
+if (ModelState.IsValid)
+```
 
-View partial: @Html.Partial("StudentInfo", student);
+
+
+
+
+## Viewuri
+Exemplu edit event:
+```c#
+@using Simulare3.Models
+@model Event
+
+@{
+    var db = new ApplicationDbContext();
+}
+
+<h2>Edit Event</h2>
+
+<h3 class="text-info">@ViewBag.Message</h3>
+
+<form method="post" action="/Events/Edit">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(m => m.Id)
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    
+    @Html.LabelFor(m => m.Title, "Title of the Event")
+    @Html.EditorFor(m => m.Title, null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
+    
+    @Html.DropDownListFor(m => m.LocationId,
+            new SelectList(db.Locations.ToList(), "LocationId", "LocName"),
+            "Select Location", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.LocationId)
+    <br />
+    <button type="submit" class="btn btn-success">Edit Event</button>
+</form>
+```
+
 
 ## Helpere -> Curs 6
 Html.ActionLink – genereaza un URL
@@ -134,6 +167,7 @@ Html.ActionLink – genereaza un URL
     este alocat unui camp de tip int va genera un input de tip numeric; daca editorul este alocat unui camp de tip string va genera un
     textbox, etc.
 
+Exemplu de form Fara helpere:
 <form method="post" action="/Students/New">
  @Html.HttpMethodOverride(HttpVerbs.Put)
  <label>Nume</label>
@@ -151,6 +185,10 @@ Html.ActionLink – genereaza un URL
  <button type="submit">Adauga student</button>
 </form>
 
+Exemplu de input care transmite "ID" cu o anumita valoare:
+<input type="hidden" name="id" value="@ev.Id" />
+
+Exemplu de dropdown manual:
 <select class="form-control" data-val="true" data-val-number="The field
 CategoryId must be a number." data-val-required="The CategoryId field
 is required." id="CategoryId" name="CategoryId">
@@ -160,27 +198,7 @@ is required." id="CategoryId" name="CategoryId">
  <option value="9">Animale</option>
 </select>
 
-<form method="post" action="/Students/New">
- @Html.HttpMethodOverride(HttpVerbs.Put)
- @Html.ValidationSummary(false, "", new { @class = "text-danger" })
- <br />
- @Html.Label("Name", "Nume Student")
- <br />
- @Html.TextBox("Name", null, new { @class = "form-control" })
- @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
- <br /><br />
- @Html.Label("Email", "Adresa de e-mail")
- <br />
- @Html.TextBox("Email", null, new { @class = "form-control" })
- @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
- <br /><br />
- @Html.Label("CNP", "CNP Student")
- <br />
- @Html.TextBox("CNP", null, new { @class = "form-control" })
- @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
- <br />
- <button type="submit" class="btn btn-success">Adauga student</button>
-</form>
+
 
 ## Validari
 [Required(ErrorMessage = "Campul e-mail este obligatoriu")]
@@ -199,35 +217,27 @@ De adaugat in site.css
 }
 ```
 
-Pentru a trece de validari, in controller se adauga
-```C#
-if (ModelState.IsValid)
-```
+
 
 ## Bootstrap
+```Html
 <div class="panel panel-default">
- <div class="panel-heading">@Model.Name</div>
- <div class="panel-body">
- Studentul are CNP <strong>@Model.CNP</strong>
- <br />
- <span class="label label-success">@Model.Email</span>
- <br />
- <i class="glyphicon glyphicon-globe"></i> @Model.Address
- </div>
- <div class="panel-footer">
- <a class="btn btn-sm btn-success"
-href="/Student/Show/@Model.StudentId">Afisare student</a>
- </div>
+    <div class="panel-heading">@ev.Title</div>
+    <div class="panel-body">
+        <p><strong>Content:</strong> @ev.Description</p>
+        <p><strong>Location:</strong> @ev.Location.LocName</p>
+    </div>
+    <div class="panel-footer" style="display:flex; grid-gap: 5px">
+        <a class="btn btn-sm btn-success"
+            href="/Events/Edit/@ev.Id">Editare Event</a>
+        <form method="post" action="/Events/Delete/@ev.Id">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button type="submit" class="btn btn-danger">Sterge Event</button>
+        </form>
+    </div>
 </div>
-<br />
-
-## Controller
-```C#
-if (TempData.ContainsKey("Message"))
- {
- ViewBag.Message = TempData["Message"].ToString();
- }
- 
- TempData["Message"] = "Studentul cu numele " + student.Name + " a
-fost sters din baza de date";
 ```
+
+
+1. Don't forget to add hidden ID
+2. Don't forget Db.SaveChanges()
