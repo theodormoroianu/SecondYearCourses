@@ -99,10 +99,13 @@ namespace Laborator5App.Models
 
 ## Controller
 ```C#
-if (TempData.ContainsKey("Message"))
-    ViewBag.Message = TempData["Message"].ToString();
- 
- TempData["Message"] = "Studentul cu numele " + student.Name + " a fost sters din baza de date";
+if (TempData.ContainsKey("ErrorMessage"))
+    ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+if (TempData.ContainsKey("SuccessMessage"))
+    ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+
+TempData["SuccessMessage"] = "Studentul cu numele " + student.Name + " a fost sters din baza de date";
+TempData["ErrorMessage"] = "Error!";
 ```
 
 Pentru a trece de validari, in controller se adauga
@@ -115,6 +118,29 @@ if (ModelState.IsValid)
 
 
 ## Viewuri
+Mesaje:
+```C#
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-warning alert-dismissable" role="alert">
+        <h4 class="alert-heading">Warning</h4>
+        <p>We were unable to perform the requested action!</p>
+        <hr />
+        <p><strong>Error Message:</strong> @ViewBag.ErrorMessage</p>
+    </div>
+}
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success alert-dismissable" role="alert">
+        <h4 class="alert-heading">Success</h4>
+        <p>Successfully finished requested action!</p>
+        <hr />
+        <p><strong>Result Message:</strong> @ViewBag.SuccessMessage</p>
+    </div>
+}
+<br />
+```
+
 Exemplu edit event:
 ```c#
 @using Simulare3.Models
@@ -125,8 +151,6 @@ Exemplu edit event:
 }
 
 <h2>Edit Event</h2>
-
-<h3 class="text-info">@ViewBag.Message</h3>
 
 <form method="post" action="/Events/Edit">
     @Html.HttpMethodOverride(HttpVerbs.Put)
@@ -168,7 +192,8 @@ Exemplu edit event:
  * `Html.Editor` – acest helper genereaza unul din elementele de mai sus in functie de tipul proprietatii modelului. Astfel, daca editorul
     este alocat unui camp de tip int va genera un input de tip numeric; daca editorul este alocat unui camp de tip string va genera un
     textbox, etc.
-
+ * `@using (Html.BeginForm(actionName: "Edit", controllerName: "Groups"))` - Creaza un form.
+ 
 Exemplu de form Fara helpere:
 ```Html
 <form method="post" action="/Students/New">
