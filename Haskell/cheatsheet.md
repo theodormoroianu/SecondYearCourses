@@ -176,7 +176,75 @@ mapTimes2 =
 | `toLower` | face litera mica  | `Data.Char`
 | `toUpper` | face litera mare  | `Data.Char`
 | `and`     | vectorul are true | `prelude`
-| `all`     | verifica o contitie| `prelude`
+| `all`     | verifica o conditie| `prelude`
+| `any`     | verifica o conditie| `prelude`
 | `lookup`  | daca a e in [(a, b)] | `prelude`
 | `partition` | splituieste dupa o conditie | `Data.List`
 | `ord, chr` | int <-> char     | `Data.Char`
+| `toList`  | transforma intr-o lista | `Data.Foldable`
+| `when`    | conditie in do       | `Control.Monad`
+
+## Typeclasses
+
+```hs
+data Container a
+    = Data a [String]
+    | Error String
+
+instance Foldable Container where
+    foldMap f (Error _) = mempty 
+    foldMap f (Data a _) = f a
+
+instance Eq a => Eq (Container a) where
+    (Error _) == (Error _) = True
+    (Data a _) == (Data b _) = a == b
+    _ == _ = False
+
+instance Show a => Show (Container a) where
+    show (Error s) = "Error: " ++ s
+    show (Data a logs) =
+        "Data: " ++ show a ++ "\nlogs: " ++ show logs
+
+
+-- Monad, and then rest 
+instance Monad Container where
+    return a = Data a []
+    (Error s) >>= f = Error s
+    (Data a logs) >>= f =
+        case f a of
+            Error e -> Error e
+            Data b logs2 -> Data b (logs ++ ["Apply monad"] ++ logs2)
+
+instance Functor Container where
+    fmap f container = do
+        a <- container
+        return $ f a
+
+instance Applicative Container where
+    pure = return
+    c1 <*> c2 = do
+        f <- c1
+        a <- c2
+        return $ f a
+```
+
+## IO
+
+```hs
+readstuff :: IO ()
+readstuff = do
+    n <- read <$> getLine
+    when (n < 10) $ do
+        print "Ce penal!"
+        print "haha"
+    print $ "You said " ++ show n
+```
+
+## Random
+
+
+
+TODO: 
+* implementarea by default al lui functor si applicative pornind de la monada
+* verificare care e treaba cu random
+* IO
