@@ -1,5 +1,5 @@
 import System.Random
-
+import Test.QuickCheck
 newtype MyRandom a = MyRandom { runRandom :: StdGen -> (a,StdGen) }
 
 randomPositive :: MyRandom Int
