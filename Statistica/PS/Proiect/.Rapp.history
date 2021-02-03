@@ -1,0 +1,665 @@
+#  Cerinta 1#
+model <- infert#
+plot(model)#
+edu <- model$age#
+medie<-mean(edu)#
+medie#
+varianta<-var(edu) #
+varianta#
+q1=quantile(edu,1/4)#
+q1#
+q2=quantile(edu,2/4)#
+q2#
+q3=quantile(edu,3/4)#
+q3#
+q4=quantile(edu,4/4)#
+q4#
+mdn = median(edu, na.rm = FALSE)#
+varsta <- model$age#
+medie<-mean(varsta)#
+medie#
+varianta<-var(varsta) #
+varianta#
+q1=quantile(varsta,1/4)#
+q1#
+q2=quantile(varsta,2/4)#
+q2#
+q3=quantile(varsta,3/4)#
+q3#
+q4=quantile(varsta,4/4)#
+q4#
+mdn = median(varsta, na.rm = FALSE)#
+paritate <- model$parity#
+medie<-mean(paritate)#
+medie#
+varianta<-var(paritate) #
+varianta#
+q1=quantile(paritate,1/4)#
+q1#
+q2=quantile(paritate,2/4)#
+q2#
+q3=quantile(paritate,3/4)#
+q3#
+q4=quantile(paritate,4/4)#
+q4#
+mdn = median(paritate, na.rm = FALSE)#
+# Boxplot pentru Varsta si Numarul de nasteri#
+varstasrt = sort(varsta)#
+varsta#
+varstasrt#
+lg<-length(varstasrt)#
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri#
+        (inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))#
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri(inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))#
+text(y=fivenum(varsta~paritate), labels =fivenum(varsta~paritate), x=0.25)#
+boxplot(varsta, horizontal = TRUE, axes = FALSE, staplewex = 1)#
+text(x=fivenum(X), labels =fivenum(X), y=1.25)#
+vec <- c(26,26,26,38,38,39,39,39)#
+vec#
+quantile(vec)#
+indus <- model$induced#
+medie<-mean(indus)#
+medie#
+varianta<-var(indus) #
+varianta#
+q1=quantile(indus,1/4)#
+q1#
+q2=quantile(indus,2/4)#
+q2#
+q3=quantile(indus,3/4)#
+q3#
+q4=quantile(indus,4/4)#
+q4#
+mdn = median(indus, na.rm = FALSE)#
+case <- model$case#
+medie<-mean(case)#
+medie#
+varianta<-var(case) #
+varianta#
+q1=quantile(case,1/4)#
+q1#
+q2=quantile(case,2/4)#
+q2#
+q3=quantile(case,3/4)#
+q3#
+q4=quantile(case,4/4)#
+q4#
+mdn = median(case, na.rm = FALSE)#
+spontan <- model$spontaneous#
+medie<-mean(spontan)#
+medie#
+varianta<-var(spontan) #
+varianta#
+q1=quantile(spontan,1/4)#
+q1#
+q2=quantile(spontan,2/4)#
+q2#
+q3=quantile(spontan,3/4)#
+q3#
+q4=quantile(spontan,4/4)#
+q4#
+mdn = median(spontan, na.rm = FALSE)#
+stratum <- model$stratum#
+medie<-mean(stratum)#
+medie#
+varianta<-var(stratum) #
+varianta#
+q1=quantile(stratum,1/4)#
+q1#
+q2=quantile(stratum,2/4)#
+q2#
+q3=quantile(stratum,3/4)#
+q3#
+q4=quantile(stratum,4/4)#
+q4#
+mdn = median(stratum, na.rm = FALSE)#
+pooled.stratum <- model$pooled.stratum#
+medie<-mean(pooled.stratum)#
+medie#
+varianta<-var(pooled.stratum) #
+varianta#
+q1=quantile(pooled.stratum,1/4)#
+q1#
+q2=quantile(pooled.stratum,2/4)#
+q2#
+q3=quantile(pooled.stratum,3/4)#
+q3#
+q4=quantile(pooled.stratum,4/4)#
+q4#
+mdn = median(pooled.stratum, na.rm = FALSE)#
+#  Cerinta 2#
+# Varianta 1 - Regresii Liniare#
+# Regresie simpla#
+edu <- infert$edu#
+varsta <- infert$age#
+linMod <- lm(edu ~ varsta, data = infert)#
+plot(x= varsta, y = edu, col = "red", pch = "*")#
+abline(linMod, col = "blue")#
+# Regresie multipla#
+varsta <- infert$age#
+paritate <- infert$parity#
+edu <- infert$edu#
+spontan <- infert$spontaneous#
+linMod1 <- lm(varsta ~ paritate + edu + spontan)#
+summary(linMod1)#
+layout(matrix(c(1, 2, 3, 4), 2, 2)) # 4 grafuri pe pagina#
+plot(linMod1)#
+# Varianta 2:#
+# Regresie liniara simpla cu o variabila independenta prin metoda celor mai mici patrate#
+varsta <- model$age # set de date initial#
+length(varsta) #
+yage <-model$age #preluare date de analizat pentru selectie de regresie liniara#
+yrage<-yage*3/4 #propunere selectie de date pentru regresia liniara#
+yrage#
+round(yrage, digits = 0) #rotunjim detele noii propuneri de set de date#
+c=cbind(1,age)#
+solve(t(c) %*% c, t(c) %*% yrage)#
+boxplot(yrage~paritate,data=infert, main="Regresie liniara penru varsta", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1)#
+# Regresie liniara multipla#
+# Regresie liniara multipla cu 2 variabila independente prin metoda celor mai mici patrate #
+varsta <- model$age #set1 de date initial -> selectie de regresie liniara#
+length(varsta) #
+paritate<-(model$parity) #set2 de date initial -> selectie de regresie liniara#
+c=cbind(1,varsta,paritate)#
+yrage=(1/4+paritate+varsta) #set combinat al datelor initiale #
+round(yrage, digits = 0)#
+solve(t(c) %*% c, t(c) %*% yrage)#
+# Cerinta 3#
+# Distributia Weibull#
+layout(matrix(c(1, 2), 1, 2))#
+t <- seq(0, 2.5, 0.0001)#
+plot(t, pweibull(t, 0.5, 1), pch = ".", col = 2, xlim=c(0, 2.5), ylim=c(0, 1.0))#
+lines(t, pweibull(t, 1, 1), pch = ".", col = 3)#
+lines(t, pweibull(t, 1.5, 1), pch = ".", col = 4)#
+lines(t, pweibull(t, 5, 1), pch = ".", col = 5)#
+plot(t, dweibull(t, 0.5, 1), pch = ".", col = 2, xlim=c(0, 2.5), ylim=c(0, 2.5))#
+lines(t, dweibull(t, 1, 1), pch = ".", col = 3)#
+lines(t, dweibull(t, 1.5, 1), pch = ".", col = 4)#
+lines(t, dweibull(t, 5, 1), pch = ".", col = 5)#
+mean1 <- mean(pweibull(t, 0.5, 1))#
+mean2 <- mean(pweibull(t, 1, 1))#
+mean3 <- mean(pweibull(t, 1.5, 1))#
+mean4 <- mean(pweibull(t, 5, 1))#
+var1 <- var(pweibull(t, 0.5, 1))#
+var2 <- var(pweibull(t, 1, 1))#
+var3 <- var(pweibull(t, 1.5, 1))#
+var4 <- var(pweibull(t, 5, 1))
+#  Cerinta 1#
+model <- infert#
+plot(model)#
+edu <- model$age#
+medie<-mean(edu)#
+medie#
+varianta<-var(edu) #
+varianta#
+q1=quantile(edu,1/4)#
+q1#
+q2=quantile(edu,2/4)#
+q2#
+q3=quantile(edu,3/4)#
+q3#
+q4=quantile(edu,4/4)#
+q4#
+mdn = median(edu, na.rm = FALSE)#
+varsta <- model$age#
+medie<-mean(varsta)#
+medie#
+varianta<-var(varsta) #
+varianta#
+q1=quantile(varsta,1/4)#
+q1#
+q2=quantile(varsta,2/4)#
+q2#
+q3=quantile(varsta,3/4)#
+q3#
+q4=quantile(varsta,4/4)#
+q4#
+mdn = median(varsta, na.rm = FALSE)#
+paritate <- model$parity#
+medie<-mean(paritate)#
+medie#
+varianta<-var(paritate) #
+varianta#
+q1=quantile(paritate,1/4)#
+q1#
+q2=quantile(paritate,2/4)#
+q2#
+q3=quantile(paritate,3/4)#
+q3#
+q4=quantile(paritate,4/4)#
+q4#
+mdn = median(paritate, na.rm = FALSE)#
+# Boxplot pentru Varsta si Numarul de nasteri#
+varstasrt = sort(varsta)#
+varsta#
+varstasrt#
+lg<-length(varstasrt)#
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri#
+        (inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))#
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri(inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))#
+text(y=fivenum(varsta~paritate), labels =fivenum(varsta~paritate), x=0.25)#
+boxplot(varsta, horizontal = TRUE, axes = FALSE, staplewex = 1)#
+text(x=fivenum(X), labels =fivenum(X), y=1.25)#
+vec <- c(26,26,26,38,38,39,39,39)#
+vec#
+quantile(vec)#
+indus <- model$induced#
+medie<-mean(indus)#
+medie#
+varianta<-var(indus) #
+varianta#
+q1=quantile(indus,1/4)#
+q1#
+q2=quantile(indus,2/4)#
+q2#
+q3=quantile(indus,3/4)#
+q3#
+q4=quantile(indus,4/4)#
+q4#
+mdn = median(indus, na.rm = FALSE)#
+case <- model$case#
+medie<-mean(case)#
+medie#
+varianta<-var(case) #
+varianta#
+q1=quantile(case,1/4)#
+q1#
+q2=quantile(case,2/4)#
+q2#
+q3=quantile(case,3/4)#
+q3#
+q4=quantile(case,4/4)#
+q4#
+mdn = median(case, na.rm = FALSE)#
+spontan <- model$spontaneous#
+medie<-mean(spontan)#
+medie#
+varianta<-var(spontan) #
+varianta#
+q1=quantile(spontan,1/4)#
+q1#
+q2=quantile(spontan,2/4)#
+q2#
+q3=quantile(spontan,3/4)#
+q3#
+q4=quantile(spontan,4/4)#
+q4#
+mdn = median(spontan, na.rm = FALSE)#
+stratum <- model$stratum#
+medie<-mean(stratum)#
+medie#
+varianta<-var(stratum) #
+varianta#
+q1=quantile(stratum,1/4)#
+q1#
+q2=quantile(stratum,2/4)#
+q2#
+q3=quantile(stratum,3/4)#
+q3#
+q4=quantile(stratum,4/4)#
+q4#
+mdn = median(stratum, na.rm = FALSE)#
+pooled.stratum <- model$pooled.stratum#
+medie<-mean(pooled.stratum)#
+medie#
+varianta<-var(pooled.stratum) #
+varianta#
+q1=quantile(pooled.stratum,1/4)#
+q1#
+q2=quantile(pooled.stratum,2/4)#
+q2#
+q3=quantile(pooled.stratum,3/4)#
+q3#
+q4=quantile(pooled.stratum,4/4)#
+q4#
+mdn = median(pooled.stratum, na.rm = FALSE)#
+#  Cerinta 2#
+# Varianta 1 - Regresii Liniare#
+# Regresie simpla#
+edu <- infert$edu#
+varsta <- infert$age#
+linMod <- lm(edu ~ varsta, data = infert)#
+plot(x= varsta, y = edu, col = "red", pch = "*")#
+abline(linMod, col = "blue")#
+# Regresie multipla#
+varsta <- infert$age#
+paritate <- infert$parity#
+edu <- infert$edu#
+spontan <- infert$spontaneous#
+linMod1 <- lm(varsta ~ paritate + edu + spontan)#
+summary(linMod1)#
+layout(matrix(c(1, 2, 3, 4), 2, 2)) # 4 grafuri pe pagina#
+plot(linMod1)#
+# Varianta 2:#
+# Regresie liniara simpla cu o variabila independenta prin metoda celor mai mici patrate#
+varsta <- model$age # set de date initial#
+length(varsta) #
+yage <-model$age #preluare date de analizat pentru selectie de regresie liniara#
+yrage<-yage*3/4 #propunere selectie de date pentru regresia liniara#
+yrage#
+round(yrage, digits = 0) #rotunjim detele noii propuneri de set de date#
+c=cbind(1,age)#
+solve(t(c) %*% c, t(c) %*% yrage)#
+boxplot(yrage~paritate,data=infert, main="Regresie liniara penru varsta", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1)#
+# Regresie liniara multipla#
+# Regresie liniara multipla cu 2 variabila independente prin metoda celor mai mici patrate #
+varsta <- model$age #set1 de date initial -> selectie de regresie liniara#
+length(varsta) #
+paritate<-(model$parity) #set2 de date initial -> selectie de regresie liniara#
+c=cbind(1,varsta,paritate)#
+yrage=(1/4+paritate+varsta) #set combinat al datelor initiale #
+round(yrage, digits = 0)#
+solve(t(c) %*% c, t(c) %*% yrage)#
+# Cerinta 3#
+# Distributia Weibull#
+layout(matrix(c(1, 2), 1, 2))#
+t <- seq(0, 2.5, 0.0001)#
+plot(t, pweibull(t, 0.5, 1), pch = ".", col = 2, xlim=c(0, 2.5), ylim=c(0, 1.0))#
+lines(t, pweibull(t, 1, 1), pch = ".", col = 3)#
+lines(t, pweibull(t, 1.5, 1), pch = ".", col = 4)#
+lines(t, pweibull(t, 5, 1), pch = ".", col = 5)#
+plot(t, dweibull(t, 0.5, 1), pch = ".", col = 2, xlim=c(0, 2.5), ylim=c(0, 2.5))#
+lines(t, dweibull(t, 1, 1), pch = ".", col = 3)#
+lines(t, dweibull(t, 1.5, 1), pch = ".", col = 4)#
+lines(t, dweibull(t, 5, 1), pch = ".", col = 5)#
+mean1 <- mean(pweibull(t, 0.5, 1))#
+mean2 <- mean(pweibull(t, 1, 1))#
+mean3 <- mean(pweibull(t, 1.5, 1))#
+mean4 <- mean(pweibull(t, 5, 1))#
+var1 <- var(pweibull(t, 0.5, 1))#
+var2 <- var(pweibull(t, 1, 1))#
+var3 <- var(pweibull(t, 1.5, 1))#
+var4 <- var(pweibull(t, 5, 1))
+#  Cerinta 1#
+model <- infert#
+plot(model)
+edu <- model$age#
+#
+medie<-mean(edu)#
+medie
+#  Cerinta 1#
+model <- infert#
+plot(model)
+varianta<-var(edu) #
+varianta#
+q1=quantile(edu,1/4)#
+q1#
+q2=quantile(edu,2/4)#
+q2#
+q3=quantile(edu,3/4)#
+q3#
+q4=quantile(edu,4/4)#
+q4
+mdn = median(edu, na.rm = FALSE)#
+#
+varsta <- model$age#
+#
+medie<-mean(varsta)#
+medie#
+varianta<-var(varsta) #
+varianta#
+q1=quantile(varsta,1/4)#
+q1#
+q2=quantile(varsta,2/4)#
+q2#
+q3=quantile(varsta,3/4)#
+q3#
+q4=quantile(varsta,4/4)#
+q4#
+mdn = median(varsta, na.rm = FALSE)#
+#
+paritate <- model$parity#
+#
+medie<-mean(paritate)#
+medie#
+varianta<-var(paritate) #
+varianta#
+q1=quantile(paritate,1/4)#
+q1#
+q2=quantile(paritate,2/4)#
+q2#
+q3=quantile(paritate,3/4)#
+q3#
+q4=quantile(paritate,4/4)#
+q4#
+mdn = median(paritate, na.rm = FALSE)#
+#
+# Boxplot pentru Varsta si Numarul de nasteri#
+varstasrt = sort(varsta)#
+varsta#
+varstasrt#
+lg<-length(varstasrt)#
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri#
+        (inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))
+boxplot(varsta~paritate,data=infert, main="Varsta-Numarul de nasteri(inainte de termen)", #
+        xlab="Numarul de nasteri", ylab="Varsta",staplewex = 1, ylim=c(varstasrt[1], varstasrt[lg]))
+#################### a) ########################
+#
+frepcomgen <- function(n, m) {#
+	# Valorile lui X #
+	xv <- seq(1, n, by=1)#
+	# Valorile lui Y#
+	yv <- seq(1, m, by=1)#
+#
+	# Valorile din repartitia comuna a celor 2#
+	# sub forma de vector#
+	xycomp <- round(runif(m, 1, n + m), 0)#
+	xycomp <- append(xycomp, 0)#
+#
+	for (i in 2:n) {#
+		aux <- round(runif(m, 1, n + m), 0)#
+		xycomp <- append(xycomp, aux)#
+		xycomp <- append(xycomp, 0)#
+	}#
+	xycomp <- append(xycomp, replicate(m + 1, 0))#
+#
+	# Scaleaza valorile ca suma lor sa fie 1#
+	sum <- sum(xycomp)#
+	xycomp <- xycomp / sum#
+#
+	# Transformarea in matrice#
+	xycomp <- matrix(xycomp, ncol = m + 1, byrow=TRUE)#
+#
+	# Completarea probabilitatilor lui X si Y (ultima coloana / linie)#
+	for (i in 1:n) {#
+		sum <- sum(xycomp[i,])#
+		xycomp[i, m + 1] <- sum#
+	}#
+	for (i in 1:m) {#
+		sum <- sum(xycomp[, i])#
+		xycomp[n + 1, i] <- sum#
+	}#
+	xycomp[n + 1, m + 1] = 1#
+	# Schimbarea numelor liniilor si coloanelor#
+	rownames(xycomp) <- append(xv, "q")#
+	colnames(xycomp) <- append(yv, "p")#
+	xycomp[n, m] = NaN#
+#
+	return(xycomp)#
+}#
+#
+##################### b) #######################
+#
+# Gaseste prima pozitie din v pe care apare valoare value.#
+# In cazul in care last = TRUE, o gaseste pe ultima#
+find <- function(v, value, last=FALSE) {#
+	n <- length(v)#
+#
+	if (last) {#
+		for (i in n:1) {#
+			if (v[i] == value) {#
+				return(i)#
+			}#
+		}#
+	} else {#
+		for (i in 1:n) {#
+			if (v[i] == value) {#
+				return(i)#
+			}#
+		}#
+	}#
+	return(NaN)#
+}#
+#
+# Genereaza urmatoarea pozitie completabila din tabel#
+next_to_complete <- function(xycomp) {#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+#
+	# Cauta o pozitie completabila prin sume pe linii#
+	for (i in 1:(n + 1)) {#
+		row <- xycomp[i, ]#
+		first_NaN = find(is.nan(row), TRUE)#
+		last_NaN = find(is.nan(row), TRUE, last=TRUE)#
+		if (first_NaN == last_NaN && !is.nan(first_NaN)) {#
+			if (first_NaN != m + 1) {#
+				return(c(i, first_NaN, "l"))#
+			} else {#
+				return(c(i, first_NaN, NaN))#
+			}#
+		}#
+	}#
+#
+	# Cauta o pozitie completabila prin sume pe coloane#
+	for (i in 1:(m + 1)) {#
+		col <- xycomp[, i]#
+		first_NaN = find(is.nan(col), TRUE)#
+		last_NaN = find(is.nan(col), TRUE, last=TRUE)#
+		if (first_NaN == last_NaN && !is.nan(first_NaN)) {#
+			if (first_NaN != n + 1) {#
+				return(c(first_NaN, i, "c"))#
+			} else {#
+				return(c(n + 1, i, NaN))#
+			}#
+		}	#
+	}#
+#
+	return(NaN)#
+}#
+#
+fcomplrepcom <- function(xycomp) {#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+#
+	poz <- next_to_complete(xycomp)#
+	while(!is.nan(poz)) {#
+		if (is.nan(poz[3])) {#
+			if (poz[1] == n + 1) {#
+				xycomp[poz[1], poz[2]] = sum(xycomp[poz[1], 1:m])#
+			} else if (poz[2] == m + 1) {#
+				xycomp[poz[1], poz[2]] = sum(xycomp[1:n, poz[2]])#
+			}#
+		} else if (identical(poz[3], "l")) {#
+			xycomp[poz[1], poz[2]] = xycomp[poz[1], m + 1] - sum(xycomp[poz[1], 1:m], na.rm=TRUE)#
+		} else {#
+			xycomp[poz[1], poz[2]] = xycomp[n + 1, poz[2]] - sum(xycomp[1:n, poz[2]], na.rm=TRUE)#
+		}#
+		poz <- next_to_complete(xycomp)#
+	}#
+#
+	return (xycomp)#
+}#
+#
+##################### c) #######################
+#
+# Calculeaza media unei variabile aleatoare X#
+E <- function(x) {#
+	return(sum(x[2, ] * x[1, ]))#
+}#
+#
+# Calculeaza Cov(aX, bY)#
+Cov <- function(xycomp, a = 1, b = 1) {#
+	# Daca a si b exista, atunci apeleaza recursiv#
+	# Cov(X, Y)#
+	if (a != 1 || b != 1) {#
+		return(a * b * Cov(xycomp))#
+	}#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+#
+	# Calculam variabila aleatoare obtinuta daca din X scadem E(X)#
+	x <- append(round(as.numeric(rownames(xycomp[1:n, ])), 0), xycomp[1:n, m + 1])#
+	x <- matrix(x, nrow=2, byrow=TRUE)#
+	x[1, ] <- x[1, ] - E(x)#
+#
+	# Calculam variabila aleatoare obtinuta daca din Y scadem E(Y)#
+	y <- append(round(as.numeric(colnames(xycomp[, 1:m])), 0), xycomp[n + 1, 1:m])#
+	y <- matrix(y, nrow=2, byrow=TRUE)#
+	y[1, ] <- y[1, ] - E(y)#
+#
+	answer <- 0#
+	for (i in 1:n) {#
+		answer <- answer + sum(xycomp[i, 1:m] * y[1,]) * x[1, i]#
+	}#
+#
+	return(answer)#
+}#
+#
+# Calculeaza P(0 < X < 3 | Y > 2)#
+p1 <- function(xycomp) {#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+	# P(A | B) = P(A ^ B) / P(B)#
+	# P(A ^ B)#
+	a <- sum(xycomp[1:2, 3:m])#
+	# P(B)#
+	b <- sum(xycomp[n + 1, 3:m])#
+	return(a / b)#
+}#
+#
+# Calculeaza P(X > 6, Y < 7)#
+p2 <- function(xycomp) {#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+	return(sum(xycomp[7:n, 1:6]))#
+}#
+#
+###################### d) ######################
+#
+fverind <- function(xycomp) {#
+	# Deminsiunile celor doua variabile#
+	n <- dim(xycomp)[1] - 1#
+	m <- dim(xycomp)[2] - 1#
+#
+	# Verifica pt fiecare element daca este produsul probabilitatilor din X si Y#
+	for (i in 1:n) {#
+		for (j in 1:m) {#
+			if (xycomp[i, j] != xycomp[i, m + 1] * xycomp[n + 1, j]) {#
+				return(FALSE)#
+			}#
+		}#
+	}#
+#
+	return(TRUE)#
+}#
+#
+fvernecor <- function(xycomp) {#
+	# Verifica daca Cov(X, Y) = 0#
+	return(Cov(xycomp) == 0)#
+}
+frepcomgen(8, 11)
+xy <- frepcomgen(8, 11)
+xy
+xy <- fcomplrepcom
+xy
+xy <- frepcomgen(8, 11)
+xy
+xy <- fcomplrepcom(xy)
+Cov(xy, 3, -5)
+Cov(xy)
+Cov(xy) * 3 * 5
+fverind(xy)
+fvernnecor(xy)
+fvernecor(xy)
