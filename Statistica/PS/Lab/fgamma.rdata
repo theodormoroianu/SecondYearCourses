@@ -1,0 +1,29 @@
+check.integer <- function(x) {
+	x == round(x)
+}
+
+FGamma <- function(x, a) {
+	x ^ (a - 1) * exp(-x)
+}
+
+MyGamma <- function(a) {
+	if (all.equal(a, 1) == TRUE) {
+		return(1)
+	} else if (all.equal(a, 1 / 2) == TRUE) {
+		return(sqrt(pi))
+	} else if (check.integer(a)) {
+		return(factorial(a - 1))
+	} else if (a > 1) {
+		return((a - 1) * MyGamma(a - 1))
+	} else {
+		# FGamma <- function(x) {
+		# 	 x ^ (a - 1) * exp(-x)
+		# }
+
+		return(integrate(FGamma, 0, Inf, a))
+	}
+}
+
+# a <- 1 : 100
+# nu merge, fa sa mearga
+# (er <- MyGamma(a) - gamma(a))
