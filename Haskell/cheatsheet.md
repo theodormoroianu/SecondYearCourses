@@ -183,6 +183,7 @@ mapTimes2 =
 | `ord, chr` | int <-> char     | `Data.Char`
 | `toList`  | transforma intr-o lista | `Data.Foldable`
 | `when`    | conditie in do       | `Control.Monad`
+| `words`   | sparge in cuvinte   | `prelude`
 
 ## Typeclasses
 
@@ -242,9 +243,20 @@ readstuff = do
 
 ## Random
 
+```hs
+import Test.QuickCheck
 
+import System.Random
 
-TODO: 
-* implementarea by default al lui functor si applicative pornind de la monada
-* verificare care e treaba cu random
-* IO
+a :: StdGen
+a = mkStdGen 10
+
+(rnd, a') = random a :: (Int, StdGen)
+
+infiniteRange = randomRs (1, 100) a' :: [Int]
+
+prop :: Int -> Bool
+prop x = maximum (take (abs x + 1) infiniteRange) <= 100
+
+z = quickCheck prop
+```
