@@ -1,6 +1,4 @@
 # Curs de Retele de Calculatoare
 
-## Evaluare
-
-60% Lab
-40% Examen
+Informatii: class notebook pe teams
+Link GH: https://github.com/senisioi/computer-networks
