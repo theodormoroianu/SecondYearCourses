@@ -1,0 +1,4 @@
+winter :- cold.
+winder.
+
+?- cold.

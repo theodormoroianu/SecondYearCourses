@@ -43,7 +43,7 @@ public class Code {
         System.out.println(a.query(3));
 
         Idk ab = new Idk2();
-
+        
         System.out.println(ab.Tell());
     }
 }
