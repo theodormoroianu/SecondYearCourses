@@ -47,7 +47,7 @@ showPerson :: Person -> String
 showPerson a = "(" ++ showPersonN a ++ "," ++ showPersonA a ++ ")"
 
 mshowPersonN ::  Reader Person String
-mshowPersonN = Reader showPersonN --- de ce nu merge .
+mshowPersonN = Reader showPersonN
 
 mshowPersonA ::  Reader Person String
 mshowPersonA = Reader showPersonA
