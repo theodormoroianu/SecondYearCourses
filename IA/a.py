@@ -1,11 +1,13 @@
-from copy import deepcopy
+import numpy as np
+import copy
+import math
 
 class NodParcurgere:
-    def __init__(self, id, info, cost, parinte):
-        self.id = id  # este indicele din vectorul de noduri
+    def __init__(self, info, parinte, g, f):
         self.info = info
         self.parinte = parinte  # parintele din arborele de parcurgere
-        self.cost = cost
+        self.f = f
+        self.g = g
 
     def obtineDrum(self):
         l = [self.info]
@@ -40,31 +42,47 @@ class NodParcurgere:
         return (sir)
 
 class Graph:  # graful problemei
-    def __init__(self, start):
+    def __init__(self, start, scopuri, capacitateBarca, n):
         self.start = start
+        self.scopuri = scopuri
+        self.capacitateBarca = capacitateBarca
+        self.n = n
 
     def indiceNod(self, n):
         return self.noduri.index(n)
 
     # va genera succesorii sub forma de noduri in arborele de parcurgere
-    def genereazaSuccesori(self, nodCurent, c):
+    def genereazaSuccesori(self, nodCurent):
+      #de modificat
         listaSuccesori = []
-      
-        stive = nodCurent.info
-
-        for i in range(len(stive)):
-            if len(stive[i]) == 0:
-                continue
-            for j in range(len(stive)):
-                if i == j:
-                    continue
-                stiva_noua = deepcopy(stive)
-                stiva_noua[j].append(stiva_noua[i][-1])
-                stiva_noua[i].pop()
-
-                listaSuccesori.append(NodParcurgere(-1, stiva_noua, 1 + nodCurent.cost, nodCurent))
-
+        [can, mis, eps] = nodCurent.info
+        t1 = 0
+        t2 = 0
+        if eps == 1:
+          t1 = n - can 
+          t2 = n - mis
+        else:
+          t1 = can
+          t2 = mis
+        for i in range(t1+1):
+          for j in range (t2+1):
+            if (i == 0 or j==0 or i <= j) and i+j <= self.capacitateBarca and (i != 0 or j!=0):
+              canNew = can + eps*i
+              misNew = mis + eps*j
+              if (canNew == 0 or misNew == 0 or canNew <= misNew) and (n - canNew == 0 or n - misNew == 0 or  n - canNew <= n-misNew):
+                res = [canNew, misNew, eps * (-1)]
+                if nodCurent.contineInDrum(res):
+                  continue
+                listaSuccesori.append((res, nodCurent.g + 1, self.calculeaza_h(nodCurent.info)))
         return listaSuccesori
+
+    def calculeaza_h(self, nod_info):
+      #se completeaza in functie de problema hi = [(x + y)/m] xf+yf >= x + y (aducem de pe drept) -> hf >= hi | xf + yf >= x + y - m -> hf >= hi - 1 -> hf + 1 >= hi CONSISTENT
+      a, b, dir_ = nod_info
+      return (a + b) // capacitate_barca
+
+      
+
 
     def __repr__(self):
         sir = ""
@@ -72,47 +90,65 @@ class Graph:  # graful problemei
             sir += "{} = {}\n".format(k, v)
         return (sir)
 
-start = [[1, 5, 2, 3], [54, 10, 2], [34, 44, 1]]
+
+##############################################################################################
+#                                 Initializare problema                                      #
+##############################################################################################
+
+# pozitia i din vector
+capacitate_barca = 4
 nrSolutiiCautate = 1
-gr = Graph(start)
+n = 20
+start = [n, n, -1]
+scopuri = [[0, 0, 1]]
 
-def isScope(nod):
-    nr = -1
-    for i in nod:
-        if nr != -1 and len(i) != 0 and len(i) != nr:
-            return False
-        if len(i) != 0:
-            nr = len(i)
-    return True
+gr = Graph(start, scopuri, capacitate_barca, n)
 
-def uniform_cost(gr):
-    global nrSolutiiCautate
-    c = [NodParcurgere(-1, start, 0, None)]
-    continua = True
-    while (len(c) > 0 and continua):
-        nodCurent = c.pop(0)
-        # print("Processing node ", nodCurent.info)
+def in_list(nod_info, lista):
+  for nod in lista:
+    if nod.info == nod_info:
+      return nod
+  return None
 
-        if isScope(nodCurent.info):
-            nodCurent.afisDrum()
-            nrSolutiiCautate -= 1
-            if nrSolutiiCautate == 0:
-                continua = False
+def a_star():
+  closed, opened = [], [NodParcurgere(start, None, 0, 0)]
 
-        lSuccesori = gr.genereazaSuccesori(nodCurent, c)
-        for s in lSuccesori:
-            i = 0
-            gasit_loc = False
-            for i in range(len(c)):
-                # diferenta e ca ordonez dupa f
-                if c[i].cost >= s.cost:
-                    gasit_loc = True
-                    break
-            if gasit_loc:
-                c.insert(i, s)
-            else:
-                c.append(s)
-                
+  while len(opened) != 0:
+    nod_curent = opened[0]
+    opened.pop(0)
+  
+    closed.append(nod_curent)
+
+    if nod_curent.info in scopuri:
+      nod_curent.afisDrum()
+      return
+    
+    succ = gr.genereazaSuccesori(nod_curent)
+
+    def insertElem(nod):
+      poz = 0
+      while poz + 1 < len(opened) and [opened[poz].f, -opened[poz].g] < [nod.f, -nod.g]:
+        poz += 1
+      opened.insert(poz, nod)
+
+    for i in succ:
+      nod = in_list(i[0], closed)
+      if nod is not None:
+        if nod.f > i[1] + i[2]:
+          closed.remove(nod)
+          insertElem(NodParcurgere(i[0], nod_curent, i[1], i[1] + i[2]))
+        continue
+      
+      nod = in_list(i[0], opened)
+      if nod is not None:
+        if nod.f > i[1] + i[2]:
+          opened.remove(nod)
+          insertElem(NodParcurgere(i[0], nod_curent, i[1], i[1] + i[2]))
+        continue
+  
+      # got here -> does not appear
+      insertElem(NodParcurgere(i[0], nod_curent, i[1], i[1] + i[2]))
+
+
 if __name__ == '__main__':
-  print("Got here")
-  uniform_cost(gr)
+    a_star()
