@@ -25,6 +25,29 @@ inoutFile = do
               putStrLn $ "Iesire\n" ++ sout
               writeFile "Output.txt" sout
 
+readAndPrintStuff :: IO ()
+readAndPrintStuff = do
+    n <- read <$> getLine
+    let readPeople :: Int -> IO [(String, Int)]
+        readPeople 0 = return []
+        readPeople n = do
+            name <- getLine
+            age <- read <$> getLine
+            rest <- readPeople (n - 1)
+            return $ (name, age) : rest
+    
+    people <- readPeople n
+
+    let age_max :: Int
+        age_max = maximum $ fmap snd people
+        old_ppl :: [(String, Int)]
+        old_ppl = filter ((== age_max).snd) people
+        message :: [String]
+        message = map (\(nume, varsta) -> "Fraierul " ++ nume ++ " are " ++ show varsta ++ " anisori!") old_ppl
+
+    print $ foldr (\x acc -> x ++ "\n" ++ acc) "" message
+    return ()
+
 type Input = String
 type Output = String
  
