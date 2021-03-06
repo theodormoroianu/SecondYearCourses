@@ -24,3 +24,6 @@ Regresie lineara a punctelor `(x_i, y_i)` la un polinom de grad 2:
     ```R        
         pnorm(x)
     ```
+
+# TODO:
+1. mean, variance, deviation etc
