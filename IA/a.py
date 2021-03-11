@@ -98,7 +98,7 @@ class Graph:  # graful problemei
 # pozitia i din vector
 capacitate_barca = 4
 nrSolutiiCautate = 1
-n = 20
+n = 10
 start = [n, n, -1]
 scopuri = [[0, 0, 1]]
 
@@ -120,7 +120,7 @@ def a_star():
     closed.append(nod_curent)
 
     if nod_curent.info in scopuri:
-      nod_curent.afisDrum()
+      print(nod_curent.afisDrum())
       return
     
     succ = gr.genereazaSuccesori(nod_curent)
