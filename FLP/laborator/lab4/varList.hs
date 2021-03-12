@@ -1,28 +1,10 @@
-import Data.Maybe
---- Monada Identity
-
-newtype Identity a = Identity { runIdentity :: a }
-
-instance Monad Identity where
-  return = Identity
-  (Identity a) >>= f = f a
-
-instance Applicative Identity where
-  pure = return
-  a <*> b = do
-    f <- a
-    f <$> b
-
-instance Functor Identity where
-  fmap f a = f <$> a
 
 --- Limbajul si  Interpretorul
 
-type M = Identity
-
+type M = []
 
 showM :: Show a => M a -> String
-showM (Identity a) = show a
+showM = foldMap (\a -> show a ++ " ")
 
 type Name = String
 
@@ -31,6 +13,8 @@ data Term = Var Name
           | Term :+: Term
           | Lam Name Term
           | App Term Term
+          | Fail
+          | Amb Term Term
   deriving (Show)
 
 pgm :: Term
@@ -47,7 +31,7 @@ pgm = App
           (Var "x" :+: Var "y")
         )
       )
-      (Con 3)
+      (Amb (Con 3) (Con 1))
     )
   )
   (Con 4)
@@ -55,30 +39,44 @@ pgm = App
 
 data Value = Num Integer
            | Fun (Value -> M Value)
-           | Wrong
 
 instance Show Value where
  show (Num x) = show x
  show (Fun _) = "<function>"
- show Wrong   = "<wrong>"
 
 type Environment = [(Name, Value)]
 
 interp :: Term -> Environment -> M Value
 interp (Var name) env =
   case lookup name env of
-    Nothing -> Identity Wrong
-    Just val -> Identity val
-interp (Con x) _ = Identity $ Num x
-interp (a :+: b) env =
-  case (interp a env, interp b env) of
-    (Identity (Num a), Identity (Num b)) -> Identity $ Num $ a + b
-    _ -> Identity Wrong
+    Just x -> return x
+    Nothing -> []
+
+interp (Con x) _ = return $ Num x
+
+interp (a :+: b) env = do
+  v1 <- interp a env
+  v2 <- interp b env
+
+  case (v1, v2) of
+    (Num x, Num y) -> return $ Num (x + y)
+    _ -> []
+
 interp (Lam name exp) env =
-  Identity $ Fun (\x -> interp exp ((name, x) : env))
-interp (App f v) env =
-  case (interp f env, interp v env) of
-    (Identity (Fun f), Identity x) -> f x
+  return $ Fun (\x -> interp exp ((name, x) : env))
+
+interp (App f v) env = do
+  intf <- interp f env
+  intv <- interp v env
+
+  case intf of
+    Fun a -> a intv
+    _ -> []
+
+interp Fail _ = []
+
+interp (Amb a b) env =
+  (interp a env) ++ (interp b env)
 
 test :: Term -> String
 test t = showM $ interp t []

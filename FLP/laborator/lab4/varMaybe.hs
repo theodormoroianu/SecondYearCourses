@@ -1,28 +1,13 @@
 import Data.Maybe
---- Monada Identity
-
-newtype Identity a = Identity { runIdentity :: a }
-
-instance Monad Identity where
-  return = Identity
-  (Identity a) >>= f = f a
-
-instance Applicative Identity where
-  pure = return
-  a <*> b = do
-    f <- a
-    f <$> b
-
-instance Functor Identity where
-  fmap f a = f <$> a
 
 --- Limbajul si  Interpretorul
 
-type M = Identity
+type M = Maybe
 
 
 showM :: Show a => M a -> String
-showM (Identity a) = show a
+showM (Just a) = show a
+showM Nothing = "<wrong>"
 
 type Name = String
 
@@ -55,30 +40,26 @@ pgm = App
 
 data Value = Num Integer
            | Fun (Value -> M Value)
-           | Wrong
 
 instance Show Value where
  show (Num x) = show x
  show (Fun _) = "<function>"
- show Wrong   = "<wrong>"
 
 type Environment = [(Name, Value)]
 
 interp :: Term -> Environment -> M Value
 interp (Var name) env =
-  case lookup name env of
-    Nothing -> Identity Wrong
-    Just val -> Identity val
-interp (Con x) _ = Identity $ Num x
+  lookup name env
+interp (Con x) _ = Just $ Num x
 interp (a :+: b) env =
   case (interp a env, interp b env) of
-    (Identity (Num a), Identity (Num b)) -> Identity $ Num $ a + b
-    _ -> Identity Wrong
+    (Just (Num a), Just (Num b)) -> Just $ Num $ a + b
+    _ -> Nothing
 interp (Lam name exp) env =
-  Identity $ Fun (\x -> interp exp ((name, x) : env))
+  Just $ Fun (\x -> interp exp ((name, x) : env))
 interp (App f v) env =
   case (interp f env, interp v env) of
-    (Identity (Fun f), Identity x) -> f x
+    (Just (Fun f), Just x) -> f x
 
 test :: Term -> String
 test t = showM $ interp t []

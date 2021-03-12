@@ -1,28 +1,13 @@
 import Data.Maybe
---- Monada Identity
-
-newtype Identity a = Identity { runIdentity :: a }
-
-instance Monad Identity where
-  return = Identity
-  (Identity a) >>= f = f a
-
-instance Applicative Identity where
-  pure = return
-  a <*> b = do
-    f <- a
-    f <$> b
-
-instance Functor Identity where
-  fmap f a = f <$> a
 
 --- Limbajul si  Interpretorul
 
-type M = Identity
+type M = Either String
 
 
 showM :: Show a => M a -> String
-showM (Identity a) = show a
+showM (Right a) = show a
+showM (Left s) = "<wrong: " ++ s ++ ">"
 
 type Name = String
 
@@ -44,7 +29,7 @@ pgm = App
           )
         )
         (Lam "x"
-          (Var "x" :+: Var "y")
+          (Var "x" :+: Var "z")
         )
       )
       (Con 3)
@@ -55,30 +40,39 @@ pgm = App
 
 data Value = Num Integer
            | Fun (Value -> M Value)
-           | Wrong
 
 instance Show Value where
  show (Num x) = show x
  show (Fun _) = "<function>"
- show Wrong   = "<wrong>"
 
 type Environment = [(Name, Value)]
 
 interp :: Term -> Environment -> M Value
 interp (Var name) env =
   case lookup name env of
-    Nothing -> Identity Wrong
-    Just val -> Identity val
-interp (Con x) _ = Identity $ Num x
-interp (a :+: b) env =
-  case (interp a env, interp b env) of
-    (Identity (Num a), Identity (Num b)) -> Identity $ Num $ a + b
-    _ -> Identity Wrong
+    Just x -> Right x
+    Nothing -> Left $ "Unbound variable " ++ name
+
+interp (Con x) _ = Right $ Num x
+
+interp (a :+: b) env = do
+  v1 <- interp a env
+  v2 <- interp b env
+
+  case (v1, v2) of
+    (Num x, Num y) -> Right $ Num (x + y)
+    _ -> Left $ "Should be numbers: " ++ show v1 ++ show v2
+
 interp (Lam name exp) env =
-  Identity $ Fun (\x -> interp exp ((name, x) : env))
-interp (App f v) env =
-  case (interp f env, interp v env) of
-    (Identity (Fun f), Identity x) -> f x
+  Right $ Fun (\x -> interp exp ((name, x) : env))
+
+interp (App f v) env = do
+  intf <- interp f env
+  intv <- interp v env
+
+  case intf of
+    Fun a -> a intv
+    _ -> Left $ "Should be function: " ++ show f
 
 test :: Term -> String
 test t = showM $ interp t []
