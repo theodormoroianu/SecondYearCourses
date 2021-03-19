@@ -12,7 +12,7 @@ while (prime && i * i < n) {
         x = 10
     }
     else {
-        a = 0
+        
     }
 };
 if (prime) print("Is prime: ", n) else print("Is not prime: ", n)

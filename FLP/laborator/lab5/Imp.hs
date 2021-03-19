@@ -99,6 +99,8 @@ bracesParser :: Parser a -> Parser a
 bracesParser = Token.braces impLexer
 semiParser :: Parser String
 semiParser = Token.semi impLexer
+semiSepParser :: Parser a -> Parser [a]
+semiSepParser = Token.semiSep impLexer
 
 -- Expression parser able to parse expressions.
 expression :: Parser Exp
@@ -148,21 +150,10 @@ boolExp =
         reserved "false"
         return $ B False)
 
--- Reads a bunch of lines, separated by ';'.
-readLines :: Parser [Stmt]
-readLines = do
-    a <- statement
-    (do
-        semiParser
-        stms <- readLines
-        return $ a:stms)
-     <|>
-        return [a]
-
 -- Reads lines, and closes them in a Block.
 readBlock :: Parser Stmt
 readBlock =
-    (Block <$> bracesParser readLines) <|> bracesParser (return (Block [])) <|> statement
+    bracesParser (Block <$> semiSepParser statement) <|> statement
 
 -- Parses a statement.
 statement :: Parser Stmt
