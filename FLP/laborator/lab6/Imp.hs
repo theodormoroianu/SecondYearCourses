@@ -7,8 +7,12 @@ import Text.Parsec.Expr
     ( buildExpressionParser, Assoc(..), Operator(..) )
 import Text.ParserCombinators.Parsec.Language
     ( emptyDef, GenLanguageDef( .. ), LanguageDef)
-import Text.Parsec ( alphaNum, letter, (<|>), eof )
+import Text.Parsec ( alphaNum, letter, (<|>), eof,State (State) )
 import Control.Monad
+import Control.Monad.State
+import qualified Data.Map as Map
+import Data.Maybe
+
 
 --Defining AST.
 type Name = String
@@ -234,6 +238,105 @@ whileStmt = do
     condition <- parens expression
     While condition <$> readBlock
 
+
+
+type Environment = Map.Map String Int
+type Store = Map.Map Int Integer
+type Storage = (Environment, Store)
+type M = StateT Storage IO
+
+evaluate :: Exp -> M Integer
+evaluate (Id name) = do
+    (env, store) <- get
+    let poz_in_store = fromJust $ Map.lookup name env
+    return $ fromJust $ Map.lookup poz_in_store store
+evaluate (I x) = return x
+evaluate (B True) = return 1
+evaluate (B False) = return 0
+evaluate (UMin a) = negate <$> evaluate a
+evaluate (BinA op a b) = do
+    ansa <- evaluate a
+    ansb <- evaluate b
+    case op of
+        Add -> return (ansa + ansb)
+        Mul -> return (ansa * ansb)
+        Sub -> return (ansa - ansb)
+        Div -> return (ansa `div` ansb)
+        Mod -> return (ansa `mod` ansb)
+evaluate (BinC op a b) = do
+    ansa <- evaluate a
+    ansb <- evaluate b
+    case op of
+        Lt -> return $ if ansa < ansb then 1 else 0 
+        Lte -> return $ if ansa <= ansb then 1 else 0 
+        Gt -> return $ if ansa > ansb then 1 else 0 
+        Gte -> return $ if ansa >= ansb then 1 else 0 
+evaluate (BinE op a b) = do
+    ansa <- evaluate a
+    ansb <- evaluate b
+    case op of
+        Eq -> return $ if ansa == ansb then 1 else 0 
+        Neq -> return $ if ansa /= ansb then 1 else 0
+evaluate (BinL op a b) = do
+    ansa <- evaluate a
+    ansb <- evaluate b
+    case op of
+        And -> return $ if ansa * ansb /= 0 then 1 else 0 
+        Or -> return $ if ansa + ansb /= 0 then 1 else 0
+evaluate (Not a) = (\x -> if x /= 0 then 0 else 1) <$> evaluate a
+
+
+interpret :: Stmt -> StateT (Environment, Store) IO ()
+interpret (Asgn var exp) = do
+    val <- evaluate exp
+    (env, store) <- get
+
+    let id_in_store = fromJust $  Map.lookup var env
+    let new_map = Map.insert id_in_store val store
+
+    put (env, new_map)
+interpret (If cond if_true if_false) = do
+    value_cond <- evaluate cond
+    if value_cond == 1 then
+        interpret if_true
+    else
+        interpret if_false
+interpret (Read display_text var) = do
+    lift $ putStr display_text
+    read_value <- lift (readLn :: IO Integer)
+    interpret (Asgn var (I read_value))
+interpret (Print display_text var) = do
+    value <- evaluate var
+    lift $ putStrLn (display_text ++ " " ++ show value)
+interpret (While cond stmt) = do
+    value_cond <- evaluate cond
+    if value_cond == 0 then
+        return ()
+    else do
+        interpret stmt
+        interpret (While cond stmt)
+interpret (Decl _ var_name) = do
+    (env, store) <- get
+    let poz_in_memory = Map.size store
+    let new_store = Map.insert poz_in_memory 0 store
+    let new_env = Map.insert var_name poz_in_memory env
+    put (new_env, new_store)
+
+interpret (Block operations) = do
+    (old_env, _) <- get
+
+    mapM_ interpret operations
+
+    -- Maybe trim act_store to the size of old_store?
+    (_, act_store) <- get
+    put (old_env, act_store)
+
+startInterpretation :: Stmt -> IO ()
+startInterpretation stmt = do
+    (_, (env, store)) <- runStateT (interpret stmt) (Map.empty, Map.empty)
+    putStrLn $ "The final env is: " ++ show env
+    putStrLn $ "The final store is: " ++ show store
+    
 -- Parses the "1.imp" file.
 -- Or at least, it's supposed to :(
 main :: IO ()
@@ -241,5 +344,5 @@ main = do
     result <- parseFromFile (readLines <* eof) "1.imp"
     case result of
         Left err  -> print err
-        Right xs  -> print xs
+        Right xs  -> startInterpretation xs
 
