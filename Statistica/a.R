@@ -91,22 +91,23 @@ lm(y ~ X + X2)
 i <- 116
 
 # 1
-DPlus = am boala
-DMinus = nu am boala
+# DPlus = am boala
+# DMinus = nu am boala
 
-Tplus = testul e pozitiv
-TMinus = testul e negativ
+# Tplus = testul e pozitiv
+# TMinus = testul e negativ
 
-Dplus <- i / 1000
-Dminus <- 1 - Dplus
+(Dplus <- i / 1000)
+(Dminus <- 1 - Dplus)
 
 # Fals pozitiv
-TplusCondDminus <- 0.03
-TminusCondDplus <- 0.03
+(TplusCondDminus <- 0.03)
+# Fals negativ
+(TminusCondDplus <- 0.03)
 
-TplusCondDplus <- 1 - TminusCondDplus
+(TplusCondDplus <- 1 - TminusCondDplus)
 
-Tplus <- TplusCondDminus * Dminus + TplusCondDplus * Dplus
+(Tplus <- TplusCondDminus * Dminus + TplusCondDplus * Dplus)
 
 # vrem sa calculam
 (DplusCondTplus <- TplusCondDplus * Dplus / Tplus)
@@ -115,16 +116,21 @@ Tplus <- TplusCondDminus * Dminus + TplusCondDplus * Dplus
 e <- 1^2 * i / 1000 + 2^2 * i / 500 + 3^2 * (1000 - 3 * i) / 1000
 e
 
+
 # 3
 
-X ~ U(0, i)
-Y = x^2
-domeniu de valori este [0, sqrt(i)]
+# X ~ U(0, i)
+# Y = x^2
+# domeniu de valori este [0, sqrt(i)]
 
-Fy(y) = P(Y <= y) = P(sqrt(X) <= y) = P(X <= y^2) = Fx(y^2) = y^2 / i
-Fy(y) = y^2 / i
-fy(y) = Fy(y)'' = 2 * y / i
-fy(y) = 2 * y / i
+# Fy(y) = P(Y <= y) = P(sqrt(X) <= y) = P(X <= y^2) = Fx(y^2) = y^2 / i
+# Fy(y) = y^2 / i
+# fy(y) = Fy(y)' = 2 * y / i
+# fy(y) = 2 * y / i
+
+# Verficare
+s <- integrate(function(x) { return(2 * x / 116) }, 0, sqrt(116))
+s
 
 # 4
 # I aversuri -> folosim MLE
@@ -136,14 +142,15 @@ fy(y) = 2 * y / i
 # i - i * p = 200 * p - i * p
 # p = i / 200
 
+
 # 5
 
-Ipoteza               Prior                Likelihood                  Bayes numerator               posterior
-   H                   P(H)                 P(D | H)                       P(D | H) * P(H)            P(H | D)
-   A                   i / 200                0.5                            0.5 * i / 200            0.
-   B                  1 - i / 200             0.8                         0.8 * (1 - i / 200)
+# Ipoteza               Prior                Likelihood                  Bayes numerator               posterior
+#    H                   P(H)                 P(D | H)                       P(D | H) * P(H)            P(H | D)
+#    A                   i / 200                0.5                            0.5 * i / 200            0.
+#    B                  1 - i / 200             0.8                         0.8 * (1 - i / 200)
 
-P(D) = 0.5 * i / 200 + 0.8 * (1 - i / 200)
+# P(D) = 0.5 * i / 200 + 0.8 * (1 - i / 200)
 pd <- 0.5 * i / 200 + 0.8 * (1 - i / 200)
 pd
 
@@ -156,3 +163,6 @@ pd
 
 # 6
 
+xbar <- 10 * i / 1600
+a <- 0.05
+z = qnorm(1 - a / 2) / 2 / sqrt(1600)
