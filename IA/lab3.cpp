@@ -62,11 +62,15 @@ pair <int, vector <State>> AStar(State init, State final)
     priority_queue <tuple <int, int, State>> q;
     q.push(make_tuple(0, 0, init));
 
+    int processed = 0;
+
     while (!q.empty()) {
         auto [expected, until, state] = q.top();
         q.pop();
         if (cost[state] != until)
             continue;
+
+        processed++;
 
         if (state == final)
             break;
@@ -82,6 +86,8 @@ pair <int, vector <State>> AStar(State init, State final)
             }
         }
     }
+
+    cout << "Visited " << processed << " states!\n";
 
     if (cost.find(final) == cost.end())
         return { -1, { } };
