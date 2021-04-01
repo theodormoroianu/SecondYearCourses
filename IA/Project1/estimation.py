@@ -1,5 +1,5 @@
 import state
-from typing import Callable, Tuple
+from typing import Callable, List, Tuple
 
 def TrivialEstimation(position: state.UserState) -> int:
     """
@@ -23,7 +23,7 @@ def BadEstimation(position: state.UserState) -> int:
     return 20000 * state.N * state.M - DistanceToObstaclesEstimation(position) + \
         1000000 if position.position[0] == 0 else 0
 
-estimations: Tuple[Callable[[state.UserState],int],str] = [
+estimations: List[Tuple[Callable,str]] = [
     (TrivialEstimation, "Trivial Estimation"),
     (DistanceToFinishEstimation, "Distance to end position"),
     (DistanceToObstaclesEstimation, "Distance to end passing by the stone"),

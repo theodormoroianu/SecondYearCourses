@@ -2,7 +2,7 @@ Found 1 solutions:
 Solution #1:
  * Step #0:
     * Actions:
-       * Added start position to BFS
+       * Added start position to A*
     * State Summary:
        * New position: (0, 0)
        * Has the magic stone: False
@@ -388,9 +388,9 @@ Solution #1:
        * Has shoes in the backapck: True
        * Color and usage of backpack shoes: a, used 0 times
  * Search Summary:
-    * Search time: 0.012200 seconds
+    * Search time: 0.050300 seconds
     * Total distance of path: 38
     * Visited nodes until the solution: 210
     * Computed nodes until the solution: 220
-    * Algorithm used for computing the answer: BFS
+    * Algorithm used for computing the answer: Optimized A*
 

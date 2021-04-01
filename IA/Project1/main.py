@@ -40,6 +40,32 @@ def main():
         print("Unable to create output folder. Stopping...")
         return
 
+    # Read number of solutions.
+    nr_solutions = int(input("How many paths should the algorithm compute (Note that A*/BFS/IDA* only compute the first one)?\n $ "))
+    if nr_solutions <= 0:
+        raise IOError("Invalid number of solutions")
+    
+    # Read choosen estimation.
+    print("Available estimations:")
+    for id, (_, description) in enumerate(estimation.estimations):
+        print("  %d. %s" % (id + 1, description))
+    estimation_id = int(input("Which estimation should the algoritm consider?\n $ "))
+    estimation_fn = estimation.estimations[estimation_id - 1][0]
+
+
+    # Read choosen algorithm.
+    print("Available search algoritms:")
+    for id, (_, description) in enumerate(pathfinding.pathfindings):
+        print("  %d. %s" % (id + 1, description))
+    search_alg_id = int(input("Which searching algorithm should we use?\n $ "))
+    search_alg_fn = pathfinding.pathfindings[search_alg_id - 1][0]
+
+
+    # Read choosen timeout.
+    timeout = float(input("What timeout should the algoritm have (in seconds)?\n $ "))
+
+
+
     # Iterate over each input file.
     for file in files_in_folder:
 
@@ -61,28 +87,7 @@ def main():
                     (state.N, state.M, state.start_position[0], state.start_position[1],
                      state.stone_position[0], state.stone_position[1]))
             
-            # Read number of solutions.
-            nr_solutions = int(input("How many paths should the algorithm compute (Note that A*/BFS only compute the first one)?\n $ "))
-            if nr_solutions <= 0:
-                raise IOError("Invalid number of solutions")
             
-            # Read choosen estimation.
-            print("Available estimations:")
-            for id, (_, description) in enumerate(estimation.estimations):
-                print("  %d. %s" % (id + 1, description))
-            estimation_id = int(input("Which estimation should the algoritm consider?\n $ "))
-            estimation_fn = estimation.estimations[estimation_id - 1][0]
-
-            # Read choosen algorithm.
-            print("Available search algoritms:")
-            for id, (_, description) in enumerate(pathfinding.pathfindings):
-                print("  %d. %s" % (id + 1, description))
-            search_alg_id = int(input("Which searching algorithm should we use?\n $ "))
-            search_alg_fn = pathfinding.pathfindings[search_alg_id - 1][0]
-
-            # Read choosen timeout.
-            timeout = float(input("What timeout should the algoritm have (in seconds)?\n $ "))
-
             # Process file.
             process(search_alg_fn, estimation_fn, nr_solutions, timeout, output_folder + "/" + file)
 
