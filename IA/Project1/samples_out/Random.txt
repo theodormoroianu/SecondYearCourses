@@ -1,0 +1,130 @@
+Found 1 solutions:
+Solution #1:
+ * Step #0:
+    * Actions:
+       * Added start position to BFS
+    * State Summary:
+       * New position: (0, 1)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: r, used 1 times
+       * Has shoes in the backapck: False
+ * Step #1:
+    * Actions:
+       * Moved from (0, 1) to (1, 1)
+       * Took shoes of color a and put them in the backpack
+    * State Summary:
+       * New position: (1, 1)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: r, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #2:
+    * Actions:
+       * Moved from (1, 1) to (1, 2)
+    * State Summary:
+       * New position: (1, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: r, used 3 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #3:
+    * Actions:
+       * Moved from (1, 2) to (2, 2) after changing shoes with the backpack
+       * Removed shoes from the backpack as they are completly used
+    * State Summary:
+       * New position: (2, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 1 times
+       * Has shoes in the backapck: False
+ * Step #4:
+    * Actions:
+       * Moved from (2, 2) to (3, 2)
+       * Took shoes of color g and put them in the backpack
+    * State Summary:
+       * New position: (3, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: g, used 0 times
+ * Step #5:
+    * Actions:
+       * Moved from (3, 2) to (4, 2)
+       * Took the magic stone
+    * State Summary:
+       * New position: (4, 2)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 3 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: g, used 0 times
+ * Step #6:
+    * Actions:
+       * Moved from (4, 2) to (4, 1) after changing shoes with the backpack
+       * Removed shoes from the backpack as they are completly used
+    * State Summary:
+       * New position: (4, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: g, used 1 times
+       * Has shoes in the backapck: False
+ * Step #7:
+    * Actions:
+       * Moved from (4, 1) to (4, 0)
+       * Took shoes of color v and put them in the backpack
+    * State Summary:
+       * New position: (4, 0)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: g, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: v, used 0 times
+ * Step #8:
+    * Actions:
+       * Moved from (4, 0) to (4, 1)
+    * State Summary:
+       * New position: (4, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: g, used 3 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: v, used 0 times
+ * Step #9:
+    * Actions:
+       * Moved from (4, 1) to (3, 1) after changing shoes with the backpack
+       * Removed shoes from the backpack as they are completly used
+    * State Summary:
+       * New position: (3, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: v, used 1 times
+       * Has shoes in the backapck: False
+ * Step #10:
+    * Actions:
+       * Moved from (3, 1) to (2, 1)
+       * Took shoes of color r and put them in the backpack
+    * State Summary:
+       * New position: (2, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: v, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: r, used 0 times
+ * Step #11:
+    * Actions:
+       * Moved from (2, 1) to (1, 1) after changing shoes with the backpack
+    * State Summary:
+       * New position: (1, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: r, used 1 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: v, used 2 times
+ * Step #12:
+    * Actions:
+       * Moved from (1, 1) to (0, 1)
+    * State Summary:
+       * New position: (0, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: r, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: v, used 2 times
+ * Search Summary:
+    * Search time: 0.000400 seconds
+    * Total distance of path: 12
+    * Visited nodes until the solution: 39
+    * Computed nodes until the solution: 42
+    * Algorithm used for computing the answer: BFS
+

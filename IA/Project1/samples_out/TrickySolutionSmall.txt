@@ -1,0 +1,396 @@
+Found 1 solutions:
+Solution #1:
+ * Step #0:
+    * Actions:
+       * Added start position to BFS
+    * State Summary:
+       * New position: (0, 0)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 1 times
+       * Has shoes in the backapck: False
+ * Step #1:
+    * Actions:
+       * Moved from (0, 0) to (0, 1)
+       * Took shoes of color a and put them in the backpack
+    * State Summary:
+       * New position: (0, 1)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 2 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #2:
+    * Actions:
+       * Moved from (0, 1) to (0, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #3:
+    * Actions:
+       * Moved from (0, 2) to (0, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 3)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #4:
+    * Actions:
+       * Moved from (0, 3) to (0, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 4)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #5:
+    * Actions:
+       * Moved from (0, 4) to (0, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 5)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #6:
+    * Actions:
+       * Moved from (0, 5) to (1, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (1, 5)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #7:
+    * Actions:
+       * Moved from (1, 5) to (2, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 5)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #8:
+    * Actions:
+       * Moved from (2, 5) to (2, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 4)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #9:
+    * Actions:
+       * Moved from (2, 4) to (2, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 3)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #10:
+    * Actions:
+       * Moved from (2, 3) to (2, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #11:
+    * Actions:
+       * Moved from (2, 2) to (2, 1)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 1)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #12:
+    * Actions:
+       * Moved from (2, 1) to (2, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 0)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #13:
+    * Actions:
+       * Moved from (2, 0) to (3, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (3, 0)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #14:
+    * Actions:
+       * Moved from (3, 0) to (4, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 0)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #15:
+    * Actions:
+       * Moved from (4, 0) to (4, 1)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 1)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #16:
+    * Actions:
+       * Moved from (4, 1) to (4, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 2)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #17:
+    * Actions:
+       * Moved from (4, 2) to (4, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 3)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #18:
+    * Actions:
+       * Moved from (4, 3) to (4, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 4)
+       * Has the magic stone: False
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #19:
+    * Actions:
+       * Moved from (4, 4) to (4, 5)
+       * Took the magic stone
+    * State Summary:
+       * New position: (4, 5)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 1 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #20:
+    * Actions:
+       * Moved from (4, 5) to (4, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 4)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #21:
+    * Actions:
+       * Moved from (4, 4) to (4, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 3)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #22:
+    * Actions:
+       * Moved from (4, 3) to (4, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 2)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #23:
+    * Actions:
+       * Moved from (4, 2) to (4, 1)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #24:
+    * Actions:
+       * Moved from (4, 1) to (4, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (4, 0)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #25:
+    * Actions:
+       * Moved from (4, 0) to (3, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (3, 0)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #26:
+    * Actions:
+       * Moved from (3, 0) to (2, 0)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 0)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #27:
+    * Actions:
+       * Moved from (2, 0) to (2, 1)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #28:
+    * Actions:
+       * Moved from (2, 1) to (2, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 2)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #29:
+    * Actions:
+       * Moved from (2, 2) to (2, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 3)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #30:
+    * Actions:
+       * Moved from (2, 3) to (2, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 4)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #31:
+    * Actions:
+       * Moved from (2, 4) to (2, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (2, 5)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #32:
+    * Actions:
+       * Moved from (2, 5) to (1, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (1, 5)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #33:
+    * Actions:
+       * Moved from (1, 5) to (0, 5)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 5)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #34:
+    * Actions:
+       * Moved from (0, 5) to (0, 4)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 4)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #35:
+    * Actions:
+       * Moved from (0, 4) to (0, 3)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 3)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #36:
+    * Actions:
+       * Moved from (0, 3) to (0, 2)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 2)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #37:
+    * Actions:
+       * Moved from (0, 2) to (0, 1)
+       * Replaced shoes i'm wearing with the new a shoes, and threw the previous ones
+    * State Summary:
+       * New position: (0, 1)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 0 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Step #38:
+    * Actions:
+       * Moved from (0, 1) to (0, 0)
+    * State Summary:
+       * New position: (0, 0)
+       * Has the magic stone: True
+       * Color and usage of wearing shoes: a, used 1 times
+       * Has shoes in the backapck: True
+       * Color and usage of backpack shoes: a, used 0 times
+ * Search Summary:
+    * Search time: 0.012200 seconds
+    * Total distance of path: 38
+    * Visited nodes until the solution: 210
+    * Computed nodes until the solution: 220
+    * Algorithm used for computing the answer: BFS
+

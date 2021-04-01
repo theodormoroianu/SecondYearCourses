@@ -1,0 +1,15 @@
+g r v v v v
+a r r r r a
+a v a r r a
+v v a r r a
+g g a r r a
+v r r g v v
+r r a a a a
+
+0 * 0 0 0 0
+g a 0 0 0 0
+0 r 0 0 0 r
+0 0 g 0 0 0
+v 0 @ 0 0 0
+0 0 0 0 0 g
+0 0 0 0 0 0
