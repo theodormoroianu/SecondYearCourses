@@ -6,6 +6,8 @@ import state
 def ReadFolder(folder: str) -> List[str]:
     """
         Reads an input folder, and returns the files from within.
+        @param folder: folder to read.
+        @return: list with all the files.
     """
 
     onlyfiles = [f for f in listdir(folder) if isfile(join(folder, f))]
@@ -15,6 +17,7 @@ def ReadFolder(folder: str) -> List[str]:
 def ReadFile(filepath: str):
     """
         Reads a file, and returns { color, bonus }.
+        @param: file to read.
     """
 
     with open(filepath, "r") as fin:

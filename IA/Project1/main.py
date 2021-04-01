@@ -8,6 +8,11 @@ from typing import Callable, Tuple, List
 def process(alg: Callable, est: Callable, nr_sol: int, timeout: float, file: str):
     """
         Starts a search algoritm, with an aproximation and a timeout.
+        @param alg: Algorithm function to use.
+        @param est: Estimation function to use.
+        @param nr_sol: Number of solutions to generate.
+        @param timeout: timeout in seconds for the algorithm.
+        @param file: File to write the solution into.
     """
 
     # Run algoritm.

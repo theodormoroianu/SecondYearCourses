@@ -7,6 +7,11 @@ stone_position = None
 N, M = None, None
 
 def Initialize(colors: List[List[str]], bonuses: List[List[str]]):
+    """
+        Initialize the state.
+        @param colors: matrix with all the colors in the arena.
+        @param bonuses: matrix with all the bonuses in the arena.
+    """
     global map_colors, map_bonus, start_position, N, M, stone_position
     N = len(colors)
     M = len(colors[0])
@@ -42,12 +47,12 @@ class UserState:
             distance: int, shoes: Tuple[str, int], backpack: Tuple[str, int],
             has_stone: bool, history: List[str]):
         """
-            position: position of player \\
-            previous_state: former UserState the player is comming from \\
-            shoes: color of the shoes (0) and number of times they were used (1) \\
-            backpack: color of the shoes in the backpack (0) and nr of times they were used (1) \\
-            has_stone: true if the player managed to get the stone \\
-            history: log with all the moves made so far\\
+            @param position: position of player 
+            @param previous_state: former UserState the player is comming from 
+            @param shoes: color of the shoes (0) and number of times they were used (1) 
+            @param backpack: color of the shoes in the backpack (0) and nr of times they were used (1) 
+            @param has_stone: true if the player managed to get the stone 
+            @param history: log with all the moves made so far
         """
         self.distance = distance
         self.position = position

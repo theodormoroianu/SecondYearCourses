@@ -5,6 +5,7 @@ import os
 def CreateDirectory(dir: str):
     """
         Creates an output directory if it doesn't already exist.
+        @param dir: directory to create.
     """
     if os.path.exists(dir):
         return
@@ -13,6 +14,9 @@ def CreateDirectory(dir: str):
 def PrintSolutions(states: List[state.UserState], status: dict, file: str):
     """
         Prints a solution of a search algoritm to a file.
+        @param states: list of final states.
+        @param status: dictionary with search results.
+        @param file: file to write into.
     """
 
     # Open the output file.

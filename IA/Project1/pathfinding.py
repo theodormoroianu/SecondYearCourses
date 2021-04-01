@@ -7,6 +7,9 @@ def OptimizedAStar(estimation: Callable, nr_solutions: int, timeout: float) -> T
     """
         A* Algoritm using open and closed lists.
         Only returns the first path found.
+        @param estimation: estimation function.
+        @timeout: timeout in seconds.
+        @return: list of final states and a dictionary storing the additional informations.
     """
     opened = [state.UserState(
             state.start_position,
@@ -74,6 +77,9 @@ def OptimizedAStar(estimation: Callable, nr_solutions: int, timeout: float) -> T
 def UCS(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[List[state.UserState], dict]:
     """
         UCS Algoritm.
+        @param estimation: estimation function.
+        @timeout: timeout in seconds.
+        @return: list of final states and a dictionary storing the additional informations.
     """
     states = [state.UserState(
             state.start_position,
@@ -127,6 +133,9 @@ def UCS(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[List[s
 def SlowAStar(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[List[state.UserState], dict]:
     """
         Slow A* Algoritm.
+        @param estimation: estimation function.
+        @timeout: timeout in seconds.
+        @return: list of final states and a dictionary storing the additional informations.
     """
     states = [state.UserState(
             state.start_position,
@@ -182,6 +191,9 @@ def SlowAStar(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[
 def IDAStar(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[List[state.UserState], dict]:
     """
         IDA* Algoritm.
+        @param estimation: estimation function.
+        @timeout: timeout in seconds.
+        @return: list of final states and a dictionary storing the additional informations.
     """
 
     start_node = state.UserState(
@@ -268,6 +280,9 @@ def BFS(estimation: Callable, nr_solutions: int, timeout: float) -> Tuple[List[s
     """
         BFS algoritm for finding the destination.
         Only returns the first occurence.
+        @param estimation: estimation function.
+        @timeout: timeout in seconds.
+        @return: list of final states and a dictionary storing the additional informations.
     """
     queue = [state.UserState(
             state.start_position,
