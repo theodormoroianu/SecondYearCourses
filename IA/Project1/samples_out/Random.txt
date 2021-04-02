@@ -2,7 +2,7 @@ Found 1 solutions:
 Solution #1:
  * Step #0:
     * Actions:
-       * Added start position to slow A*
+       * Added start position to A*
     * State Summary:
        * New position: (0, 1)
        * Has the magic stone: False
@@ -122,9 +122,9 @@ Solution #1:
        * Has shoes in the backapck: True
        * Color and usage of backpack shoes: v, used 2 times
  * Search Summary:
-    * Search time: 0.001900 seconds
+    * Search time: 0.002000 seconds
     * Total distance of path: 12
-    * Visited nodes until the solution: 137
-    * Computed nodes until the solution: 137
-    * Algorithm used for computing the answer: Slow A*
+    * Visited nodes until the solution: 23
+    * Computed nodes until the solution: 34
+    * Algorithm used for computing the answer: Optimized A*
 
