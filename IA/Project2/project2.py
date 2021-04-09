@@ -188,6 +188,11 @@ def estimate_state(state: State, estimation_type: int, player: int):
         Estimate state score for a given state.
         estimation_type = 0 -> difference between the number of cells.
         estimation_type = 1 -> difference between nr of cells + possible new captures.
+
+        The state is estimated based on how many pieces are capured (which is what the 
+        game is all about).
+        Additionally, the estimation_Type can specity to also consider all pieces which have 
+        3 used bordered (all of them can be captured at the same time by the player).
     '''
     estimation = 0
 
@@ -287,6 +292,10 @@ def display_stats(state: State, player: int):
     global stats_game_start_time, stats_nodes_generated
     global stats_current_nodes_generated, stats_time
     global stats_moves
+
+    if len(stats_time) == 0:
+        return
+
     status = "finished successfully" if game_ended(state) else "was stopped"
     print(f"\nStats for game which {status}:")
     print(f"  * Game duration: {time.time() - stats_game_start_time}")
