@@ -3,8 +3,11 @@ from typing import Any, Callable, List, Optional, Tuple
 import pygame
 import sys
 import copy
+import time
 import random
 
+# Constants used through the game.
+# They are defined here so that any function is able to access them.
 GAME_H_OFFSET = 50
 CIRCLE_RADIUS = 15
 RECTANGLE_WIDTH = 10
@@ -18,7 +21,19 @@ pygame.font.init()
 FONT = pygame.font.Font('freesansbold.ttf', 32)
 FONT_SMALLER = pygame.font.Font('freesansbold.ttf', 28)
 
+# Statistics kept about the game, number of steps or computer.
+stats_game_start_time = 0
+stats_nodes_generated = []
+stats_current_nodes_generated = 0
+stats_time = []
+stats_moves = [0, 0]
+
+# State class, storing the actual state of the game.
+# This class is also used in the game search tree, but 
+# in that particular case, the display is set to None.
 class State:
+
+    # constructor of the class.
     def __init__(self, COL: int, LIN: int, display):
         self.LIN = LIN
         self.COL = COL
@@ -45,15 +60,33 @@ class State:
         self.display = display
     
     def create_copy(self):
+        '''
+            Returns a deep copy of the state. Used for modifying the copy
+            without changing the original object.
+        '''
         s = State(self.COL, self.LIN, None)
         s.right_taken = copy.deepcopy(self.right_taken)
         s.below_taken = copy.deepcopy(self.below_taken)
         s.taken = copy.deepcopy(self.taken)
         return s
 
+    def scores(self):
+        '''
+            Returns the scores of the two players, as
+            a vector: [score_player_0, score_player_1]s
+        '''
+        ans = [0, 0]
+        for i in range(self.LIN - 1):
+            for j in range(self.COL - 1):
+                if self.taken[i][j] != -1:
+                    ans[self.taken[i][j]] += 1
+        return ans
+
     def possible_moves(self):
         '''
             Returns all available moves.
+            Only considers valid moves (ofc.).
+            Goes through all edges not yet choosen, and returns them.
         '''
         ans = []
         for i in range(self.COL):
@@ -66,6 +99,11 @@ class State:
         return ans
 
     def draw(self):
+        '''
+            Renders the game into the display.
+            This prints only the actual game, no
+            additional text / background.
+        '''
         for i in range(self.COL - 1):
             for j in range(self.LIN):
                 color = (200, 200, 200) if not self.right_taken[i][j] else (0, 0, 0)
@@ -100,6 +138,9 @@ class State:
         pygame.display.flip()
 
 def game_ended(state: State):
+    '''
+        Returns if there are any available moves left.
+    '''
     for i in range(state.COL - 1):
         for j in range(state.LIN - 1):
             if state.taken[i][j] == -1:
@@ -135,6 +176,11 @@ def alter_state(state: State, type_move: int, poz: Tuple[int, int], player) -> b
             won_smth = True
             state.taken[i][j] = player
 
+    if state.display is not None:
+        scor1, scor2 = state.scores()
+        print(f"Atempted alteration of the state. New scores:")
+        print(f"  * Player 1: {scor1}")
+        print(f"  * Player 2: {scor2}")
     return won_smth
 
 def estimate_state(state: State, estimation_type: int, player: int):
@@ -169,6 +215,8 @@ def min_max(state: State, player: int, depth: int, estimation_type: int) -> Tupl
     '''
         Min-Max algorithm.
     '''
+    global stats_current_nodes_generated
+    stats_current_nodes_generated += 1
     if depth == 0 or game_ended(state):
         return (estimate_state(state, estimation_type, player), None)
 
@@ -193,6 +241,8 @@ def alpha_beta(state: State, player: int, alpha: int, beta: int, depth: int, est
     '''
         alpha-beta prunning algorithm.
     '''
+    global stats_current_nodes_generated
+    stats_current_nodes_generated += 1
     if depth == 0 or game_ended(state):
         return (estimate_state(state, estimation_type, player), None)
 
@@ -222,16 +272,98 @@ def alpha_beta(state: State, player: int, alpha: int, beta: int, depth: int, est
     return (estimate, action)
 
 def print_title_on_display(content, display):
+    '''
+        Prints a given title on the display.
+    '''
     text = FONT.render(content, True, (50, 50, 50))
     text_rect = text.get_rect()
     text_rect.center = (GAME_SCREEN_X // 2, GAME_H_OFFSET // 2 + 5)
     display.blit(text, text_rect)
 
+def display_stats(state: State, player: int):
+    '''
+        Prints the statistics in the console.
+    '''
+    global stats_game_start_time, stats_nodes_generated
+    global stats_current_nodes_generated, stats_time
+    global stats_moves
+    status = "finished successfully" if game_ended(state) else "was stopped"
+    print(f"\nStats for game which {status}:")
+    print(f"  * Game duration: {time.time() - stats_game_start_time}")
+    print(f"  * Number of moves made by the computer: {len(stats_time)}")
+    print(f"  * Total computer thinking time: {sum(stats_time)}")
+    print(f"  * Average computer thinking time: {sum(stats_time) / len(stats_time)}")
+    print(f"  * Maximal computer thinking time: {max(stats_time)}")
+    print(f"  * Minimal computer thinking time: {min(stats_time)}")
+    stats_time = sorted(stats_time)
+    print(f"  * Median computer thinking time: {stats_time[len(stats_time) // 2]}")
+    print(f"  * Total number of visited nodes: {sum(stats_nodes_generated)}")
+    print(f"  * Average number of visited nodes: {sum(stats_nodes_generated) / len(stats_nodes_generated)}")
+    print(f"  * Maximal number of visited nodes: {max(stats_nodes_generated)}")
+    print(f"  * Minimal number of visited nodes: {min(stats_nodes_generated)}")
+    stats_nodes_generated = sorted(stats_nodes_generated)
+    print(f"  * Median number of visited nodes: {stats_nodes_generated[len(stats_nodes_generated) // 2]}")
+    print("  * Scores:")
+    s1, s2 = state.scores()
+    print(f"     * First player: {s1}")
+    print(f"     * Second player: {s2}")
+    print(f"  * Number of moves:")
+    print(f"     * First player: {stats_moves[0]}")
+    print(f"     * Second player: {stats_moves[1]}")
+
+    if not game_ended(state):
+        print("  * Estimated final scores (player1 - player2):")
+        scor1, _ = min_max(state, player, 1, 1)
+        scor2, _ = alpha_beta(state, player, -10**9, 10**9, 2, 1)
+        print(f"     * Min-Max: {scor1}")
+        print(f"     * Alpha-Beta: {scor2}")
+
+def init_stats():
+    '''
+        Resets the status.
+    '''
+    global stats_game_start_time, stats_nodes_generated
+    global stats_current_nodes_generated, stats_time
+    global stats_moves
+
+    stats_game_start_time = time.time()
+    stats_nodes_generated = []
+    stats_current_nodes_generated = 0
+    stats_time = []
+    stats_moves = [0, 0]
+
 def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], names: List[str]):
+    '''
+        Game loop. This will run forever until the user closes it.
+    '''
+    global stats_moves
+
+    init_stats()
+
+    # Create a new player.
     state = State(COL, LIN, display)
     player = 0
+    last_move_time = time.time()
 
+    step = False
+
+    # Game loop.
     while True:
+
+        # Something moved. Print statistics.
+        if step:
+            step = False
+            
+            s1, s2 = state.scores()
+            print(f"     * First player: {s1}")
+            print(f"     * Second player: {s2}")
+
+            print("  * Estimated final scores (player1 - player2):")
+            scor1, _ = min_max(state, player, 1, 1)
+            scor2, _ = alpha_beta(state, player, -10**9, 10**9, 2, 1)
+            print(f"     * Min-Max: {scor1}")
+            print(f"     * Alpha-Beta: {scor2}")
+
         # Set proper background
         if player == 0:
             display.fill(PLAYER_0_BACKGROUND_COLOR)
@@ -256,6 +388,9 @@ def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], na
                 print_title_on_display("Tie!", display)
             state.draw()
 
+            display_stats(state, player)
+
+            # Wait for game to stop
             while True:
                  for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -268,12 +403,16 @@ def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], na
         if players[player] is not None:
             type_move, x, y = players[player](state)
             if not alter_state(state, type_move, (x, y), player):
+                stats_moves[player] += 1
                 player = 1 - player
+            last_move_time = time.time()
+            step = True
 
         # Loop through the events of the game.
         for event in pygame.event.get():
             # Quit.
             if event.type == pygame.QUIT:
+                display_stats(state, player)
                 pygame.quit()
                 sys.exit()
             
@@ -281,6 +420,9 @@ def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], na
             if event.type == pygame.MOUSEBUTTONDOWN:
                 pos = pygame.mouse.get_pos()
 
+                print(f"Player attempted a move. Time for the move: {time.time() - last_move_time}")
+                last_move_time = time.time()
+                
                 # It's not a human player's turn.
                 if players[player] != None:
                     continue
@@ -290,10 +432,13 @@ def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], na
                     for j in range(LIN):
                         if i < COL - 1 and state.right[i][j].collidepoint(pos):
                             if not alter_state(state, 0, (i, j), player):
+                                stats_moves[player] += 1
                                 player = 1 - player
                         if j < LIN - 1 and state.below[i][j].collidepoint(pos):
                             if not alter_state(state, 1, (i, j), player):
+                                stats_moves[player] += 1
                                 player = 1 - player
+                step = True
 
 def ask_user_questions(question: str, answers: list, L: int, H: int, display):
     '''
@@ -370,15 +515,33 @@ def main():
     estimations = [["Number of pieces", "Number of pieces + captures"]]
     _, estimation = ask_user_questions("Estimation to use", estimations, GAME_SCREEN_X, GAME_SCREEN_Y, ecran)
 
+    print(f"User choose the estimation {estimations[0][estimation]}")
+
     # Get first user.
+
+    # Functions calling a-b prunning / min-max.
     def choose_a_b(steps, player):
         def eval(state):
-            _, mov = alpha_beta(state, player, -10**9, 10**9, steps, estimation)
+            global stats_nodes_generated, stats_current_nodes_generated, stats_time
+            stats_current_nodes_generated = 0
+            time_before = time.time()
+            est, mov = alpha_beta(state, player, -10**9, 10**9, steps, estimation)
+            time_after = time.time()
+            stats_time.append(time_after - time_before)
+            stats_nodes_generated.append(stats_current_nodes_generated)
+            print(f"Computer moved in {time_after - time_before} sec. New estimation: {est}, moves: {stats_current_nodes_generated}")
             return mov
         return eval
     def choose_min_max(steps, player):
         def eval(state):
-            _, mov = min_max(state, player, steps, estimation)
+            global stats_nodes_generated, stats_current_nodes_generated, stats_time
+            stats_current_nodes_generated = 0
+            time_before = time.time()
+            est, mov = min_max(state, player, steps, estimation)
+            time_after = time.time()
+            stats_time.append(time_after - time_before)
+            stats_nodes_generated.append(stats_current_nodes_generated)
+            print(f"Computer moved in {time_after - time_before} sec. New estimation: {est}, moves: {stats_current_nodes_generated}")
             return mov
         return eval
 
@@ -393,6 +556,8 @@ def main():
     player_1 = bots[idx][idy]
     name_1 = questions[idx][idy]
 
+    print(f"The user choose the first user as {name_1}")
+
     bots = [[None, choose_min_max(1, 1), choose_min_max(2, 1)],
              [choose_min_max(3, 1), choose_min_max(4, 1), choose_a_b(2, 1)],
              [choose_a_b(3, 1), choose_a_b(4, 1), choose_a_b(5, 1)]]
@@ -404,12 +569,14 @@ def main():
     player_2 = bots[idx][idy]
     name_2 = questions[idx][idy]
 
+    print(f"The user choose the second user as {name_2}")
 
     GAME_SCREEN_X = (COL - 1) * DISTANCE + 2 * OFFSET
     GAME_SCREEN_Y = (LIN - 1) * DISTANCE + 2 * OFFSET + GAME_H_OFFSET
     ecran = pygame.display.set_mode(size=(GAME_SCREEN_X, GAME_SCREEN_Y))
               
-
+    # Starting the game.
+    print("Starting game loop....")
     game_loop(COL, LIN, ecran, [player_1, player_2], [name_1, name_2])
     
 
