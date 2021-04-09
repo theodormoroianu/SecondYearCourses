@@ -76,8 +76,8 @@ class State:
             a vector: [score_player_0, score_player_1]s
         '''
         ans = [0, 0]
-        for i in range(self.LIN - 1):
-            for j in range(self.COL - 1):
+        for i in range(self.COL - 1):
+            for j in range(self.LIN - 1):
                 if self.taken[i][j] != -1:
                     ans[self.taken[i][j]] += 1
         return ans
