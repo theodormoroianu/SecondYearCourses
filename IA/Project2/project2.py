@@ -58,7 +58,32 @@ class State:
         # if a cell is taken
         self.taken = [[-1 for j in range(LIN - 1)] for i in range(COL - 1)]
         self.display = display
-    
+
+    def show(self):
+        '''
+            Displays the state in the console.
+        '''
+        for j in range(self.LIN):
+            for i in range(self.COL):
+                print("*", end='')
+                if i < self.COL - 1:
+                    if self.right_taken[i][j]:
+                        print("---", end='')
+                    else:
+                        print("   ", end='')
+            print("")
+            if j < self.LIN - 1:
+                for w in range(3):
+                    for i in range(self.COL):
+                        if self.below_taken[i][j] and w == 1 and i < self.COL - 1 and self.taken[i][j] != -1:
+                            print("| %s " % ('X' if self.taken[i][j] == 0 else 'O'), end='')
+                        elif self.below_taken[i][j]:
+                            print("|   ", end='')
+                        else:
+                            print("    ", end='')
+                    print("")
+                    
+
     def create_copy(self):
         '''
             Returns a deep copy of the state. Used for modifying the copy
@@ -372,6 +397,7 @@ def game_loop(COL: int, LIN: int, display, players: List[Optional[Callable]], na
             scor2, _ = alpha_beta(state, player, -10**9, 10**9, 2, 1)
             print(f"     * Min-Max: {scor1}")
             print(f"     * Alpha-Beta: {scor2}")
+            state.show()
 
         # Set proper background
         if player == 0:
