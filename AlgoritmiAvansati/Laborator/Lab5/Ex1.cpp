@@ -4,6 +4,7 @@ using namespace std;
 typedef pair <double, double> Point;
 const double EPS = 1e-6;
 
+// Pozitive if a, b and c are in counter clockwise order.
 int CCW(Point a, Point b, Point c)
 {
     b.first -= a.first;

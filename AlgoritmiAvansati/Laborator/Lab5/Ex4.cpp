@@ -72,20 +72,29 @@ vector <Point> ComputeTSP(vector <Point> points)
         return ans;
     };
 
+    // While not all points are added, check one more point.
     while (!points_left.empty()) {
+        // Best point and position found so far.
         double best_rap = 1e18;
         Point best_point;
         int best_poz;
 
         // Checking best point and edge.
         for (auto i : points_left) {
+            // Best position for the point i.
             int id = 0;
             double best_dist = 1e18;
+
+            // Checking all available positions.
             for (int poz = 0; poz < (int)act.size(); poz++) {
                 double d_act = distance_offset(i, poz);
+
+                // If the position is better for point i, update.
                 if (d_act < best_dist)
                     best_dist = d_act, id = poz;
             }
+
+            // If point i is better than the best point, update.
             double rap_act = check_rap_point(i, id);
             if (rap_act < best_rap)
                 best_rap = rap_act, best_point = i, best_poz = id;
@@ -131,3 +140,19 @@ int main()
     cout << "(" << ans[0].first << ", " << ans[0].second << ")\n";
     return 0;
 }
+
+/**
+ * Input:
+    8
+    10 0
+    4 4
+    0 10
+    -4 4
+    -10 0
+    -4 -4
+    0 -10
+    4 -4
+ * Answer:
+ (-10, 0)  -->  (-4, -4)  -->  (0, -10)  -->  (4, -4)  -->  (10, 0)  -->  (4, 4)  -->  (0, 10)  -->  (-4, 4)  -->  (-10, 0)
+ * 
+ */

@@ -22,12 +22,15 @@ int CCW(Point a, Point b, Point c)
  */
 int CheckPointInPolygon(Point p, const vector <Point>& lower, const vector <Point>& upper)
 {
+    // Too far left or too far right.
     if (lower[0].first > p.first || lower.back().first < p.first)
         return 1;
 
+    // Checks the position of a point with respect to a left-right envelope.
     // 1 -> above, 0 -> on, -1 -> below
     auto check_p_line = [&](const vector <Point>& v) {
         int id = 0;
+        // smart binary search.
         for (int pas = 1, cresc = 1; pas; pas = (cresc ? 2 * pas : pas / 2)) {
             int new_id = id + pas;
             if (new_id + 1 < (int)v.size() && v[new_id].first <= p.first)
@@ -44,19 +47,23 @@ int CheckPointInPolygon(Point p, const vector <Point>& lower, const vector <Poin
         return -1;
     };
 
+    // Check position relative to the upper envelope and the lower envelope.
     int up = check_p_line(upper);
     int lo = check_p_line(lower);
 
+    // On one of the envelopes
     if (up == 0 || lo == 0)
         return 0;
-    
+
+    // Outside.    
     if (up == 1 || lo == -1)
         return 1;
 
+    // Inside.
     return -1;
 }
 
-// returns lower enveloppe and upper enveloppe.
+// returns lower envelope and upper envelope.
 pair <vector <Point>, vector <Point>> GetPolygon()
 {
     int n;
@@ -108,3 +115,24 @@ int main()
     }
     return 0;
 }
+
+/*
+
+Please enter the number of points: 4
+0 0
+10 0
+15 5
+5 10
+Care e punctul pe care il verificati? 0 0
+Punctul este pe poligon
+Care e punctul pe care il verificati? 5 0
+Punctul este pe poligon
+Care e punctul pe care il verificati? -10 0
+Punctul este inafara!
+Care e punctul pe care il verificati? 6 9
+Punctul este in poligon
+Care e punctul pe care il verificati? 6 10
+Punctul este inafara!
+Care e punctul pe care il verificati? 100 100
+Punctul este inafara!
+*/
