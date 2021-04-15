@@ -20,7 +20,7 @@ int CCW(Point a, Point b, Point c)
  * 2. Compute the CH as we would usually.
  * 3. Remove the last few points which shouldn't be there.
  */
-vector <Point> ConvexHull(const vector <Point>& points)
+vector <Point> ConvexHull(vector <Point> points)
 {
     // Position of smallest point, which we know is part of the
     // convex hull.
