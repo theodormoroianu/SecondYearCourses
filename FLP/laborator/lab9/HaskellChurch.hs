@@ -165,6 +165,7 @@ newtype CList a = CList { cFoldR :: forall b. (a -> b -> b) -> b -> b }
 
 -- make CList an instance of Foldable
 instance Foldable CList where
+    foldr fn init lst = cFoldR lst fn init
 
 --An instance to show CLists as regular lists.
 instance (Show a) => Show (CList a) where
