@@ -155,6 +155,8 @@ parseOp =
         return $ Increment name
     )
 
+spaceFree :: Parser a -> Parser a
+spaceFree m = skipSpaces *> m <* skipSpaces
 
 parseChainOfStm :: Parser Op
 parseChainOfStm = Chain <$> many (parseOp <* skipSpaces <* expectChar ';' <* skipSpaces)
