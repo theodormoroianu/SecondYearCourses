@@ -24,7 +24,10 @@ int main()
     cout << "Introduceti cele 4 puncte:\n";
     Point A = read_point(), B = read_point(),
           C = read_point(), D = read_point();
-    
+   
+    cout << "Angle is " << Angle(A, B, C) << '\n';
+    return 0;
+
     if (CheckIllegal(A, B, C, D))
         return cout << "NIII NOOO NIII NOOO vine politia\n", 0;
     cout << "Poligonul nu conduce activiati ilegale!\n";

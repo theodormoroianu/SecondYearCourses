@@ -1,5 +1,5 @@
 #include <complex>
-
+#include <math.h>
 
 typedef std::complex<double> Point;
 #define x real
@@ -72,4 +72,24 @@ int CheckIntersection(Point A, Point B, Point C, Point D)
     if (IsOnSegment(A, B, intersect) && IsOnSegment(C, D, intersect))
         return 1;
     return 2;
+}
+
+/**
+ * Returns the angle of A in the triangle ABC.
+ */
+double Angle(Point A, Point B, Point C)
+{
+    /**
+     * A^2 = B^2 + C^2 + 2 * A * B * cos(a)
+     * a = acos((A^2 - B^2 - C^2) / (2 * A * B))
+     */
+    double lenA = Dist(B, C);
+    double lenB = Dist(A, C);
+    double lenC = Dist(A, B);
+
+    double cos_angle = (lenB * lenB - lenC * lenC - lenA * lenA);
+    cos_angle /= 2 * lenA * lenB;
+
+    double angle = acos(cos_angle);
+    return angle;
 }
