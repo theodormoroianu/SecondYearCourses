@@ -13,7 +13,7 @@ mt19937 rnd(time(0));
 int CastRay(vector <Point> poly, Point source)
 {
     // Getting a random destination for our ray.
-    uniform_real_distribution<double> random_distr(-1e9, 1e9);
+    uniform_real_distribution<double> random_distr(1e9, 2e9);
     Point dest({ random_distr(rnd), random_distr(rnd) });
 
     int cnt = 0;
