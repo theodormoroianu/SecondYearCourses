@@ -4,6 +4,9 @@ using namespace std;
 
 /**
  * Returns if the poly vector is bitonic w/ respect to value.
+ * This computes STRICT monotony: it has to be strictly increasing
+ * and strictly decreasing.
+ * In particular, there is a single minimal and single maximal value.
  */
 bool CheckMono(vector <Point> poly, function<double(Point)> value)
 {
@@ -20,6 +23,10 @@ bool CheckMono(vector <Point> poly, function<double(Point)> value)
     // up=1 -> Increasing / up=0 -> decreasing.
     bool up = 1;
     for (int i = 1; i < (int)poly.size(); i++) {
+        // Equal. shouldn't happend.
+        if (abs(value(poly[i]) - value(poly[i - 1])) < 1e-5)
+            return false;
+            
         // Decreasing.
         if (value(poly[i]) < value(poly[i - 1]))
             up = 0;
