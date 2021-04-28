@@ -9,6 +9,9 @@ using namespace std;
  */
 int CheckIllegalManual(Point A, Point B, Point C, Point D)
 {
+    // Just get all the angles,
+    // and sort them increasingly.
+    // Then, just compare lexicografically.
     auto generate_angles = [](Point A, Point B, Point C) {
         return vector <double>({
             Angle(A, B, C),
@@ -49,6 +52,9 @@ int CheckIllegalManual(Point A, Point B, Point C, Point D)
  */
 int CheckIllegalGeometric(Point A, Point B, Point C, Point D)
 {
+    // Edge AC is illegal if D is inside of the
+    // circle circumscribed to ABC.
+    // If D is outside, then edge BD is illegal.
     auto [center, radius] = CircumscribedCircle(A, B, C);
     double d = Dist(D, center);
 

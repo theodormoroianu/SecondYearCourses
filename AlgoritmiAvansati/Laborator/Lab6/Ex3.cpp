@@ -15,6 +15,7 @@ int main()
     Point A = read_point(), B = read_point(),
           C = read_point(), D = read_point();
 
+    // Call CircumscribedCircle from "points.hpp".
     auto [center, radius] = CircumscribedCircle(A, B, C);
     
     double dist = Dist(D, center);

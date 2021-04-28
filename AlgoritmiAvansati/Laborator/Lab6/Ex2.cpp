@@ -12,12 +12,19 @@ bool CheckMono(vector <Point> poly, function<double(Point)> value)
         if (value(poly[p_min]) > value(poly[i]))
             p_min = i;
     
+    // Rotate such that first item is the smallest
+    // element.
     rotate(poly.begin(), poly.begin() + p_min, poly.end());
 
+    // Now values should increase, and then decrease.
+    // up=1 -> Increasing / up=0 -> decreasing.
     bool up = 1;
     for (int i = 1; i < (int)poly.size(); i++) {
+        // Decreasing.
         if (value(poly[i]) < value(poly[i - 1]))
             up = 0;
+
+        // Supposed to be decreasing, but has to increase.
         if (value(poly[i]) > value(poly[i - 1]) && !up)
             return false;
     }
