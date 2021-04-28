@@ -1,3 +1,6 @@
+#ifndef POINTS__
+#define POINTS__
+
 #include <complex>
 #include <math.h>
 
@@ -93,3 +96,36 @@ double Angle(Point A, Point B, Point C)
     double angle = acos(cos_angle);
     return angle;
 }
+
+
+/**
+ * Returns the center and radius of the circumscribed circle
+ * to ABC.
+ */
+std::pair <Point, double> CircumscribedCircle(Point A, Point B, Point C)
+{
+    /**
+     * Center of circumscribed circle is the intersection of the perpendicular bisectors.
+     * Bisector of AB is the line containing (A + B) / 2 and having the direction ((B-A).y(), -(B-A).x())
+     * Same goes for AC.
+     * The intersection of the two lines yields the center of the circle.
+     */
+    Point centerAB = (A + B) / 2.;
+    Point centerAC = (A + C) / 2.;
+    Point dir_bis_AB = Point({ (B - A).y(), (A - B).x() });
+    Point dir_bis_AC = Point({ (C - A).y(), (A - C).x() });
+    
+    Point center = Intersection(centerAB, centerAB + dir_bis_AB, centerAC, centerAC + dir_bis_AC);
+
+    // radius of the circle.
+    double radius = Dist(center, A);
+
+    // Verify it is indeed the center.
+    assert(abs(Dist(center, B) - radius) < 1e-5);
+    assert(abs(Dist(center, C) - radius) < 1e-5);
+
+    return { center, radius };
+}
+
+
+#endif // POINTS__

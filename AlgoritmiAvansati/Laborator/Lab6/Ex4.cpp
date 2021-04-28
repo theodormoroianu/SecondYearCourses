@@ -7,7 +7,7 @@ using namespace std;
  * Returns 1 if AC is illegal.
  * Returns 2 if BD is illegal.
  */
-int CheckIllegal(Point A, Point B, Point C, Point D)
+int CheckIllegalManual(Point A, Point B, Point C, Point D)
 {
     auto generate_angles = [](Point A, Point B, Point C) {
         return vector <double>({
@@ -41,6 +41,25 @@ int CheckIllegal(Point A, Point B, Point C, Point D)
     return 0;
 }
 
+
+/**
+ * Returns 0 if both edges are legal.
+ * Returns 1 if AC is illegal.
+ * Returns 2 if BD is illegal.
+ */
+int CheckIllegalGeometric(Point A, Point B, Point C, Point D)
+{
+    auto [center, radius] = CircumscribedCircle(A, B, C);
+    double d = Dist(D, center);
+
+    if (abs(d - radius) < 1e-5)
+        return 0;
+    
+    if (d < radius)
+        return 1;
+    return 2;
+}
+
 // Exercise 4.
 int main()
 {
@@ -54,7 +73,7 @@ int main()
     Point A = read_point(), B = read_point(),
           C = read_point(), D = read_point();
 
-    int legality = CheckIllegal(A, B, C, D);
+    int legality = CheckIllegalGeometric(A, B, C, D);
 
     if (legality == 0)
         cout << "Ambele diagonale sunt legale!\n";
