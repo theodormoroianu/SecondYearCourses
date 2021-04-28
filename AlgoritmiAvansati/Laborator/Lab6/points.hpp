@@ -87,8 +87,8 @@ double Angle(Point A, Point B, Point C)
     double lenB = Dist(A, C);
     double lenC = Dist(A, B);
 
-    double cos_angle = (lenB * lenB - lenC * lenC - lenA * lenA);
-    cos_angle /= 2 * lenA * lenB;
+    double cos_angle = (lenB * lenB + lenC * lenC - lenA * lenA);
+    cos_angle /= 2 * lenB * lenC;
 
     double angle = acos(cos_angle);
     return angle;
