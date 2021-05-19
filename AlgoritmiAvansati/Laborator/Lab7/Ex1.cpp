@@ -17,7 +17,6 @@ struct Plane {
 
     void read() {
         double coef_x, coef_y, free;
-        cout << "Please enter coeficients a, b and c:\n $ ";
         cin >> coef_x >> coef_y >> free;
 
         if ((abs(coef_x) <= eps && abs(coef_y) <= eps) ||
@@ -57,7 +56,7 @@ int CheckAlignedPlanesIntersection(const vector <Plane>& planes)
             x_min = max(x_min, new_min), x_max = min(x_max, new_max);
     }
 
-    bool is_empty = (x_min > x_max) || (y_min > y_max);
+    bool is_empty = (x_min - eps > x_max) || (y_min - eps > y_max);
     bool is_infinite = (min(x_min, y_min) < -infinity / 2) ||
                        (max(x_max, y_max) > infinity / 2);
 
@@ -66,25 +65,26 @@ int CheckAlignedPlanesIntersection(const vector <Plane>& planes)
     return is_infinite ? 2 : 1;
 }
 
-
 int main()
 {
-    cout << "How many planes do you have?\n $ ";
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    vector <Plane> planes(n);
-    for (Plane& p : planes)
-        p.read();
+    while (t--) {
+        int n;
+        cin >> n;
+        vector <Plane> planes(n);
+        for (auto& p : planes)
+            p.read();
 
-    int result = CheckAlignedPlanesIntersection(planes);
+        int result = CheckAlignedPlanesIntersection(planes);
 
-    if (result == 0)
-        cout << "Intersection of the semi-planes is empty!\n";
-    else if (result == 1)
-        cout << "Intersection of the semi-planes has a finite area!\n";
-    else
-        cout << "Intesection of the semi-planes has an infinite area!\n";
-
+        if (result == 0)
+            cout << "Intersection of the semi-planes is empty!\n";
+        else if (result == 1)
+            cout << "Intersection of the semi-planes has a finite area!\n";
+        else
+            cout << "Intesection of the semi-planes has an infinite area!\n";
+    }
     return 0;
 }

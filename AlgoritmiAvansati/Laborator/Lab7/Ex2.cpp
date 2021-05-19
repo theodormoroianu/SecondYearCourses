@@ -17,7 +17,6 @@ struct Plane {
 
     void read() {
         double coef_x, coef_y, free;
-        cout << "Please enter coeficients a, b and c:\n $ ";
         cin >> coef_x >> coef_y >> free;
 
         if ((abs(coef_x) <= eps && abs(coef_y) <= eps) ||
@@ -28,63 +27,90 @@ struct Plane {
         else
             is_vertical = 0, a = coef_x, b = free;
     }
+
+    /**
+     * Returns the support line of the semiplane
+     */
+    double GetSupportLine() const {
+        return -b / a;
+    }
+
+    /**
+     * Returns true if the point is contained in the half-plane.
+     */
+    bool Contains(double x, double y) {
+        if (is_vertical)
+            return a * y + b < 0;
+        return a * x + b < 0;
+    }
 };
 
 /**
- * 0 if intersection is empty
- * 1 if intersection has finite area
- * 2 otherise
+ * Takes a point and a bunch of vertical and
+ * orizontal lines, and returns the minimal area
+ * or a rectangle strictly including the point, or
+ * -1 if no such point exists
  */
-int CheckAlignedPlanesIntersection(const vector <Plane>& planes)
+double GetMinimalEnclosingRectangleArea(const vector<Plane>& planes, double x, double y)
 {
-    // Initial boundaries of the intersection.
-    double x_min = -infinity, x_max = infinity, y_min = -infinity, y_max = infinity;
+    // Best rectangle found so far.
+    double x_lo = -infinity, x_hi = infinity;
+    double y_lo = -infinity, y_hi = infinity;
 
-    // Incorporate new restrictions.
     for (Plane p : planes) {
-        // Initial new restrictions to add.
-        double new_min = -infinity, new_max = infinity;
-        
-        if (p.a > 0)
-            new_max = -p.b / p.a;
-        else
-            new_min = -p.b / p.a;
+        // If the plane doesn't contain our point just skip it.
+        if (!p.Contains(x, y))
+            continue;
+            
+        // Coordonates of the vertical / orizontal line.
+        double l = p.GetSupportLine();
 
-        // Vertical plane => update y_min and y_max.
-        if (p.is_vertical)
-            y_min = max(y_min, new_min), y_max = min(y_max, new_max);
-        else // Orizontal plane => update x_min and x_max.
-            x_min = max(x_min, new_min), x_max = min(x_max, new_max);
+        // Vertical line. Update x.
+        if (!p.is_vertical) {
+            if (l < x)
+                x_lo = max(x_lo, l);
+            if (l > x)
+                x_hi = min(x_hi, l);
+        }
+        else { // Orizontal line. Update y.
+            if (l < y)
+                y_lo = max(y_lo, l);
+            if (l > y)
+                y_hi = min(y_hi, l);
+        }
     }
 
-    bool is_empty = (x_min > x_max) || (y_min > y_max);
-    bool is_infinite = (min(x_min, y_min) < -infinity / 2) ||
-                       (max(x_max, y_max) > infinity / 2);
-
-    if (is_empty)
-        return 0;
-    return is_infinite ? 2 : 1;
+    if (min(x_lo, y_lo) < -infinity / 2 || max(y_hi, y_hi) > infinity / 2)
+        return -1;
+    
+    return (x_hi - x_lo) * (y_hi - y_lo);
 }
-
 
 int main()
 {
-    cout << "How many planes do you have?\n $ ";
-    int n;
-    cin >> n;
+    int t;
+    cin >> t;
 
-    vector <Plane> planes(n);
-    for (Plane& p : planes)
-        p.read();
+    // All tests.
+    while (t--) {
+        // Read query point.
+        double x, y;
+        cin >> x >> y;
 
-    int result = CheckAlignedPlanesIntersection(planes);
+        // Read planes.
+        int n;
+        cin >> n;
+        vector <Plane> planes(n);
+        for (auto& p : planes)
+            p.read();
 
-    if (result == 0)
-        cout << "Intersection of the planes is empty!\n";
-    else if (result == 1)
-        cout << "Intersection of the planes has a finite area!\n";
-    else
-        cout << "Intesection of the planes has an infinite area!\n";
+        // Compute answer.
+        double result = GetMinimalEnclosingRectangleArea(planes, x, y);
 
+        if (result < 0)
+            cout << "There isn't any rectangle w/ the required property!\n";
+        else
+            cout << "There is a rectangle, and its area is at least " << result << "!\n";
+    }
     return 0;
 }
