@@ -1,3 +1,6 @@
 [submodule "Java/Remember"]
 	path = Java/Remember
 	url = https://github.com/theodormoroianu/Remember
+[submodule "IA/IA_Project"]
+	path = IA/IA_Project
+	url = https://github.com/theodormoroianu/IA_Project
