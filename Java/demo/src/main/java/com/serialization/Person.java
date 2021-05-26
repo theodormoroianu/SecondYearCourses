@@ -14,5 +14,10 @@ public class Person extends PersonOld implements Serializable {
         this.x = x;
         this.s = s;
         this.t = t;
+        System.out.println("Hello");
+    }
+
+    Person() {
+        System.out.println("Hello default");
     }
 }

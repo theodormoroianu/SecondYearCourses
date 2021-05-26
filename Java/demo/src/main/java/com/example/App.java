@@ -1,40 +1,57 @@
 package com.example;
 
-import javax.swing.text.Style;
+import javax.xml.transform.stream.StreamSource;
 
-/**
- * Hello world!
- *
- */
-public class App implements Runnable
+class Test {
+    String s = "A";
+    void A() {
+        try {
+            s += "B";
+            B();
+        }
+        catch (Exception e) {
+            s += "C";
+        }
+    }
+
+    void B() throws Exception {
+        try {
+            s += "D";
+            C();
+        }
+        catch (Exception e) {
+            throw new Exception();
+        }
+        finally {
+            s += "E";
+        }
+    }
+
+    void C() throws Exception {
+        throw new Exception();
+    }
+}
+
+class A {
+    public int x = 1;
+    void afisare() {
+        System.out.println(x);
+    }
+}
+
+class B extends A {
+    public int x = 2;
+    void afisare() {
+        System.out.println(x);
+    }
+}
+
+public class App
 {
-    int x;
-
-    public App(int x) {
-        this.x = x;
-    }
-
-    public void run() {
-        for (int i = 0; i < 10; i++)
-            System.out.print(x);
-    }
-    public static void main( String[] args ) throws InterruptedException
+    public static void main(String[] args)
     {
-        String s = "Ionel are mere si pere!!";
-        System.out.print(s.length() - s.replace("e", "").length());
-        // App obj1 = new App(1);
-        // App obj2 = new App(2);
-
-        // Thread t1 = new Thread(obj1);
-        // Thread t2 = new Thread(obj2);
-        
-        // t1.start();
-        // t2.start();
-
-        // t2.join();
-
-        // System.out.println(3);
-
+        A ob = new B();
+        System.out.println(++ob.x);
     }
 }
 
