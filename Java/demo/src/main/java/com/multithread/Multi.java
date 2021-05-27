@@ -1,14 +1,48 @@
 package com.multithread;
 
-class C1 extends Thread {
+class Obj {
+    synchronized static void F() { //sync pw obj.class
+        for (int i = 0; i < 10; i++) {
+            System.out.println("In F!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+    
+
+    synchronized void G() { // sync pe this
+        for (int i = 0; i < 10; i++) {
+            System.out.println("In G!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+class C extends Thread {
     
     String s;
-    public C1(String s) {
+    Obj ob;
+    public C(String s, Obj o) {
         this.s = s;
+        ob = o;
     }
 
     @Override
     public void run() {
+        if (s == "C1")
+            ob.F();
+        else
+            ob.G();
+
         for (int i = 0; i < 10; i++) {
             System.out.println(s);
             try {
@@ -21,16 +55,17 @@ class C1 extends Thread {
     }
 }
 
-class C2 extends C1 {
-    public C2() {
-        super("C2");
-    }
-}
+
 
 public class Multi {
     public static void main (String args[]) {
-        C1 a = new C2();
+        Obj o = new Obj();
+        Obj o2 = new Obj();
+        C a = new C("C1", o);
+        C b = new C("C2", o2);
 
-        System.out.println(a instanceof C1);
+        a.start();
+        b.start();
+
     }
 }

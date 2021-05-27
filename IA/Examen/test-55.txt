@@ -1,0 +1,281 @@
+1. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
+A. Paralel cu hiperplanul de separare, distanta fiind controlata prin bias
+B. Orienta astfel incat punctele sa fie cat mai departate
+C. Orientat astfel incat punctele sa fie cat mai apropriate
+D. Perpendicular pe hiperplanul de separare
+
+2. Care este functia utilizata pentru generarea predictiilor (pasul forward) unei retele neuronale feedforward cu 2 straturi ascunse cu activare ReLU si un strat de iesire cu activare Softmax?
+A. relu(softmax(x * w + b) + |w|)
+B. softmax(2*relu(x * w1 + b1))
+C. softmax(2*relu(x * w + b)*relu(x * w + b))
+D. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3)
+
+3. Pentru care dintre urmatoarele probleme putem masura performanta unui model de invatare automata folosind media patratelor erorilor?
+A. Identificarea limbii unui text
+B. Detectarea semafoarelor dintr-o imagine
+C. Estimarea veniturilor viitoare ale unei companii
+D. Recunoasterea actiunilor dintr-un clip video
+
+4. Invatarea nusupervizata presupune ca setul de antrenare este compus din:
+A. Etichete
+B. Date si model invatare
+C. Date
+D. Date si etichete
+
+5. Care din urmatoarele este o schema de combinare a mai multor clasificatori binari pentru a rezolva o problema de clasificare cu k > 2 clase?
+A. One vs One
+B. Cross-validation
+C. Leave one out
+D. SGD
+
+6. Care este scufundarea asociata functie nucleu RBF?
+A. Nu exista
+B. f(x) = sqrt(x)
+C. f(x) = x
+D. k(x,y) = exp(- d(x,y) / (2 * sigma)), unde d(x,y) denote distanta Euclidiana
+
+7. Care este forma duala utilizand kernel-ul liniar pe matricea X, daca forma primala este X = [[0.5, 2.7, 3], [4, 1.5, 6]]?
+A. X_dual = [[16.54, 24.05], [24.05, 54.25]]
+B. X_dual = [[16.54, -2.05], [25.05, 54.25]]
+C. X_dual = [[16.54, 24.05], [24.55, 4.25]]
+D. X_dual = [[16.14, -24.05], [24.05, 59.25]]
+
+8. Care este valoarea de iesire a perceptronului daca intrare=[11.4, -5.4], ponderi=[3.2, 0.5], bias=-23.3 (functia de activare - sign)?
+A. 9.53
+B. 1
+C. -1
+D. -9.52
+
+9. Care este rezultatul aplicarii functiei de activare Parametric ReLU - PReLU(x) unde x = 32, si alpha=0.1?
+A. 1
+B. -1
+C. -0.32
+D. 32
+
+10. Daca un nod dintr-un graf computational reprezinta operatia z = 2 * x * y, intrarile sunt x = -0.5 si y = 2, iar gradientul dL/dz = -5, atunci gradientii in raport cu intrarile dL/dx si dL/dy sunt:
+A. dL/dx = 40 si dL/dy = -5
+B. dL/dx = -20 si dL/dy = 5
+C. dL/dx = -40 si dL/dy = 10
+D. dL/dx = 10 si dL/dy = -5
+
+
+
+
+
+
+
+
+
+
+
+
+1. Cat este eroarea MSE pentru urmatoarele etichete prezise y_pred = [0.0, 0.1, 2.1, -1.3] si etichetele adevarate y_true=[1, 0, 1, 0]?
+A. 2.412
+B. 0.248
+C. 0.977
+D. 0.888
+
+2. Cand este mai eficient sa folosim reprezentarea primala a datelor?
+A. Cand avem o problema de clasificare binara (cu doua clase)
+B. Cand numarul de trasaturi este mai mic decat numarul de exemple
+C. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
+D. Cand numarul de trasaturi este mai mare decat numarul de exemple
+
+3. Care dintre urmatoarele functii nu este o functie kernel?
+A. K(x,y) = sum(3x - 3y)
+B. K(x,y) = sum(2x - y)
+C. K(x,y) = sum(min{x_i,y_i}) + x·y + 2)**2
+D. K(x,y) = sum(sqrt(x_i·y_i))
+
+4. Care afirmatie este adevarata pentru un niste date normalizate cu scalarea min-max?
+A. Valorile datelor sunt intre -1 si 1
+B. Datele vor fi transformate in numere intregi pozitive
+C. Valorile datelor sunt intre 0 si 1
+D. Scalarea min-max nu functioneaza pentru date negative
+
+5. Care este functia utilizata pentru generarea predictiilor (pasul forward) unei retele neuronale feedforward cu 2 straturi ascunse cu activare ReLU si un strat de iesire cu activare Softmax?
+A. relu(softmax(x * w + b) + |w|)
+B. softmax(2*relu(x * w1 + b1))
+C. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3)
+D. softmax(2*relu(x * w + b)*relu(x * w + b))
+
+6. Cati clasificatori binari vor fi antrenati pentru o problema multi-class cu 4 clase folosind schema de combinare one-vs-all?
+A. 32
+B. 16
+C. 4
+D. 1
+
+7. Care este valoarea de iesire a perceptronului daca intrare=[11.4, -5.4], ponderi=[3.2, 0.5], bias=-23.3 (functia de activare - sign)?
+A. 9.53
+B. -1
+C. 1
+D. -9.52
+
+8. Daca un nod dintr-un graf computational reprezinta operatia z = 2 * x * y^2, intrarile sunt x = -0.5 si y = 2, iar gradientul dL/dz = -5, atunci gradientii in raport cu intrarile dL/dx si dL/dy sunt:
+A. dL/dx = -20 si dL/dy = 5
+B. dL/dx = 40 si dL/dy = -5
+C. dL/dx = -40 si dL/dy = 10
+D. dL/dx = 10 si dL/dy = -5
+
+9. Daca spatiul de intrare al trasaturilor are dimensiunea 5 atunci, pentru a nu suferi de "blestemul dimensionalitatii":
+A. Ar trebui ca multimea de antrenare sa aiba aproximativ 10^(5) exemple.
+B. Ar trebui ca multimea de antrenare sa aiba aproximativ 5^(5) exemple
+C. Ar trebui ca multimea de antrenare sa aiba aproximativ 5x5 exemple
+D. Ar trebui ca multimea de antrenare sa aiba aproximativ 500 exemple
+
+10. Care dintre urmatoarele tehnici nu este o metoda de prevenire a overfittingului?
+A. Oprirea timpurie a antrenarii
+B. Scaderea ratei de invatare
+C. Utilizarea regularizarii
+D. Normalizarea datelor
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Cati clasificatori binari trebuie antrenati pentru a rezolva o problema cu K clase folosind metoda One vs All?
+A. K - 1
+B. K
+C. 2 * K + 1
+D. (K * (K-1)) / 2
+
+2. Care din urmatoarele functii este o functie de activare?
+A. NeLU
+B. SGD
+C. Maxout
+D. Leave-one-out
+
+3. Care ditre aceste optiuni pot sa ajute in imbunatatirea capacitatii de generalizarea unui model de invatare automata?
+A. Cresterea numarului de parametri antrenabili ai modelului.
+B. Micsorarea setului de antrenare
+C. Cresterea numarului de epoci de invatare
+D. Oprirea invatarii atunci cand eroarea pe setul de validare incepe sa creasca
+
+4. In urma antrenarii unui model de invatare automata avem urmatoarele masuri - True Positive = 30, False Positive = 3. Calculati masura Precision?
+A. 0.91
+B. 0.67
+C. 0.80
+D. 0.74
+
+5. Daca un nod dintr-un graf computational reprezinta operatia z = 2 * x * y, intrarile sunt x = -0.5 si y = 2, iar gradientul dL/dz = -5, atunci gradientii in raport cu intrarile dL/dx si dL/dy sunt:
+A. dL/dx = -40 si dL/dy = 10
+B. dL/dx = 10 si dL/dy = -5
+C. dL/dx = -20 si dL/dy = 5
+D. dL/dx = 40 si dL/dy = -5
+
+6. Cand este mai eficient sa folosim reprezentarea primala a datelor?
+A. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
+B. Cand avem o problema de clasificare binara (cu doua clase)
+C. Cand numarul de trasaturi este mai mic decat numarul de exemple
+D. Cand numarul de trasaturi este mai mare decat numarul de exemple
+
+7. Cati parametri antrenabili (ponderi + bias) are o retea neuronala cu stratul de intrare avand 4 componente, un strat ascuns de 32 neuroni si stratul de iesire cu 2 neuroni?
+A. 192
+B. 128
+C. 32
+D. 226
+
+8. Presupunerea algoritmului Naive Bayes este ca:
+A. Trasaturile sunt independente
+B. Multimea de trasaturi are un numar maxim de elemente
+C. Trasaturile sunt liniar dependente
+D. Multimea de trasaturi are un numar minim de elemente
+
+9. Care este output-ul unei perceptron cu ponderile W = [-0.4, 0.3, 0.1], b = 1, functia de activare semn pe datele de intrare X = [[-3, -2, 1], [2, 0.5, 0.1]]?
+A. [1, -1]
+B. [-1, 1]
+C. [-1, -1]
+D. 
+
+10. Ce dimensiune spatiala va avea un activation map dupa aplicarea unui strat de pooling de 2x2 cu stride=2 pe o intrare de 32x32?
+A. 16x16
+B. 28x28
+C. 8x8
+D. 32x32
+
+
+1 gresita:
+1. B
+2. C
+3. D
+4. A
+5. -
+6. -
+7. A
+8. A
+9. D
+10. A
+
+
+
+
+
+
+1. Fiind date etichetele y = [23, 14, 30, 45, 18, 31] si predictiile aferente p = [26, 20, 39, 38, 18, 33], care este masura Kendall Tau?
+A. 0.6
+B. 0.4
+C. 1.0
+D. 0.2
+
+2. Care din urmatoarele este o schema de combinare a mai multor clasificatori binari pentru a rezolva o problema de clasificare cu k > 2 clase?
+A. One vs All
+B. Leave one out
+C. SGD
+D. Cross-validation
+
+3. Care este iesirea unei retele neuronale cu 3 unitati ascunse si o unitate de iesire cu activari de tip ReLU pentru intrarea x = [1, -2], daca ponderile sunt W1 = [-0.5, 3, -2; 2, -1, 0], B1 = [0, 1, -1], W2 = [-1; 1; 2], B2 = [2]?
+A. 8
+B. 1
+C. 0
+D. 4.5
+
+4. Cand este mai eficient sa folosim reprezentarea primala a datelor?
+A. Cand avem o problema de clasificare binara (cu doua clase)
+B. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
+C. Cand numarul de trasaturi este mai mare decat numarul de exemple
+D. Cand numarul de trasaturi este mai mic decat numarul de exemple
+
+5. Care este valoarea de iesire a perceptronului daca intrare=[1.4, 0.3], ponderi=[-0.5, 0.2], bias=1.0 (functia de activare - sign)?
+A. 1
+B. -0.36
+C. 0.36
+D. -1
+
+6. Fiind urmatoarele puncte [(2, 2), (6, 5), (3, 0), (0, 1), (1, 0), (2, 3)] si etichetele corespunzatoare [2, 2, 1, 0, 1, 1]. Folosind metoda kNN, k=1 si distanta Euclideana, care este eticheta prezista pentru punctul (2, 4)?
+A. 0
+B. 2
+C. Nu se poate determina
+D. 1
+
+7. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
+A. Orienta astfel incat punctele sa fie cat mai departate
+B. Paralel cu hiperplanul de separare, distanta fiind controlata prin bias
+C. Orientat astfel incat punctele sa fie cat mai apropriate
+D. Perpendicular pe hiperplanul de separare
+
+8. Care din urmatoarele activari sunt rezultatul aplicarii functiei de activare softmax?
+A. [[0.3, 0.7], [0.2, 0.8], [0.9, 0.1]]
+B. [0.1, 0.99]
+C. [[0.01, 0.99], [0.99, 0.02], [0.7, 0.3]]
+D. [[-1, 2], [0.4, 0.6]]
+
+9. Ce dimensiune spatiala va avea un activation map dupa aplicarea unui strat de pooling de 2x2 cu stride=2 pe o intrare de 32x32?
+A. 8x8
+B. 32x32
+C. 16x16
+D. 28x28
+
+10. Care din urmatorii algoritmi se foloseste pentru optimizare ponderilor retelelor neuronale?
+A. ADALINE
+B. SGD cu momentum
+C. Dropout
+D. Naive Bayes
+
