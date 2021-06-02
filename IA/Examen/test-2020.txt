@@ -1,4 +1,5 @@
-1. Care este precizia unui clasificator daca etichetele corecte sunt y = [0, 1, 1, 1, 0, 0, 0, 0] si cele prezise sunt y_hat = [0, 0, 0, 1, 0, 0, 1, 1]?
+1. Care este precizia unui clasificator daca etichetele corecte sunt y = [0, 1, 1, 1, 0, 0, 0, 0] si cele prezise sunt y_hat = 
+[0, 0, 0, 1, 0, 0, 1, 1]?
 A. 0.5
 B. 0.99
 C. 0.33
@@ -28,7 +29,7 @@ B. L1
 C. L2
 D. Niciunul dintre raspunsuri
 
-6. Fiind date etichitele (1, 2, 1, 1, 2, 1, 1, 1) si predictiile           (1, 2, 1, 2, 2, 2, 1, 2), care sunt acuratetea si scorul f1?
+6. Fiind date etichitele (1, 2, 1, 1, 2, 1, 1, 1) si predictiile              (1, 2, 1, 2, 2, 2, 1, 2), care sunt acuratetea si scorul f1?
 A. acc = 0.5 f1 = 0.66
 B. acc = 0.62 f1 = 0.75
 C. acc = 0.62 f1 = 0.66
@@ -40,7 +41,8 @@ B. E1 = [-0.2, -0.4, -0.4], E2 = [-0.6, -0.4, 0]
 C. E1 = [-0.5, -0.1, -0.1], E2 = [-0.2, -0.3, 0]
 D. E1 = [-2.2, -4.4, -2.4], E2 = [-2.6, -1.4, 0]
 
-8. Care este acuratetea unui clasificator daca etichetele corecte sunt y = [0, 1, 1, 0, 0, 0, 1, 1] si cele prezise sunt y_hat =     [1, 0, 1, 0, 0, 1, 1, 1]?
+8. Care este acuratetea unui clasificator daca etichetele corecte sunt y = [0, 1, 1, 0, 0, 0, 1, 1] si cele prezise sunt y_hat =     
+  [1, 0, 1, 0, 0, 1, 1, 1]?
 A. 1
 B. 0.625
 C. 0.6

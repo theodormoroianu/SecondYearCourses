@@ -21,6 +21,14 @@ Accuracy            = (TP+TN)/(TP+TN+FP+FN)
 F1                  = 2/(1/Precision+1/Recall)
 ```
 
+# Bayes
+
+P(A|B) = P(B|A) * P(A) / P(B)
+
+# Kendall Tau 
+
+(perechi concordante - perechi discordante) / C n luate cate 2 
+
 # Functii Kernel
 
 1. Functia RBF
@@ -30,6 +38,48 @@ Forma duala al unei matrice X: X.dot(X.T)
 # Functii de performanta
 
 1. MSE -> Regresie
-2. Media erorilor in valoare absolutia -> Regresie
+2. Media erorilor in valoare absolutia (MAE) -> Regresie
 3. True positive ... matrice de confuzie -> Clasificare
 4. Misclassificaiton error -> Clasificare
+
+# Normalizare L1:
+
+input: E
+R: E / np.abs(E).sum()
+
+# Regresii
+
+1. Regresia Ridge: 𝑐𝑜𝑠𝑡𝑅𝑖𝑑𝑔𝑒 (𝑦, 𝑦ℎ𝑎𝑡 ) = 𝛴 (𝑦ℎ𝑎𝑡𝑖 − 𝑦𝑖)^2+ 𝛼||𝑊||_2
+! alpha determina cat de mici sunt ponderile
+
+2. Regresia Lasso - la fel ca la Ridge dar norma este L1
+
+# Convolutii Calculator
+
+Formula:
+
+input: WxHxD
+filtre: K
+filtre_dim: FxF
+stride: S
+padding: P
+
+R: (W - F + 2P) / S + 1
+
+## eg.
+strat de pooling=11x11
+stride=4
+intrare=227x227
+pdding=0
+R: (227 - 11 + 2 * 0) / 4 + 1
+
+# Calcul perceptroane: 
+
+input: X
+layer_1: W1, B1
+activation_1: ReLU
+layer_2: W2, B2
+activation_2: ReLU
+
+R:  A_1 = (x.dot(W1)+B1).clip()
+    A_2 = (A_1.dot(W2)+B2).clip()
