@@ -1,0 +1,42 @@
+1. Care este scufundarea asociata functie nucleu RBF?
+A. k(x,y) = exp(- d(x,y) / (2 * sigma)), unde d(x,y) denote distanta Euclidiana
+B. Nu exista
+C. f(x) = x
+D. f(x) = sqrt(x)
+
+
+2. Pentru punctele [(2,2),(1,2),(1,1),(2,1)], avand etichetele [0,1,1,0], care este eticheta punctului (2,2) utilizand metoda 3-NN?
+A. Este necesar un criteriu suplimentar pentru departajarea claselor.
+B. 0 in cazul in care C <= 1, 1 altfel
+C. 0
+D. 1
+
+
+9. Care este forma duala utilizand kernel-ul liniar pe matricea X, daca forma primala este X = [[0.5, 2.7, 3], [4, 1.5, 6]]?
+A. X_dual = [[16.54, 24.05], [24.55, 4.25]]
+B. X_dual = [[16.14, -24.05], [24.05, 59.25]]
+C. X_dual = [[16.54, 24.05], [24.05, 54.25]]
+D. X_dual = [[16.54, -2.05], [25.05, 54.25]]
+
+
+1. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
+A. Paralel cu hiperplanul de separare, distanta fiind controlata prin bias
+B. Orienta astfel incat punctele sa fie cat mai departate
+C. Orientat astfel incat punctele sa fie cat mai apropriate
+D. Perpendicular pe hiperplanul de separare
+
+
+
+4. Invatarea nusupervizata presupune ca setul de antrenare este compus din:
+A. Etichete
+B. Date si model invatare
+C. Date
+D. Date si etichete
+
+
+
+6. Care din urmatoarele metode este folosita pentru a combate bias-ul modelului?
+A. F1-score
+B. Alegerea unui model mai complex
+C. Reducerea numarului de exemple
+D. Early stopping
