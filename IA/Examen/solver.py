@@ -1,4 +1,7 @@
 import numpy as np
+import scipy.stats as stats
+from sklearn.metrics import confusion_matrix
+
 
 def n(a):
     return np.array(a)
@@ -20,17 +23,22 @@ def norm_L2_dual(X):
     K = K / np.matmul(KNorm.T, KNorm)
     return X
 
-def kendall_tau(v1, v2):
-    def sgn(x):
-        return 1 if x > 0 else 0 if x == 0 else -1
+# from scipylearn
+def kendalltau(v1, v2):
+    rez, _ = stats.kendalltau(v1, v2)
+    return rez
 
-    ans = 0
-    for i in range(len(v1)):
-        for j in range(i, len(v1)):
-            ans += sgn(v1[i] - v1[j]) * sgn(v2[i] - v2[j])
-    ans = 2 * ans / len(v1) / (len(v1) - 1)
+# def kendall_tau(v1, v2):
+#     def sgn(x):
+#         return 1 if x > 0 else 0 if x == 0 else -1
 
-    return ans
+#     ans = 0
+#     for i in range(len(v1)):
+#         for j in range(i, len(v1)):
+#             ans += sgn(v1[i] - v1[j]) * sgn(v2[i] - v2[j])
+#     ans = 2 * ans / len(v1) / (len(v1) - 1)
+
+#     return ans
     
 def precision(TP, FP):
    return TP / (TP + FP)
@@ -52,3 +60,27 @@ def MSE(y, y_hat):
 
 def B_cond_A(A_cond_B, A, B):
     return A_cond_B * B / A
+
+
+
+# Gets the standardization of data
+def compute_standardization2(train, test):
+    train = n(train).T
+    test = n(test).T
+
+    for i in range(train.shape[0]):
+        me = train[i].mean()
+        st = train[i].std()
+        train[i] = (train[i] - me) / st
+        test[i] = (test[i] - me) / st
+
+        print(f"Feature #{i}: mean is {me:.4f}, std is {st:.4f}")
+
+    train = train.T
+    test = test.T
+
+    return train, test
+
+def compute_standardization(train):
+    a, _  = compute_standardization(train, train)
+    return a

@@ -34,6 +34,11 @@ P(A|B) = P(B|A) * P(A) / P(B)
 1. Functia RBF
 
 Forma duala al unei matrice X: X.dot(X.T)
+Forma al lui X_test, dandu-se X_train este X_test.dot(X_train.T)
+
+# Blestemul dimensionalitatii
+
+Nevoie de 5^dimensiune date
 
 # Functii de performanta
 
