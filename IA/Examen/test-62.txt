@@ -1,3 +1,4 @@
+                                2       5      r10     r5      r5      0
 1. Fiind urmatoarele puncte [(2, 5), (6, 5), (3, 0), (3, 1), (1, 5), (2, 3)] si etichetele corespunzatoare [2, 2, 1, 0, 1, 1]. Folosind metoda kNN, k=3 si distanta Euclideana, care este eticheta prezista pentru punctul (2, 3)?
 A. 0
 B. 1

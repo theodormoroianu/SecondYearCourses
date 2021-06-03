@@ -1,0 +1,22 @@
+a f
+7
+a 7
+b 8
+c 7
+d 5
+e 4
+f 0
+g 9
+12
+a b 10
+a g 5
+b a 7
+b c 3
+b d 4
+c b 5
+c e 2
+d e 2
+e g 3
+e f 7
+g c 9
+g f 20
