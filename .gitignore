@@ -9,3 +9,5 @@ Debug/
 bin/
 *.ova
 *.class
+*.json
+IA/Examen/.vscode/settings.json
