@@ -1,11 +1,11 @@
 5. Pentru punctele [(2,2),(1,2),(1,1),(2,1)], avand etichetele [0,1,1,0], care este eticheta punctului (2,2) utilizand metoda 3-NN?
-A. 0
+A. 0 =========
 B. Este necesar un criteriu suplimentar pentru departajarea claselor.
 C. 1
 D. 0 in cazul in care C <= 1, 1 altfel
 
 3. Pentru care dintre urmatoarele probleme putem masura performanta unui model de invatare automata folosind media patratelor erorilor?
-A. Estimarea veniturilor viitoare ale unei companii
+A. Estimarea veniturilor viitoare ale unei companii ============
 B. Identificarea limbii unui text
 C. Detectarea semafoarelor dintr-o imagine
 D. Recunoasterea actiunilor dintr-un clip video
@@ -32,16 +32,16 @@ B. Alegerea unui model mai complex         =============> B
 A. X_test_dual = [0.8, 1.46, -0.4]
 B. X_test_dual = [-1.2, -2.46, 1.4, 1.25]
 C. X_test_dual = [-0.8, -1.46, 0.4, 1.25]
-D. X_test_dual = [0.8, 1.46, -0.4, 1.25]
+D. X_test_dual = [0.8, 1.46, -0.4, 1.25] =================
 
 7. Care sunt valorile urmatoarelor exemple de antrenare si testare dupa ce se aplica normalizarea standard (standardizarea), X_train = [[10, 5, 3], [-1, -2, -30], [-0.5, 0.5, 0.3]], X_test = [[0.5, -1, 7], [1.2, 3.4, 5.6]]?
 A. X_train = [[-1.41, -1.32, -0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]]
 B. X_train = [[1.41, 1.32], [-0.75, -1.09], [-0.65, -0.23]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]] ------ n are cum sunt 2
 C. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[0.46, 0.74, -1.06], [-0.32, 0.77, 0.96]]
-D. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]] ---- posib
+D. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]]  ---- posib
 
 8. Cate ponderi invatabile (inclusiv bias) are un filtru convolutional de dimensiune 11x11x3?
-A. 364      ======> A?????
+A. 364      ======> A
 B. 26
 C. 25
 D. 363 
@@ -49,66 +49,66 @@ D. 363
 1. Cat este eroarea MSE pentru urmatoarele etichete prezise y_pred = [0.0, 0.1, 2.1, -1.3] si etichetele adevarate y_true=[1, 0, 1, 0]?
 A. 2.412
 B. 0.248
-C. 0.977
+C. 0.977 =============
 D. 0.888
 
 2. Cand este mai eficient sa folosim reprezentarea primala a datelor?
 A. Cand avem o problema de clasificare binara (cu doua clase)
-B. Cand numarul de trasaturi este mai mic decat numarul de exemple
+B. Cand numarul de trasaturi este mai mic decat numarul de exemple ==============
 C. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
 D. Cand numarul de trasaturi este mai mare decat numarul de exemple
 
 3. Care dintre urmatoarele functii nu este o functie kernel?
 A. K(x,y) = sum(3x - 3y)
-B. K(x,y) = sum(2x - y)
+B. K(x,y) = sum(2x - y) ============= (nu e simetric)
 C. K(x,y) = sum(min{x_i,y_i}) + x·y + 2)**2
 D. K(x,y) = sum(sqrt(x_i·y_i))
 
 4. Care afirmatie este adevarata pentru un niste date normalizate cu scalarea min-max?
 A. Valorile datelor sunt intre -1 si 1
 B. Datele vor fi transformate in numere intregi pozitive
-C. Valorile datelor sunt intre 0 si 1
+C. Valorile datelor sunt intre 0 si 1 ==================
 D. Scalarea min-max nu functioneaza pentru date negative
 
 5. Care este functia utilizata pentru generarea predictiilor (pasul forward) unei retele neuronale feedforward cu 2 straturi ascunse cu activare ReLU si un strat de iesire cu activare Softmax?
 A. relu(softmax(x * w + b) + |w|)
 B. softmax(2*relu(x * w1 + b1))
-C. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3)
+C. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3) ==============
 D. softmax(2*relu(x * w + b)*relu(x * w + b))
 
 6. Cati clasificatori binari vor fi antrenati pentru o problema multi-class cu 4 clase folosind schema de combinare one-vs-all?
 A. 32
 B. 16
-C. 4
+C. 4 =====================
 D. 1
 
 7. Care este valoarea de iesire a perceptronului daca intrare=[11.4, -5.4], ponderi=[3.2, 0.5], bias=-23.3 (functia de activare - sign)?
 A. 9.53
 B. -1
-C. 1
+C. 1 ===============
 D. -9.52
 
 8. Daca un nod dintr-un graf computational reprezinta operatia z = 2 * x * y^2, intrarile sunt x = -0.5 si y = 2, iar gradientul dL/dz = -5, atunci gradientii in raport cu intrarile dL/dx si dL/dy sunt:
 A. dL/dx = -20 si dL/dy = 5
 B. dL/dx = 40 si dL/dy = -5
-C. dL/dx = -40 si dL/dy = 10
+C. dL/dx = -40 si dL/dy = 10  =======
 D. dL/dx = 10 si dL/dy = -5
 
 9. Daca spatiul de intrare al trasaturilor are dimensiunea 5 atunci, pentru a nu suferi de "blestemul dimensionalitatii":
 A. Ar trebui ca multimea de antrenare sa aiba aproximativ 10^(5) exemple.
-B. Ar trebui ca multimea de antrenare sa aiba aproximativ 5^(5) exemple
+B. Ar trebui ca multimea de antrenare sa aiba aproximativ 5^(5) exemple =========== (5^dimensiune)
 C. Ar trebui ca multimea de antrenare sa aiba aproximativ 5x5 exemple
 D. Ar trebui ca multimea de antrenare sa aiba aproximativ 500 exemple
 
 10. Care dintre urmatoarele tehnici nu este o metoda de prevenire a overfittingului?
 A. Oprirea timpurie a antrenarii
-B. Scaderea ratei de invatare
+B. Scaderea ratei de invatare   ===????
 C. Utilizarea regularizarii
 D. Normalizarea datelor
 
 1. Care este scufundarea asociata functie nucleu liniare?
 A. f(x) = sqrt(x)
-B. f(x) = x
+B. f(x) = x ==============
 C. k(x,y) = <x,y>, unde <,> denote produsul scalar
 D. Nu exista
 
@@ -116,35 +116,35 @@ D. Nu exista
 A. 1
 B. 0
 C. -0.63
-D. 0.63
+D. 0.63 ============
 
 3. Care este scufundarea asociata functie nucleu RBF?
 A. k(x,y) = exp(- d(x,y) / (2 * sigma)), unde d(x,y) denote distanta Euclidiana
 B. f(x) = x
-C. Nu exista
+C. Nu exista ==================
 D. f(x) = sqrt(x)
 
 4. Care din urmatoarele functii de activare aduce output-ul in intervalul (-1, 1)?
 A. Sigmoida
 B. ELU
-C. Tangenta Hiperbolica
+C. Tangenta Hiperbolica  ============
 D. Leaky ReLU
 
 5. Care din urmatoarele metode este folosita pentru imbunatatirea capacitatii de generalizare a unui model?
 A. Adaugarea mai multor straturi
 B. MLP
 C. Reducerea numarului de exemple
-D. Dropout
+D. Dropout ===??????????
 
 6. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
 A. Orienta astfel incat punctele sa fie cat mai departate
-B. Perpendicular pe hiperplanul de separare
+B. Perpendicular pe hiperplanul de separare  ============== :/
 C. Orientat astfel incat punctele sa fie cat mai apropriate
 D. Paralel cu hiperplanul de separare, distanta fiind controlata prin bias
 
 7. Care este scufundarea asociata functie nucleu Hellinger?
 A. Nu exista
-B. f(x) = sqrt(x)
+B. f(x) = sqrt(x) ==============
 C. f(x) = x
 D. k(x,y) = <sqrt(x), sqrt(y)>, unde <,> denote produsul scalar
 
@@ -152,58 +152,58 @@ D. k(x,y) = <sqrt(x), sqrt(y)>, unde <,> denote produsul scalar
 A. NeLU
 B. SGD
 C. Leave-one-out
-D. Leaky ReLU
+D. Leaky ReLU ============
 
 9. Cati clasificatori binari vor fi antrenati pentru o problema multi-class cu 4 clase folosind schema de combinare one-vs-all?
-A. 4
+A. 4  ========
 B. 1
 C. 16
 D. 32
 
 10. Care dintre urmatoarele afirmatii despre retele neuronale convolutionale este falsa?
 A. Pot fi folosite atat pe imagini, cat si pe date de tip text.
-B. Straturile convolutionale sunt ne-antranabile, fiind alcatuite din filtre presetate de utilizator.
+B. Straturile convolutionale sunt ne-antranabile, fiind alcatuite din filtre presetate de utilizator. =====
 C. Straturile de pooling miscoreaza dimensiunea activarilor, limitand cantitatea de informatie pierduta.
 D. Automatizeaza extragerea informatiilor relevante.
 
 1. Care sunt valorile urmatoarelor exemple de antrenare si testare dupa ce se aplica normalizarea standard (standardizarea), X_train = [[10, 5, 3], [-1, -2, -30], [-0.5, 0.5, 0.3]], X_test = [[0.5, -1, 7], [1.2, 3.4, 5.6]]?
 A. X_train = [[-1.41, -1.32, -0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]]
 B. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[0.46, 0.74, -1.06], [-0.32, 0.77, 0.96]]
-C. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]]
+C. X_train = [[1.41, 1.32, 0.79], [-0.75, -1.09, -1.41], [-0.65, -0.23, 0.61]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]] ====
 D. X_train = [[1.41, 1.32], [-0.75, -1.09], [-0.65, -0.23]]; X_test = [[-0.46, -0.74, 1.06], [-0.32, 0.77, 0.96]]
 
 2. In urma antrenarii unui model de invatare automata avem urmatoarele masuri - Precision = 0.4, Recall=0.8. Calculati masura F1?
 A. 0.72
 B. 0.64
-C. 0.53
+C. 0.53 =========
 D. 0.89
 
 3. Pentru care dintre urmatoarele probleme putem masura performanta unui model de invatare automata folosind media patratelor erorilor?
-A. Estimarea veniturilor viitoare ale unei companii
+A. Estimarea veniturilor viitoare ale unei companii ============
 B. Identificarea limbii unui text
 C. Detectarea semafoarelor dintr-o imagine
 D. Recunoasterea actiunilor dintr-un clip video
 
 4. Care afirmatie este adevarata pentru un niste date normalizate cu scalarea min-max?
 A. Valorile datelor sunt intre -1 si 1
-B. Valorile datelor sunt intre 0 si 1
+B. Valorile datelor sunt intre 0 si 1 ===========
 C. Scalarea min-max nu functioneaza pentru date negative
 D. Datele vor fi transformate in numere intregi pozitive
 
 5. In urma antrenarii unui model de invatare automata, acuratetea pe setul de antrenare este mult mai mare decat acuratetea pe setul de test. In ce situatie suntem?
 A. Underfitting
 B. Underfitting is overfitting
-C. Overfitting
+C. Overfitting ===============
 D. Optimum
 
 6. Care din urmatoarele metode este folosita pentru a combate bias-ul modelului?
 A. F1-score
-B. Alegerea unui model mai complex
+B. Alegerea unui model mai complex  ===========
 C. Reducerea numarului de exemple
 D. Early stopping
 
 7. Cati parametri antrenabili (ponderi + bias) are o retea neuronala cu stratul de intrare avand 6 componente, un strat ascuns de 24 neuroni si stratul de iesire cu 3 neuroni?
-A. 243
+A. 243 ===================
 B. 24
 C. 300
 D. 64
@@ -212,47 +212,47 @@ D. 64
 A. Este in regim de suprainvatare
 B. Acurateata este potrivita
 C. Este in regin optim de antrenare
-D. Nici una dintre variante
+D. Nici una dintre variante ==============
 
 9. La ce ajuta adaugarea umei componente de momentum in algoritmul coborarii pe gradient?
 A. Permite regularizarea modelului
-B. Aduce o convergenta mai rapida catre un minim local
+B. Aduce o convergenta mai rapida catre un minim local ==============
 C. Determina convegenta catre minimul global
 D. Permite utilizarea unei arhitecturi mai adanci
 
 10. In urma antrenarii unui model de invatare automata avem urmatoarele masuri - True Positive = 64, False Positive = 6. Calculati masura Precision?
 A. 0.74
-B. 0.91
+B. 0.91 =================
 C. 0.67
 D. 0.80
 
 1. Care este scufundarea asociata functie nucleu RBF?
 A. k(x,y) = exp(- d(x,y) / (2 * sigma)), unde d(x,y) denote distanta Euclidiana
-B. Nu exista
+B. Nu exista  ==== ???
 C. f(x) = x
 D. f(x) = sqrt(x)
 
 2. Pentru punctele [(2,2),(1,2),(1,1),(2,1)], avand etichetele [0,1,1,0], care este eticheta punctului (2,2) utilizand metoda 3-NN?
 A. Este necesar un criteriu suplimentar pentru departajarea claselor.
 B. 0 in cazul in care C <= 1, 1 altfel
-C. 0
+C. 0 =======
 D. 1
 
 3. In urma antrenarii unui model de invatare automata avem urmatoarele masuri - Precision = 0.4, Recall=0.8. Calculati masura F1?
-A. 0.53
+A. 0.53 ==============
 B. 0.89
 C. 0.64
 D. 0.72
 
 4. Care din urmatoarele activari sunt rezultatul aplicarii functiei de activare sigmoid?
-A. [[0.3, 0.1], [0.2, 0.8]]
+A. [[0.3, 0.1], [0.2, 0.8]] =================
 B. [[0.01, -0.99], [0.99, 0.02], [0.7, 0.3]]
 C. [[-1, 2], [0.4, 0.6]]
 D. [1.1, 0.99]
 
 5. Care este functia utilizata pentru generarea predictiilor (pasul forward) unei retele neuronale feedforward cu 2 straturi ascunse cu activare ReLU si un strat de iesire cu activare Softmax?
 A. softmax(2*relu(x * w + b)*relu(x * w + b))
-B. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3)
+B. softmax(relu(relu(x * w1 + b1) * w2 + b2) * w3 + b3) ===============
 C. relu(softmax(x * w + b) + |w|)
 D. softmax(2*relu(x * w1 + b1))
 
@@ -263,7 +263,7 @@ C. -9.52
 D. -1
 
 7. Care este output-ul unui model SVM cu ponderile W = [1, -0.5, 0.2, 0.9], b = -1.5 pentru urmatoarele exemple X = [[0.5, -1.5, -2.5, 0.7], [-2.1, 5.3, -1.2, 6.4]]?
-A. [-1, -1]
+A. [-1, -1] ================
 B. [1, -1]
 C. [1, 1]
 D. [-1, 1]
@@ -272,46 +272,40 @@ D. [-1, 1]
 A. Pot fi folosite atat pe imagini, cat si pe date de tip text.
 B. Automatizeaza extragerea informatiilor relevante.
 C. Straturile de pooling miscoreaza dimensiunea activarilor, limitand cantitatea de informatie pierduta.
-D. Straturile convolutionale sunt ne-antranabile, fiind alcatuite din filtre presetate de utilizator.
+D. Straturile convolutionale sunt ne-antranabile, fiind alcatuite din filtre presetate de utilizator.=============
 
 9. Care este forma duala utilizand kernel-ul liniar pe matricea X, daca forma primala este X = [[0.5, 2.7, 3], [4, 1.5, 6]]?
 A. X_dual = [[16.54, 24.05], [24.55, 4.25]]
 B. X_dual = [[16.14, -24.05], [24.05, 59.25]]
-C. X_dual = [[16.54, 24.05], [24.05, 54.25]]
+C. X_dual = [[16.54, 24.05], [24.05, 54.25]]=================
 D. X_dual = [[16.54, -2.05], [25.05, 54.25]]
 
 10. Cand este mai eficient sa folosim reprezentarea duala a datelor?
 A. Cand avem o problema de clasificare binara (cu doua clase)
 B. Cand numarul de trasaturi este mai mic decat numarul de exemple
 C. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
-D. Cand numarul de trasaturi este mai mare decat numarul de exemple
+D. Cand numarul de trasaturi este mai mare decat numarul de exemple==================
 
 1. Daca avem probabilitatile pentru evenimentele P(A)=0.2, P(B)=0.3, P(B|A)=0.5. Calculati probabilitea P(A|B) folosind regula lui Bayes.
 A. 0.67
 B. 0.42
-C. 0.33
+C. 0.33===========
 D. 0.51
 
 2. Daca un clasificator are acuratete 1% pe o multime de antrenare cu 100 clase, cel mai probabil:
 A. Acurateata este potrivita
 B. Este in regin optim de antrenare
 C. Este in regim de suprainvatare
-D. Nici una dintre variante
+D. Nici una dintre variante==============
 
 3. Care este numarul total de parametri ai unei relete neuronale feedforward cu urmatoarea configuratie: 3 neuroni pe statul de intrare, 2 straturi ascunse a cate 5 neuroni si 2 neuroni pe stratul de iesire?
 A. 26
 B. 65
-C. 62
-D. 50
-
-4. Care din urmatoarele metode este folosita pentru a combate bias-ul modelului?
-A. F1-score
-B. Early stopping
-C. Alegerea unui model mai complex
-D. Reducerea numarului de exemple
+C. 62 === (cu bias)
+D. 50 ===== (fara bias)
 
 5. Care din urmatoarele clasificatoare au o decizie liniara?
-A. MLP fara functii de transfer
+A. MLP fara functii de transfer ==============
 B. Naive Bayes
 C. SVM cu kernel RBF
 D. KNN
@@ -319,20 +313,20 @@ D. KNN
 6. Care ditre aceste optiuni pot sa ajute in imbunatatirea capacitatii de generalizarea unui model de invatare automata?
 A. Continuarea antrenarii pana se ajunge la overfitting
 B. Micsorarea setului de antrenare
-C. Adaugarea unui termen de regularizare
+C. Adaugarea unui termen de regularizare ====?
 D. Cresterea numarului de parametri antrenabili ai modelului
 
 7. Cati clasificatori binari vor fi antrenati pentru o problema multi-class cu 4 clase folosind schema de combinare one-vs-all?
-A. 4
+A. 4===
 B. 1
 C. 32
 D. 16
-
+                              2        r20    r10     r5      r5       0
 8. Fiind urmatoarele puncte [(2, 5), (6, 5), (3, 0), (3, 1), (1, 5), (2, 3)] si etichetele corespunzatoare [2, 2, 1, 0, 1, 1]. Folosind metoda kNN, k=3 si distanta Euclideana, care este eticheta prezista pentru punctul (2, 3)?
 A. 1
 B. 2
 C. 0
-D. Nu se poate determina
+D. Nu se poate determina =====?
 
 9. Care este valoarea de iesire a perceptronului daca intrare=[11.4, -5.4], ponderi=[3.2, 0.5], bias=-23.3 (functia de activare - sign)?
 A. -1
@@ -344,7 +338,7 @@ D. 1
 A. 0.4
 B. 1.0
 C. 0.2
-D. 0.6
+D. 0.6  ============
 
 1. Cati clasificatori binari vor fi antrenati pentru o problema multi-class cu 4 clase folosind schema de combinare one-vs-all?
 D. 4    ===========> D
@@ -374,7 +368,7 @@ B. 55x55    ===========> B
 B. Acuratetea    ===========> B
 
 1. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
-B. Orientat astfel incat punctele sa fie cat mai apropriate    ===========> B
+B. Orientat astfel incat punctele sa fie cat mai apropriate    ===========> B ??? (probabil gresit)
 
 2. Care din urmatoarele metode este folosita pentru a combate bias-ul modelului?
 D. Alegerea unui model mai complex    ===========> D
@@ -402,7 +396,7 @@ B. Model se comporta ca un model de regresie liniara    ===========> B
 B. f(x) = x    ===========> B
 
 10. Daca un model antrenat pe 12 clase are acuratete 97% pe multimea de testare, cel mai probabil:
-A. Este in regim de overfitting    ===========> A
+A. Este in regim de overfitting    ===========> A??? (probabil gresit)
 
 
 Model majeri:

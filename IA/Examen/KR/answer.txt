@@ -10,88 +10,98 @@ Input should be in the following format:
   ...
 
 Reading from input.txt ...
-Pas 1
-Coada Open:
-   (Nod:a, g:0, f:7, parinte:nimeni)
-Coada Closed:
 
-Nodul pe care il consideram este a, cu g:0, si f:7. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul b, pentru ca avem muchia a->b de cost 10 ...
-  b nu este in Open, asa ca il adaug.
-  Ne uitam la nodul g, pentru ca avem muchia a->g de cost 5 ...
-  g nu este in Open, asa ca il adaug.
 
-Pas 2
-Coada Open:
-   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)
-Nodul pe care il consideram este g, cu g:5, si f:14. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul c, pentru ca avem muchia g->c de cost 9 ...
-  c nu este in Open, asa ca il adaug.
-  Ne uitam la nodul f, pentru ca avem muchia g->f de cost 20 ...
-  f nu este in Open, asa ca il adaug.
 
-Pas 3
-Coada Open:
-   (Nod:b, g:10, f:18, parinte:a)   (Nod:c, g:14, f:21, parinte:g)   (Nod:f, g:25, f:25, parinte:g)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)
-Nodul pe care il consideram este b, cu g:10, si f:18. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul a, pentru ca avem muchia b->a de cost 7 ...
-    Nodul a este in lista closed cu cost mai bun, asa ca il ignoram.
-  Ne uitam la nodul c, pentru ca avem muchia b->c de cost 3 ...
-  c este in Open, dar cu g:14,f:21, s-a modificat la g:13,f:20!
-  Ne uitam la nodul d, pentru ca avem muchia b->d de cost 4 ...
-  d nu este in Open, asa ca il adaug.
+Pas 1:
+   Coada Open:
+      { (Nod:a, g:0, f:7, parinte:nimeni) }
+   Coada Closed:
+      { }
+   Nodul pe care il consideram este a, cu g:0, si f:7.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul b, pentru ca avem muchia a->b de cost 10
+         b nu este in Open / Closed, asa ca il adaugam.
+      Ne uitam la nodul g, pentru ca avem muchia a->g de cost 5
+         g nu este in Open / Closed, asa ca il adaugam.
 
-Pas 4
-Coada Open:
-   (Nod:d, g:14, f:19, parinte:b)   (Nod:c, g:13, f:20, parinte:b)   (Nod:f, g:25, f:25, parinte:g)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)
-Nodul pe care il consideram este d, cu g:14, si f:19. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul e, pentru ca avem muchia d->e de cost 2 ...
-  e nu este in Open, asa ca il adaug.
+Pas 2:
+   Coada Open:
+      { (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) }
+   Nodul pe care il consideram este g, cu g:5, si f:14.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul c, pentru ca avem muchia g->c de cost 9
+         c nu este in Open / Closed, asa ca il adaugam.
+      Ne uitam la nodul f, pentru ca avem muchia g->f de cost 20
+         f nu este in Open / Closed, asa ca il adaugam.
 
-Pas 5
-Coada Open:
-   (Nod:e, g:16, f:20, parinte:d)   (Nod:c, g:13, f:20, parinte:b)   (Nod:f, g:25, f:25, parinte:g)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)   (Nod:d, g:14, f:19, parinte:b)
-Nodul pe care il consideram este e, cu g:16, si f:20. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul g, pentru ca avem muchia e->g de cost 3 ...
-    Nodul g este in lista closed cu cost mai bun, asa ca il ignoram.
-  Ne uitam la nodul f, pentru ca avem muchia e->f de cost 7 ...
-  f este in Open, dar cu g:25,f:25, s-a modificat la g:23,f:23!
+Pas 3:
+   Coada Open:
+      { (Nod:b, g:10, f:18, parinte:a) (Nod:c, g:14, f:21, parinte:g) (Nod:f, g:25, f:25, parinte:g) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) }
+   Nodul pe care il consideram este b, cu g:10, si f:18.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul a, pentru ca avem muchia b->a de cost 7
+         a este in lista closed cu cost mai bun, asa ca il ignoram.
+      Ne uitam la nodul c, pentru ca avem muchia b->c de cost 3
+         c este in Open, dar cu g:14,f:21, il modificam la g:13,f:20!
+      Ne uitam la nodul d, pentru ca avem muchia b->d de cost 4
+         d nu este in Open / Closed, asa ca il adaugam.
 
-Pas 6
-Coada Open:
-   (Nod:c, g:13, f:20, parinte:b)   (Nod:f, g:23, f:23, parinte:e)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)   (Nod:d, g:14, f:19, parinte:b)   (Nod:e, g:16, f:20, parinte:d)
-Nodul pe care il consideram este c, cu g:13, si f:20. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul b, pentru ca avem muchia c->b de cost 5 ...
-    Nodul b este in lista closed cu cost mai bun, asa ca il ignoram.
-  Ne uitam la nodul e, pentru ca avem muchia c->e de cost 2 ...
-  Nodul e este in Closed, dar cu un cost mai prost, asa ca il mutam in Open.
+Pas 4:
+   Coada Open:
+      { (Nod:d, g:14, f:19, parinte:b) (Nod:c, g:13, f:20, parinte:b) (Nod:f, g:25, f:25, parinte:g) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) }
+   Nodul pe care il consideram este d, cu g:14, si f:19.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul e, pentru ca avem muchia d->e de cost 2
+         e nu este in Open / Closed, asa ca il adaugam.
 
-Pas 7
-Coada Open:
-   (Nod:e, g:15, f:19, parinte:c)   (Nod:f, g:23, f:23, parinte:e)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)   (Nod:d, g:14, f:19, parinte:b)   (Nod:c, g:13, f:20, parinte:b)
-Nodul pe care il consideram este e, cu g:15, si f:19. Incercam sa ii pargurgem vecinii.
-  Ne uitam la nodul g, pentru ca avem muchia e->g de cost 3 ...
-    Nodul g este in lista closed cu cost mai bun, asa ca il ignoram.
-  Ne uitam la nodul f, pentru ca avem muchia e->f de cost 7 ...
-  f este in Open, dar cu g:23,f:23, s-a modificat la g:22,f:22!
+Pas 5:
+   Coada Open:
+      { (Nod:e, g:16, f:20, parinte:d) (Nod:c, g:13, f:20, parinte:b) (Nod:f, g:25, f:25, parinte:g) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) (Nod:d, g:14, f:19, parinte:b) }
+   Nodul pe care il consideram este e, cu g:16, si f:20.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul g, pentru ca avem muchia e->g de cost 3
+         g este in lista closed cu cost mai bun, asa ca il ignoram.
+      Ne uitam la nodul f, pentru ca avem muchia e->f de cost 7
+         f este in Open, dar cu g:25,f:25, il modificam la g:23,f:23!
 
-Pas 8
-Coada Open:
-   (Nod:f, g:22, f:22, parinte:e)
-Coada Closed:
-   (Nod:a, g:0, f:7, parinte:nimeni)   (Nod:g, g:5, f:14, parinte:a)   (Nod:b, g:10, f:18, parinte:a)   (Nod:d, g:14, f:19, parinte:b)   (Nod:c, g:13, f:20, parinte:b)   (Nod:e, g:15, f:19, parinte:c)
-Am ajuns la nodul destinatie destinatie!
+Pas 6:
+   Coada Open:
+      { (Nod:c, g:13, f:20, parinte:b) (Nod:f, g:23, f:23, parinte:e) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) (Nod:d, g:14, f:19, parinte:b) (Nod:e, g:16, f:20, parinte:d) }
+   Nodul pe care il consideram este c, cu g:13, si f:20.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul b, pentru ca avem muchia c->b de cost 5
+         b este in lista closed cu cost mai bun, asa ca il ignoram.
+      Ne uitam la nodul e, pentru ca avem muchia c->e de cost 2
+         e este in Closed, dar cu un cost mai prost, asa ca il mutam in Open.
+
+Pas 7:
+   Coada Open:
+      { (Nod:e, g:15, f:19, parinte:c) (Nod:f, g:23, f:23, parinte:e) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) (Nod:d, g:14, f:19, parinte:b) (Nod:c, g:13, f:20, parinte:b) }
+   Nodul pe care il consideram este e, cu g:15, si f:19.
+   Incercam sa ii pargurgem vecinii:
+      Ne uitam la nodul g, pentru ca avem muchia e->g de cost 3
+         g este in lista closed cu cost mai bun, asa ca il ignoram.
+      Ne uitam la nodul f, pentru ca avem muchia e->f de cost 7
+         f este in Open, dar cu g:23,f:23, il modificam la g:22,f:22!
+
+Pas 8:
+   Coada Open:
+      { (Nod:f, g:22, f:22, parinte:e) }
+   Coada Closed:
+      { (Nod:a, g:0, f:7, parinte:nimeni) (Nod:g, g:5, f:14, parinte:a) (Nod:b, g:10, f:18, parinte:a) (Nod:d, g:14, f:19, parinte:b) (Nod:c, g:13, f:20, parinte:b) (Nod:e, g:15, f:19, parinte:c) }
+   Am ajuns la nodul destinatie (f), asa ca oprim cautarea!
 Drumul optim are un cost de 22, si este:
 a -> b -> c -> e -> f
