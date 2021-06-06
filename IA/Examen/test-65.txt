@@ -66,14 +66,3 @@ A. Deviatia standard a datelor este aproximativ 1
 B. Valorile datelor sunt intre 0 si 1
 C. Valorile datelor sunt intre -1 si 1
 D. Scalarea standard nu functioneaza pentru date negative
-
-1. A
-2. C
-3. A
-4. C
-5. C 
-6. B
-7. A
-8. B
-9. A
-10. A

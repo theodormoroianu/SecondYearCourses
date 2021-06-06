@@ -1,22 +1,27 @@
-a f
+a
+f
 7
-a 7
-b 8
-c 7
-d 5
-e 4
+a 1000
+b 6
+c 8
+d 10
+e 18
 f 0
-g 9
-12
-a b 10
-a g 5
-b a 7
-b c 3
-b d 4
-c b 5
-c e 2
-d e 2
-e g 3
-e f 7
-g c 9
-g f 20
+g 6
+16
+a b 5
+a e 1
+a g 19
+a d 9
+b e 4
+b d 11
+c d 4
+c f 19
+d g 4
+d c 5
+e g 8
+e f 25
+e c 7
+g f 6
+g c 18
+g d 2
