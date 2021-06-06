@@ -24,6 +24,7 @@ F1                  = 2/(1/Precision+1/Recall)
 # Bayes
 
 P(A|B) = P(B|A) * P(A) / P(B)
+P(A|B) = P(A & B) / P(B)
 
 # Kendall Tau 
 
@@ -88,3 +89,21 @@ activation_2: ReLU
 
 R:  A_1 = (x.dot(W1)+B1).clip()
     A_2 = (A_1.dot(W2)+B2).clip()
+
+
+# Bias - Variance
+
+Imbunatati capacitatea de generalizare (p. 115):
+ 1. Early stopping
+ 2. Regularizare
+
+Bias - underfitting (p. 82):
+ * Eroare sistematica din inabilitatea de-a invata adevarata relatie dintre trasaturi.
+ * Poate fi corectat prin cresterea complexitatii modelului
+
+Variance - varianta - overfitting (p.82):
+ * Erare din senzitivitatea ridicata la mici fluctuatii
+ * Poate fi corectat prin:
+   1. Adaugarea de exemple
+   2. Scaderea complexitatii modelului
+   3. (regularizare)

@@ -1,6 +1,8 @@
+#%%
 import numpy as np
 import scipy.stats as stats
 from sklearn.metrics import confusion_matrix
+import sklearn.metrics as metrics
 
 
 def n(a):
@@ -61,6 +63,11 @@ def MSE(y, y_hat):
 def B_cond_A(A_cond_B, A, B):
     return A_cond_B * B / A
 
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+
 
 
 # Gets the standardization of data
@@ -82,5 +89,71 @@ def compute_standardization2(train, test):
     return train, test
 
 def compute_standardization(train):
-    a, _  = compute_standardization(train, train)
+    a, _  = compute_standardization2(train, train)
     return a
+
+def Ridge_loss(y_hat, y, W, a):
+    N = len(y_hat)
+    y_hat = n(y_hat)
+    y = n(y)
+    L2 = (y_hat - y) ** 2
+    L2 = L2.sum()
+    W = n(W)
+    W = (W**2).sum()
+    W = np.sqrt(W)
+    return 1 / N * L2 + a * W, L2 + a * W
+
+def knn_dist(t, X):
+    X = n(X)
+    t = n(t)
+    S = abs(X - t)
+    R = []
+    for s in S:
+        R.append(s.sum())
+    return R
+
+def MAE(y, y_hat):
+    y = n(y)
+    y_hat = n(y_hat)
+    return abs(y - y_hat).sum() / len(y)
+
+def perceptron(input, W, b):
+    return (n(input)*n(W)).sum() + b
+
+def L1_norm(x):
+    x = n(x)
+    x = abs(x)
+    s = x.sum()
+    return x / s
+
+def relu(x):
+    return np.maximum(x, 0)
+
+def net_relu(x, W1, B1, W2, B2):
+    x = n(x)
+    W1 = n(W1)
+    W2 = n(W2)
+    B1 = n(B1)
+    B2 = n(B2)
+    H1 = W1.T @ x + B1
+    H1 = relu(H1)
+    H2 = W2.T @ H1.T + B2
+    H2 = relu(H2)
+    return H2.item()
+
+def SGD(W, g, l):
+    W = n(W)
+    g = n(g)
+    return W - g*l
+
+from sklearn.metrics import accuracy_score 
+from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score, recall_score 
+
+def scores(y_true, y_pred):
+    print("Accuracy score: ", accuracy_score(y_true, y_pred))
+    print("F1 score: ", f1_score(y_true, y_pred))
+    print("Precision score: ", precision_score(y_true, y_pred))
+    print("Recall score: ", recall_score(y_true, y_pred))
+
+# %%
