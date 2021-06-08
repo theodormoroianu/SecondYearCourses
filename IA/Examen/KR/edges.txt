@@ -1,7 +1,17 @@
-a  ->  b  g=5, f=11
-a  ->  e  g=1, f=19
-a  ->  g  g=19, f=25
-a  ->  d  g=9, f=19
-d  ->  g  g=13, f=19
-d  ->  c  g=14, f=22
-g  ->  f  g=19, f=19
+a  ->  b  g=5, f=8
+a  ->  d  g=3, f=13
+Bad b  ->  d  g=10, f=20
+b  ->  g  g=16, f=29
+b  ->  e  g=22, f=28
+d  ->  b  g=4, f=7
+d  ->  c  g=27, f=30
+d  ->  f  g=31, f=31
+Bad b  ->  d  g=9, f=19
+b  ->  g  g=15, f=28
+b  ->  e  g=21, f=27
+Bad e  ->  c  g=27, f=30
+e  ->  f  g=30, f=30
+g  ->  e  g=19, f=25
+Bad g  ->  f  g=37, f=37
+e  ->  c  g=25, f=28
+e  ->  f  g=28, f=28

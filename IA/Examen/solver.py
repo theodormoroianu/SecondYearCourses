@@ -3,7 +3,7 @@ import numpy as np
 import scipy.stats as stats
 from sklearn.metrics import confusion_matrix
 import sklearn.metrics as metrics
-
+from sklearn.neighbors import KNeighborsClassifier
 
 def n(a):
     return np.array(a)
@@ -155,5 +155,11 @@ def scores(y_true, y_pred):
     print("F1 score: ", f1_score(y_true, y_pred))
     print("Precision score: ", precision_score(y_true, y_pred))
     print("Recall score: ", recall_score(y_true, y_pred))
+
+def knn_dist(K, X_train, Y_train, X_test):
+    model = KNeighborsClassifier(K)
+    model.fit(X_train, Y_train)
+    pred = model.predict(X_test)
+    return pred
 
 # %%

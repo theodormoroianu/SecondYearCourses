@@ -68,10 +68,10 @@ int main()
 
         // Afisam cozile
         auto show_queue = [&](vector <Stare> coada, string name) {
-            cout << space << "Coada " << name << ":\n" << space + space << "{";
+            cout << space << "Coada " << name << ":\n" << space + space << "{\n";
             for (auto [node, g, f, from] : coada)
-                cout << " (" << "Nod:" << node << ", g:" << g << ", f:" << f << ", parinte:" << from << ")";
-            cout << " }\n";
+                cout << space + space + space << " (" << "Nod:" << node << ", g:" << g << ", f:" << f << ", tata:" << from << ")\n";
+            cout << space + space << " }\n";
         };
 
         static int pas = 1;
@@ -111,6 +111,8 @@ int main()
 
             if (is_in_closed && cmp(potential_state, closed[poz])) {
                 cout << space + space + space << vec << " este in lista closed cu cost mai bun, asa ca il ignoram.\n";
+                out << "Bad ";
+                draw_edge();
                 continue;
             }
             else if (is_in_closed) {
@@ -123,12 +125,14 @@ int main()
             }
 
             bool is_in_open = false;
+            bool is_added = false;
 
             for (auto& [nod_lst, g_lst, f_lst, from_lst] : open) {
                 if (nod_lst == vec) {
                     is_in_open = true;
                     if (f_lst > get<2>(potential_state) || (f_lst == get<2>(potential_state) &&
                             g_lst < get<1>(potential_state))) {
+                        is_added = true;
                         cout << space + space + space << vec << " este in Open, dar cu g:" << g_lst << ",f:" << f_lst << ", il modificam la ";
                         tie(nod_lst, g_lst, f_lst, from_lst) = potential_state;
                         cout << "g:" << g_lst << ",f:" << f_lst << ".\n";
@@ -142,6 +146,10 @@ int main()
                 cout << space + space + space << vec << " nu este in Open / Closed, asa ca il adaugam.\n";
                 backward_path[vec] = { node, cost };
                 open.push_back(potential_state);
+                draw_edge();
+            }
+            if (is_in_open && !is_added) {
+                out << "Bad ";
                 draw_edge();
             }
         }
