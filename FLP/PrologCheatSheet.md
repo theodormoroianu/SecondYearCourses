@@ -33,3 +33,19 @@
     * `;` to get next answer.
  * Multiple conditions: `?- is_bigger(house, X), is_bigger(X, Y), is_bigger(Y, mouse).`
 
+## Aritmetics
+
+* `=` -> Checks for same expression.
+* `X is Y` -> checks if Y evaluates to X. Y NEEDS TO BE FULLY INSTANCIATED.
+* `a =:= b` -> checks if the two values are equal. Equivalent to `a is b, b is a`.
+
+
+## Conditions
+
+```prolog
+max([X], X).
+max([H | T], M) :-
+    max(T, N),
+    N > H -> M = N;
+             M = H. 
+```
