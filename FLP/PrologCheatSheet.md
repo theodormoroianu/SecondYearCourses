@@ -49,3 +49,18 @@ max([H | T], M) :-
     N > H -> M = N;
              M = H. 
 ```
+
+## alpha-conversii
+
+-> Redenumim variabile bounduite pentru a evita conflicte de nume.
+
+\x . x y =(apha) \z . z y
+
+## beta-reductii
+
+-> efectiv efectuam aplicarea functiei.
+Trebuie ca variabilele libere din ce adaugam sa fie diferite de cele existente => facem alpha-conversii.
+
+(\x . M) E ==beta==> M[x := E]
+
+Beta-normala: nu se mai pot efectua beta-reductii.

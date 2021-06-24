@@ -77,3 +77,9 @@ reverse_list(A, B) :-
 relatie(h(A), g(B)) :-
     integer(A),
     integer(B).
+
+is_very_good(X) :-
+    is_good(X).
+
+is_good(0) :- !.
+is_good(X) :- X = 2.

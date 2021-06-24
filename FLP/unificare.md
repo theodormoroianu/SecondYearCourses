@@ -99,6 +99,17 @@ S1.2
 
 ?- p(X, X).
 
+Voi simula algoritmul de cautare a solutiilor efectuat e prolog in felul urmator:
+conditie_initiala
+    \-> unificare_posibila_1
+        :- conditii_de_satisfacut
+            \-> unificare_posibila ....
+    \-> unificare_posibila_2
+        :- conditii_de_satisfacut
+    ...
+
+Algoritmul simuleaza backtracking-ul efectuat de Prolog, evidentiand si care sunt unificarile care au loc pe parcursul acestuia.
+
 p(X, X)
     \-> p(X, X) = p(X, Y) (1) <=> Y = X
         :- q(X, Z), r(Z, X)
@@ -128,19 +139,20 @@ p(X, X)
 
 
 
-
-
-
-
-P(X, X)
-    \-> p(X,X) :-
-            q(X,Z), r(Z,X)
-                \-> q(X,Z) = q(X,b) <=> Z = b
-                        \-> r(b, X) = r(b,a). => Z = b, X = a
-                \-> q(X, Z) = q(b,a) <=> X = b, Z = a
-                        \-> r(a, b) => FAIL
-                \-> q(X, Z) = q(X,a) <=> Z = a
-
+p(X, X)
+    \-> Aplicam (1):
+        Unificam p(X, X) cu p(X, Y): Y = X.
+        => q(X, Z) ^ r(Z, X)
+            \-> Aplicam (3):
+                Unificam q(X, Z) cu q(Z, b): Z = b.
+                => r(b, X).
+                    \-> Aplicam (6).
+                        Unificam r(b, X) cu r(b, a): X = a. SUCCESS.
+            \-> Aplicam (4):
+                Unificam q(X, Z) cu q(b, a): X=b, Z=a.
+                => r(a, b).
+                    \-> FAIL.
+            \-> ...
 
 
 S1.3
@@ -229,3 +241,236 @@ executam if.
 <skip, i = -1>
 exetuam skip-ul.
 <i = -1>
+
+
+
+## Cancer din cv curs
+
+
+# unificare
+
+    f(X, g(Y)) = f(h(Y), g(X))
+   
+    step0:
+        S: []
+        R:
+            f(X, g(y)) = f(h(Y), g(X))
+    step1:
+        S: []
+        R:
+            X = h(Y)
+            g(Y) = g(X)
+    step2:
+        S:
+            X = h(Y)
+        R:
+            g(Y) = g(h(Y))
+    step3:
+        S:
+            X = h(Y)
+        R:
+            Y = h(Y)
+    step4:
+        S:
+            X = h(Y)
+        R: []
+        Incercam sa il scoatem pe Y = h(Y), Y \in h(Y) => Ciclu, FAIL.
+
+
+# variabile libere / variabile legate
+
+
+\ x1 . (\ y2 . (\ x3 . x + z) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+
+
+\ x(1) . (\ y(2) . (\ x(3) . x(4) + z(5)) ((\x(6) . x(7) x(8)) (x(9) + y(10)) + x(11)) ) (\ z(12) . x(13) y(14) z(15))
+
+x(13) legat de x(1)
+y(14) liber
+z(15) legat de z(12)
+x(4) legat de x(3)
+z(5) liber
+x(7) legat de x(6)
+x(8) legat de x(6)
+x(9) legat de x(1)
+y(10) legat de y(2)
+x(11) legat de x(1)
+
+
+
+
+# Descrieți evoluția expresiei de mai jos prin aplicarea de trei ori a regulii de beta reducție
+
+Strict order (bootom-up)
+
+\ x . (\ y . (\ x . x + y) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+\ x . (\ y . (\ x . x + y) (((x + y) + x) ((x + y) + x))) (\ z . x y z)
+
+\ x . (((((x +  (\ z . x y z)) + x) ((x +  (\ z . x y z)) + x)) +  (\ z . x y z)))
+
+
+
+(\x . \y . x) y
+
+--beta--gresit-->
+\y . y = id
+
+--alpha-->
+(\x . \z . x) y
+
+--beta-->
+\z . y = const y
+
+
+
+
+
+f a b - c
+
+\ x . (\ y . (\ x . x + y) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+--beta-->
+
+\ x . (\ y . (\ x . x + y) ((x + y) (x + y) + x) ) (\ z . x y z)
+
+--beta-->
+
+\ x . (\ y . ((x + y) (x + y) + x) + y ) (\ z . x y z)
+
+--beta-->
+
+\ x . ((x + (\ z . x y z)) (x + (\ z . x y z)) + x) + (\ z . x y z) 
+
+Normal order (topmost, leftmost)
+
+\ x . (\ y . (\ x . x + y) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+--beta--> (gresit)
+
+\ x . (\ x . x + (\ z . x y z)) ((\x . x x) (x + (\ z . x y z)) + x) 
+
+corect: mai intai redenumesc x
+
+
+\ x . (\ y . (\ x . x + y) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+==alpha==
+
+\ x . (\ y . (\ a . a + y) ((\x . x x) (x + y) + x) ) (\ z . x y z)
+
+--beta-->
+
+\ x . (\ a . a + (\ z . x y z)) ((\x . x x) (x + (\ z . x y z)) + x)
+
+--beta-->
+
+\ x . ((\x . x x) (x + (\ z . x y z)) + x) + (\ z . x y z)
+
+--beta-->
+
+\ x . ((x + (\ z . x y z)) (x + (\ z . x y z)) + x) + (\ z . x y z)
+
+
+
+
+# Are expresia de mai jos tip sau nu. Dacă da, scrieți tipul. Dacă nu, argumentați de ce nu.
+
+e := 
+
+
+
+
+--beta-->
+
+e := \ x . (\ y . (\ x . x + z) (((x + y) (x + y)) + x) ) (\ z . x y z)
+                                   \int/   \int/
+
+Int nu este o functie -> nu poate primi un alt int ca paramentru FAIL.
+
+Pentru ca e să aibă tip, orice subexpresie a lui e trebuie să aibă tip.
+
+În particular, (\x . x x) (x + y) trebuie să aibă tip.
+  - (x + y) trebuie sa aiba tip, care nu poate fi decât int (regula lui +)
+  - din regula pentru aplicare, (\x . x x) (x + y) are tip t dacă (\x . x x) are tipul int -> t
+    dar din regula pentru lambda, (\x . x x) are tipul int -> t daca din x : int putem deduce că x x : t
+    dar, din regula pentru aplicare x x : t dacă x are tipul t1 -> t și x are tipul t1
+    de unde int = int -> t    (imposibil, pentru că int și -> sunt constructori)
+
+
+e := \ x . (\ y . (\ x . x:int + z:int):int->int ((\x . x:?int x:?int):?int->int (x:int + y:int):int + x:int) ) (\ z . x y z)
+
+
+
+# Fie programul IMP  Pgm ::=  "if x >= y then max := x else max := y" și starea sigma ::= "x |-> 3, y |-> 5". Descrieți următoarele cinci tranziții într-un pas ale configurației de execuție < Pgm, sigma >  (indicând axioma folosită).
+
+
+<if x >= y then max := x else max := y, x |-> 3, y |-> 5>
+Il evaluam pe x.
+<if 3 >= y then max := x else max := y, x |-> 3, y |-> 5>
+Il evaluam pe y.
+<if 3 >= 5 then max := x else max := y, x |-> 3, y |-> 5>
+Evaluam 3 >= 5.
+<if false then max := x else max := y, x |-> 3, y |-> 5>
+Evaluam if-ul.
+<max := y, x |-> 3, y |-> 5>
+Inlocuim pe y.
+<max := 5, x |-> 3, y |-> 5>
+Executam operatia.
+<, max |-> 5, x |-> 3, y |-> 5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   < if x >= y then max := x else max := y  ,   {x |-> 3, y |-> 5} > 
+--ax. variabile-->
+   < if 3 >= y then max := x else max := y  ,   {x |-> 3, y |-> 5} > 
+--ax. variabile-->
+   < if 3 >= 5 then max := x else max := y  ,   {x |-> 3, y |-> 5} > 
+--ax. >=-->
+   < if false then max := x else max := y  ,   {x |-> 3, y |-> 5} > 
+--ax. if-->
+   < max := y  ,   {x |-> 3, y |-> 5} > 
+--ax. variabile-->
+   < max := 5  ,   {x |-> 3, y |-> 5} > 
+
+
+# Dat fiind programul Prolog Pgm, scrieți un query (de forma ...) care produce rezultatele ...
+
+
+# Lambda-calcul: Care este forma normală a expresiei: ....
+
+
+
+# Adăugați la limbajul IMP "++ x" ca expresie de incerementare a identificatorului x și scrieți regulile de execuție într-un pas care trebuie adăugate sau modificate pentru a putea da semantică lui ++
+
+
+
+
+λx.(λi0.(λi1.i1 + z) ([λi1.i1 i1] [x + i0] + x)) (λi0.x y i0)
+λx.(λi0.i0 + z) ((λi0.i0 i0) (x + [λi0.x y i0]) + x)
+λx.(λi0.i0 i0) (x + [λi0.x y i0]) + x + z
+λx.(λi0.i0 i0) (x + (λi0.x y i0)) + x + z
+λx.x + (λi0.x y i0) (x + (λi0.x y i0)) + x + z
+λx.x + (x y) (x + (x y)) + x + z
